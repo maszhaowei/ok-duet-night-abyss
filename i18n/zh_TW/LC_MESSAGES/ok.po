@@ -28,16 +28,16 @@ msgid "CONTROL_ZONE_RATIO"
 msgstr ""
 
 msgid "Combat Key"
-msgstr ""
+msgstr "戰技"
 
 msgid "END_WAIT_SPACE"
 msgstr ""
 
 msgid "Game Hotkey Config"
-msgstr ""
+msgstr "遊戲快捷鍵設置"
 
 msgid "Geniemon Key"
-msgstr ""
+msgstr "魔靈支援"
 
 msgid "ICON_MAX_AREA"
 msgstr ""
@@ -46,7 +46,7 @@ msgid "ICON_MIN_AREA"
 msgstr ""
 
 msgid "In Game Hotkey for Skills"
-msgstr ""
+msgstr "遊戲內技能快捷鍵"
 
 msgid "MAX_END_SEC"
 msgstr ""
@@ -61,7 +61,7 @@ msgid "MAX_START_SEC"
 msgstr ""
 
 msgid "Ultimate Key"
-msgstr ""
+msgstr "終結技"
 
 msgid "right"
 msgstr ""
