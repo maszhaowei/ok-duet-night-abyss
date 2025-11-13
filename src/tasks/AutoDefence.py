@@ -127,7 +127,7 @@ class AutoDefence(DNAOneTimeTask, CommissionsTask, BaseCombatTask):
                 self.log_info("任务继续")
                 self.current_wave = -1
 
-            self.sleep(0.2)
+            self.next_frame()
 
     def init_param(self):
         self.current_round = -1

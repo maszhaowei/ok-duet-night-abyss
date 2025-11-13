@@ -144,7 +144,8 @@ class AutoHedge(DNAOneTimeTask, CommissionsTask, BaseCombatTask):
     #     return bool(self.find_one("serum_icon"))
 
     def update_mission_status(self):
-        if self.mission_complete: return
+        if self.mission_complete:
+            return
         percentage = self.get_serum_process_info()
         if percentage == 100:
             self.progressing = False

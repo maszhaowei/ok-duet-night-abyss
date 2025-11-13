@@ -2,7 +2,7 @@ import time
 import numpy as np
 import cv2
 import winsound
-import win32api, win32con
+import win32api
 from datetime import datetime, timedelta
 
 from ok import BaseTask, Box, Logger, color_range_to_bound, run_in_new_thread
@@ -67,6 +67,11 @@ class BaseDNATask(BaseTask):
         if isinstance(box, Box):
             self.draw_boxes(box.name, box, "blue")
         return self.find_one(f'drop_item_{str(rates)}', threshold=threshold, box=box, template=template)
+    
+    def find_not_use_letter_icon(self, threshold: float = 0, box: Box | None = None, template=None) -> Box | None:
+        if isinstance(box, Box):
+            self.draw_boxes(box.name, box, "blue")
+        return self.find_one('not_use_letter', threshold=threshold, box=box, template=template)
 
     def safe_get(self, key, default=None):
         if hasattr(self, key):

@@ -1,4 +1,4 @@
-from ok import TriggerTask, Logger, og
+from ok import TriggerTask, Logger
 from src.tasks.BaseCombatTask import BaseCombatTask, NotInCombatException, CharDeadException
 from src.tasks.BaseListenerTask import BaseListenerTask
 
@@ -46,7 +46,7 @@ class AutoCombatTask(BaseListenerTask, BaseCombatTask, TriggerTask):
                 elif skill == "按住普攻" and not _mouse_down:
                     _mouse_down = True
                     self.mouse_down()
-                else:
+                elif skill == "普攻":
                     char.click()
                 self.sleep(interval)
             except CharDeadException:

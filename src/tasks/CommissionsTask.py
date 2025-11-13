@@ -1,6 +1,5 @@
 import re
 import time
-import cv2
 from enum import Enum
 
 from ok import find_boxes_by_name, TaskDisabledException
@@ -111,7 +110,7 @@ class CommissionsTask(BaseDNATask):
                 self.click_box(btn, after_sleep=0)
                 self.move_back_from_safe_position()
             self.sleep(0.2)
-            if self.wait_until(condition=lambda: self.find_start_btn() or self.find_letter_btn(), time_out=1):
+            if self.wait_until(condition=lambda: self.find_start_btn() or self.find_letter_interface(), time_out=1):
                 break
             if self.find_retry_btn() and self.calculate_color_percentage(retry_btn_color,
                                                                          self.get_box_by_name("retry_icon")) < 0.05:
@@ -162,9 +161,7 @@ class CommissionsTask(BaseDNATask):
         if self.in_team():
             return False
         action_timeout = self.safe_get("action_timeout", timeout)
-        continue_btn = self.wait_until(
-            self.find_continue_btn, time_out=action_timeout, raise_if_not_found=True
-        )
+        continue_btn = self.wait_until(self.find_continue_btn, time_out=action_timeout, raise_if_not_found=True)
         self.wait_until(
             condition=lambda: not self.find_continue_btn(),
             post_action=lambda: self.click_box(continue_btn, after_sleep=0.25),
@@ -179,7 +176,7 @@ class CommissionsTask(BaseDNATask):
         self.sleep(0.5)
         self.choose_drop_rate_item()
         self.wait_until(
-            condition=lambda: not self.find_drop_item(),
+            condition=lambda: not self.find_drop_item() and not self.find_drop_item(800),
             post_action=lambda: self.click_box(self.find_drop_rate_btn(), after_sleep=0.25),
             time_out=action_timeout,
             raise_if_not_found=True,
@@ -207,14 +204,19 @@ class CommissionsTask(BaseDNATask):
             return
         action_timeout = self.safe_get("action_timeout", timeout)
         if self.config.get("自动选择首个密函和密函奖励", False):
-            if self.find_letter_btn():
+            if self.find_letter_interface():
                 self.move_mouse_to_safe_position()
                 self.click(0.56, 0.5)
                 self.move_back_from_safe_position()
                 self.sleep(0.5)
                 self.wait_until(
-                    condition=lambda: not self.find_letter_btn(),
-                    post_action=lambda: self.click(0.79, 0.61, after_sleep=0.25),
+                    condition=lambda: not self.find_letter_interface(),
+                    post_action=lambda: (
+                        self.move_mouse_to_safe_position(),
+                        self.click(0.79, 0.61),
+                        self.move_back_from_safe_position(),
+                        self.sleep(1),
+                    ),
                     time_out=action_timeout,
                     raise_if_not_found=True,
                 )
@@ -222,7 +224,7 @@ class CommissionsTask(BaseDNATask):
             self.log_info_notify("需自行选择密函")
             self.soundBeep()
             self.wait_until(
-                lambda: not self.find_letter_btn(),
+                lambda: not self.find_letter_interface(),
                 time_out=300,
                 raise_if_not_found=True,
             )
@@ -337,10 +339,10 @@ class CommissionsTask(BaseDNATask):
             self.choose_letter_reward()
             return
 
-        if self.find_letter_btn():
+        if self.find_letter_interface():
             self.choose_letter()
             return self.get_return_status()
-        elif self.find_drop_item():
+        elif self.find_drop_item() or self.find_drop_item(800):
             self.choose_drop_rate()
             return self.get_return_status()
 
@@ -405,9 +407,10 @@ class CommissionsTask(BaseDNATask):
             self.wait_until(self.in_team, post_action=lambda: self.send_key("esc", after_sleep=1), time_out=10)
             return False
         return True
-
-    def _default_movement(self):
-        pass
+    
+    def find_letter_interface(self):
+        box = self.find_letter_btn() or self.find_not_use_letter_icon()
+        return box
 
 
 class QuickMoveTask:

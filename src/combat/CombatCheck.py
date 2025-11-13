@@ -21,7 +21,7 @@ class CombatCheck(BaseDNATask):
         if self._in_combat:
             now = time.time()
             if now - self.last_combat_check > self.combat_check_interval:
-                in_combat = self.manual_in_combat and self.in_team() and og.device_manager.hwnd_window.is_foreground()
+                in_combat = self.manual_in_combat and og.device_manager.hwnd_window.is_foreground()
                 self.last_combat_check = now
                 if in_combat:
                     return True
