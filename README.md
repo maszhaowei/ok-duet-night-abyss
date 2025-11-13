@@ -1,3 +1,5 @@
+[English](README_en.md) | [简体中文](README.md)
+
 <div align="center">
   <img src="icons/icon.png" alt="icon" width="200"><br>
   <h1>ok-dna</h1>
