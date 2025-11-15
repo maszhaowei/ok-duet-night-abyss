@@ -8,6 +8,8 @@ from src.tasks.DNAOneTimeTask import DNAOneTimeTask
 
 logger = Logger.get_logger(__name__)
 
+DEFAULT_ACTION_TIMEOUT = 10
+
 
 class AutoExploration(DNAOneTimeTask, CommissionsTask, BaseCombatTask):
 
@@ -30,7 +32,7 @@ class AutoExploration(DNAOneTimeTask, CommissionsTask, BaseCombatTask):
             '超时时间': '超时后将发出提示',
         })
 
-        self.action_timeout = 10
+        self.action_timeout = DEFAULT_ACTION_TIMEOUT
         self.quick_move_task = QuickMoveTask(self)
         self.external_movement = _default_movement
         self._external_config = None
@@ -68,65 +70,79 @@ class AutoExploration(DNAOneTimeTask, CommissionsTask, BaseCombatTask):
             raise
 
     def do_run(self):
-        self.init_param()
+        self.init_all()
         self.load_char()
-        _wait_next_round = False
-        _start_time = 0
+
         if self.external_movement is not _default_movement and self.in_team():
             self.open_in_mission_menu()
+
         while True:
             if self.in_team():
-                self.progressing = self.find_serum()
-                if self.progressing:
-                    if _start_time == 0:
-                        _start_time = time.time()
-                        _wait_next_round = False
-                        self.quick_move_task.reset()
-                    self.skill_time = self.use_skill(self.skill_time)
-                    if not _wait_next_round and time.time() - _start_time >= self.config.get("超时时间", 120):
-                        if self.external_movement is not _default_movement:
-                            self.log_info("任务超时")
-                            self.open_in_mission_menu()
-                        else:
-                            self.log_info_notify("任务超时")
-                            self.soundBeep()
-                            _wait_next_round = True
-                else:
-                    self.quick_move_task.run()
+                self.handle_in_mission()
 
             _status = self.handle_mission_interface(stop_func=self.stop_func)
             if _status == Mission.START:
                 self.wait_until(self.in_team, time_out=30)
                 self.sleep(2)
-                self.init_param()
-                if self.external_movement is not _default_movement:
-                    self.log_info("任务开始")
-                    self.external_movement()
-                    time_out = 10
-                    self.log_info(f"外部移动执行完毕，等待战斗开始，{time_out}秒后超时")
-                    if not self.wait_until(self.find_serum, time_out=time_out):
-                        self.log_info("超时重开")
-                        self.open_in_mission_menu()
-                    else:
-                        self.log_info("战斗开始")
-                else:
-                    self.log_info_notify("任务开始")
-                    self.soundBeep()
-                _start_time = 0
+                self.init_all()
+                self.handle_mission_start()
             elif _status == Mission.STOP:
-                self.quit_mission()
                 self.log_info("任务中止")
+                self.quit_mission()
             elif _status == Mission.CONTINUE:
-                self.wait_until(self.in_team, time_out=30)
                 self.log_info("任务继续")
-                _start_time = 0
+                self.init_for_next_round()
+                self.wait_until(self.in_team, time_out=DEFAULT_ACTION_TIMEOUT)
 
-            self.sleep(0.2)
+            self.sleep(0.1)
 
-    def init_param(self):
+    def init_all(self):
+        self.init_for_next_round()
         self.current_round = -1
-        self.skill_time = 0
 
+    def init_for_next_round(self):
+        self.init_runtime_state()
+
+    def init_runtime_state(self):
+        self.runtime_state = {"start_time": 0, "skill_time": 0, "wait_next_round": False}
+
+    def handle_in_mission(self):
+        if self.find_serum():
+            if self.runtime_state["start_time"] == 0:
+                self.runtime_state["start_time"] = time.time()
+                self.quick_move_task.reset()
+            
+            if not self.runtime_state["wait_next_round"] and time.time() - self.runtime_state["start_time"] >= self.config.get("超时时间", 120):
+                if self.external_movement is not _default_movement:
+                    self.log_info("任务超时")
+                    self.open_in_mission_menu()
+                    return
+                else:
+                    self.log_info_notify("任务超时")
+                    self.soundBeep()
+                    self.runtime_state["wait_next_round"] = True
+
+            if not self.runtime_state["wait_next_round"]:
+                self.runtime_state["skill_time"] = self.use_skill(self.runtime_state["skill_time"])
+        else:
+            if self.runtime_state["start_time"] > 0:
+                self.init_runtime_state()
+            self.quick_move_task.run()
+
+    def handle_mission_start(self):
+        if self.external_movement is not _default_movement:
+            self.log_info("任务开始")
+            self.external_movement()
+            self.log_info(f"外部移动执行完毕，等待战斗开始，{DEFAULT_ACTION_TIMEOUT}秒后超时")
+            if not self.wait_until(self.find_serum, time_out=DEFAULT_ACTION_TIMEOUT):
+                self.log_info("超时重开")
+                self.open_in_mission_menu()
+            else:
+                self.log_info("战斗开始")
+        else:
+            self.log_info_notify("任务开始")
+            self.soundBeep()
+        
     def stop_func(self):
         self.get_round_info()
         if self.current_round >= self.config.get("轮次", 3):

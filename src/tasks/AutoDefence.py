@@ -9,7 +9,6 @@ from src.tasks.CommissionsTask import CommissionsTask, Mission, QuickMoveTask, _
 logger = Logger.get_logger(__name__)
 
 DEFAULT_ACTION_TIMEOUT = 10
-DEFAULT_MISSION_TIMEOUT = 30
 
 
 class AutoDefence(DNAOneTimeTask, CommissionsTask, BaseCombatTask):
@@ -71,10 +70,8 @@ class AutoDefence(DNAOneTimeTask, CommissionsTask, BaseCombatTask):
             raise
 
     def do_run(self):
-        self.init_param()
+        self.init_all()
         self.load_char()
-
-        self.wave_info = {"wave": -1, "wait_next": False, "start_time": 0}
 
         if self.external_movement is not _default_movement and self.in_team():
             self.open_in_mission_menu()
@@ -84,52 +81,63 @@ class AutoDefence(DNAOneTimeTask, CommissionsTask, BaseCombatTask):
                 self.handle_in_mission()
 
             _status = self.handle_mission_interface(stop_func=self.stop_func)
-
             if _status == Mission.START:
+                self.wait_until(self.in_team, time_out=30)
+                self.sleep(2)
+                self.init_all()
                 self.handle_mission_start()
             elif _status == Mission.STOP:
-                self.quit_mission()
-                self.init_param()
                 self.log_info("任务中止")
+                self.quit_mission()
             elif _status == Mission.CONTINUE:
-                self.wait_until(self.in_team, time_out=DEFAULT_MISSION_TIMEOUT)
                 self.log_info("任务继续")
-                self.current_wave = -1
+                self.init_for_next_round()
+                self.wait_until(self.in_team, time_out=DEFAULT_ACTION_TIMEOUT)
 
-            self.sleep(0.1)  # 降低CPU占用率
+            self.sleep(0.1)
+
+    def init_all(self):
+        self.init_for_next_round()
+        self.current_round = -1
+
+    def init_for_next_round(self):
+        self.init_runtime_state()
+
+    def init_runtime_state(self):
+        self.runtime_state = {"wave_start_time": 0, "wave": -1, "wait_next_wave": False, "skill_time": 0}
+        self.current_wave = -1
 
     def handle_in_mission(self):
         """处理在副本中的逻辑"""
         self.get_wave_info()
         if self.current_wave != -1:
             # 如果是新的波次，重置状态
-            if self.current_wave != self.wave_info["wave"]:
-                self.wave_info.update({"wave": self.current_wave, "start_time": time.time(), "wait_next": False})
+            if self.current_wave != self.runtime_state["wave"]:
+                self.runtime_state.update({"wave": self.current_wave, "wave_start_time": time.time()})
                 self.quick_move_task.reset()
 
             # 检查波次是否超时
-            if not self.wave_info["wait_next"] and time.time() - self.wave_info["start_time"] >= self.config.get(
-                    "超时时间", 120):
+            if not self.runtime_state["wait_next_wave"] and time.time() - self.runtime_state["wave_start_time"] >= self.config.get("超时时间", 120):
                 if self.external_movement is not _default_movement:
                     self.log_info("任务超时")
                     self.open_in_mission_menu()
+                    return
                 else:
                     self.log_info_notify("任务超时")
                     self.soundBeep()
-                self.wave_info["wait_next"] = True
+                    self.runtime_state["wait_next_wave"] = True
 
             # 如果未超时，则使用技能
-            if not self.wave_info["wait_next"]:
-                self.skill_time = self.use_skill(self.skill_time)
+            if not self.runtime_state["wait_next_wave"]:
+                self.runtime_state["skill_time"] = self.use_skill(self.runtime_state["skill_time"])
         else:
+            if self.runtime_state["wave"] > 0:
+                self.init_runtime_state()
             # 如果不在战斗波次中，执行移动任务
             self.quick_move_task.run()
 
     def handle_mission_start(self):
         """处理任务开始的逻辑"""
-        self.wait_until(self.in_team, time_out=DEFAULT_MISSION_TIMEOUT)
-        self.sleep(2)
-        self.init_param()
         if self.external_movement is not _default_movement:
             self.log_info("任务开始，执行外部移动逻辑")
             self.external_movement()
@@ -143,11 +151,6 @@ class AutoDefence(DNAOneTimeTask, CommissionsTask, BaseCombatTask):
         else:
             self.log_info_notify("任务开始")
             self.soundBeep()
-
-    def init_param(self):
-        self.current_round = -1
-        self.current_wave = -1
-        self.skill_time = 0
 
     def stop_func(self):
         self.get_round_info()

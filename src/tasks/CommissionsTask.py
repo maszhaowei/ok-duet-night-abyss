@@ -20,6 +20,7 @@ class CommissionsTask(BaseDNATask):
         self.current_round = -1
         self.current_wave = -1
         self.mission_status = None
+        self.action_timeout = 10
 
     def setup_commission_config(self):
         self.default_config.update({
@@ -101,8 +102,8 @@ class CommissionsTask(BaseDNATask):
         self.sleep(0.2)
         return found
 
-    def start_mission(self, timeout=10):
-        action_timeout = self.safe_get("action_timeout", timeout)
+    def start_mission(self, timeout=0):
+        action_timeout = self.action_timeout if timeout == 0 else timeout
         start_time = time.time()
         while time.time() - start_time < action_timeout:
             if btn := self.find_retry_btn() or self.find_bottom_start_btn() or self.find_big_bottom_start_btn():
@@ -120,11 +121,9 @@ class CommissionsTask(BaseDNATask):
         else:
             raise Exception("等待开始任务超时")
 
-    def quit_mission(self, timeout=10):
-        action_timeout = self.safe_get("action_timeout", timeout)
-        quit_btn = self.wait_until(
-            self.find_quit_btn, time_out=action_timeout, raise_if_not_found=True
-        )
+    def quit_mission(self, timeout=0):
+        action_timeout = self.action_timeout if timeout == 0 else timeout
+        quit_btn = self.wait_until(self.find_quit_btn, time_out=action_timeout, raise_if_not_found=True)
         self.sleep(0.5)
         self.wait_until(
             condition=lambda: not self.find_quit_btn(),
@@ -133,12 +132,10 @@ class CommissionsTask(BaseDNATask):
             raise_if_not_found=True,
         )
         self.sleep(1)
-        self.wait_until(
-            lambda: not self.in_team(), time_out=action_timeout, raise_if_not_found=True
-        )
+        self.wait_until(lambda: not self.in_team(), time_out=action_timeout, raise_if_not_found=True)
 
-    def give_up_mission(self, timeout=10):
-        action_timeout = self.safe_get("action_timeout", timeout)
+    def give_up_mission(self, timeout=0):
+        action_timeout = self.action_timeout if timeout == 0 else timeout
         box = self.box_of_screen_scaled(2560, 1440, 1301, 776, 1365, 841, name="give_up_mission", hcenter=True)
         self.open_in_mission_menu()
 
@@ -157,10 +154,10 @@ class CommissionsTask(BaseDNATask):
         )
         self.sleep(2)
 
-    def continue_mission(self, timeout=10):
+    def continue_mission(self, timeout=0):
         if self.in_team():
             return False
-        action_timeout = self.safe_get("action_timeout", timeout)
+        action_timeout = self.action_timeout if timeout == 0 else timeout
         continue_btn = self.wait_until(self.find_continue_btn, time_out=action_timeout, raise_if_not_found=True)
         self.wait_until(
             condition=lambda: not self.find_continue_btn(),
@@ -171,8 +168,8 @@ class CommissionsTask(BaseDNATask):
         self.sleep(0.5)
         return True
 
-    def choose_drop_rate(self, timeout=10):
-        action_timeout = self.safe_get("action_timeout", timeout)
+    def choose_drop_rate(self, timeout=0):
+        action_timeout = self.action_timeout if timeout == 0 else timeout
         self.sleep(0.5)
         self.choose_drop_rate_item()
         self.wait_until(
@@ -199,10 +196,10 @@ class CommissionsTask(BaseDNATask):
         self.log_info(f"使用委托手册: {drop_rate}")
         self.sleep(0.25)
 
-    def choose_letter(self, timeout=10):
+    def choose_letter(self, timeout=0):
         if not hasattr(self, "config"):
             return
-        action_timeout = self.safe_get("action_timeout", timeout)
+        action_timeout = self.action_timeout if timeout == 0 else timeout
         if self.config.get("自动选择首个密函和密函奖励", False):
             if self.find_letter_interface():
                 self.sleep(0.5)
@@ -247,10 +244,10 @@ class CommissionsTask(BaseDNATask):
         else:
             self.log_info("未识别到持有数为0的奖励")
 
-    def choose_letter_reward(self, timeout=10):
+    def choose_letter_reward(self, timeout=0):
         if not hasattr(self, "config"):
             return
-        action_timeout = self.safe_get("action_timeout", timeout)
+        action_timeout = self.action_timeout if timeout == 0 else timeout
         if self.config.get("自动选择首个密函和密函奖励", False):
             if self.config.get("优先选择持有数为0的密函奖励", False):
                 self.choose_letter_reward_zero()

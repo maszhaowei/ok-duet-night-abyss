@@ -43,14 +43,6 @@ class AutoExpulsion(DNAOneTimeTask, CommissionsTask, BaseCombatTask):
 
         self.default_config.pop("启用自动穿引共鸣", None)
         self.action_timeout = 10
-        self.external_movement = lambda: False
-
-    def config_external_movement(self, func: callable, config: dict):
-        if callable(func):
-            self.external_movement = func
-        else:
-            self.external_movement = lambda: False
-        self.config.update(config)
 
     def run(self):
         DNAOneTimeTask.run(self)
@@ -65,37 +57,61 @@ class AutoExpulsion(DNAOneTimeTask, CommissionsTask, BaseCombatTask):
             raise
 
     def do_run(self):
+        self.init_all()
         self.load_char()
-        _start_time = 0
-        _skill_time = 0
-        _random_walk_time = 0
-        _count = 0
+        self.count = 0
         while True:
             if self.in_team():
-                if _start_time == 0:
-                    _count += 1
-                    self.move_on_begin()
-                    _start_time = time.time()
-                _skill_time = self.use_skill(_skill_time)
-                _random_walk_time = self.random_walk(_random_walk_time)
-                if time.time() - _start_time >= self.config.get("超时时间", 120):
-                    logger.info("已经超时，重开任务...")
-                    self.give_up_mission()
-                    self.wait_until(lambda: not self.in_team(), time_out=30, settle_time=1)
+                self.handle_in_mission()
 
-            _status = self.handle_mission_interface()
+            _status = self.handle_mission_interface(stop_func=self.stop_func)
             if _status == Mission.START:
                 self.wait_until(self.in_team, time_out=30)
-                if _count >= self.config.get("刷几次", 999):
-                    self.sleep(1)
-                    self.open_in_mission_menu()
-                    self.log_info_notify("任务终止")
-                    self.soundBeep()
-                    return
-                self.log_info("任务开始")
                 self.sleep(2)
-                _start_time = 0
-            self.sleep(0.2)
+                self.init_all()
+                self.handle_mission_start()
+            elif _status == Mission.STOP:
+                pass
+            elif _status == Mission.CONTINUE:
+                pass
+
+            self.sleep(0.1)
+
+    def init_all(self):
+        self.init_for_next_round()
+        self.current_round = -1
+
+    def init_for_next_round(self):
+        self.init_runtime_state()
+
+    def init_runtime_state(self):
+        self.runtime_state = {"start_time": 0, "skill_time": 0, "random_walk_time": 0}
+
+    def handle_in_mission(self):
+        if self.runtime_state["start_time"] == 0:
+            self.move_on_begin()
+            self.runtime_state["start_time"] = time.time()
+            self.count += 1
+
+        if time.time() - self.runtime_state["start_time"] >= self.config.get("超时时间", 120):
+            logger.info("已经超时，重开任务...")
+            self.give_up_mission()
+            self.wait_until(lambda: not self.in_team(), time_out=30, settle_time=1)
+
+        self.runtime_state["skill_time"] = self.use_skill(self.runtime_state["skill_time"])
+        self.runtime_state["random_walk_time"] = self.random_walk(self.runtime_state["random_walk_time"])
+
+    def handle_mission_start(self):
+        if self.count >= self.config.get("刷几次", 999):
+            self.sleep(1)
+            self.open_in_mission_menu()
+            self.log_info_notify("任务终止")
+            self.soundBeep()
+            return
+        self.log_info("任务开始")
+    
+    def stop_func(self):
+        pass
 
     def move_on_begin(self):
         if self.config.get("挂机模式") == "开局重置角色位置":
