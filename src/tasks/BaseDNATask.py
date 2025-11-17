@@ -38,9 +38,21 @@ class BaseDNATask(BaseTask):
         return f_search_box
 
     def in_team(self) -> bool:
-        if self.find_one('lv_text', threshold=0.8):
+        frame = self.frame
+        if self.find_one('lv_text', frame=frame, threshold=0.8):
             return True
-        return False
+        # start_time = time.perf_counter()
+        mat = self.get_feature_by_name("ultimate_key_icon").mat
+        mat2 = self.get_box_by_name("ultimate_key_icon").crop_frame(frame)
+        max_area1 = invert_max_area_only(mat)[2]
+        max_area2 = invert_max_area_only(mat2)[2]
+        result = False
+        if max_area1 > 0:
+            if abs(max_area1 - max_area2) / max_area1 < 0.15:
+                result = True
+        # elapsed = time.perf_counter() - start_time
+        # logger.debug(f"in_team check took {elapsed:.4f} seconds.")
+        return result
     
     def in_team_and_world(self):
         return self.in_team()
@@ -112,13 +124,13 @@ class BaseDNATask(BaseTask):
         self.log_info(msg, notify=self.afk_config['弹出通知'])
 
     def move_mouse_to_safe_position(self, save_current_pos: bool = True):
-        if self.afk_config["防止鼠标干扰"] and self.is_mouse_in_window():
+        if self.afk_config["防止鼠标干扰"]:
             if save_current_pos:
                 self.old_mouse_pos = win32api.GetCursorPos()
-            abs_pos = self.executor.interaction.capture.get_abs_cords(self.width_of_screen(0.95),
-                                                                      self.height_of_screen(0.6))
-            win32api.SetCursorPos(abs_pos)
-            self.sleep(0.01)
+            else:
+                self.old_mouse_pos = None
+            if self.rel_move_if_in_win(0.95, 0.6):
+                self.sleep(0.01)
 
     def move_back_from_safe_position(self):
         if self.afk_config["防止鼠标干扰"] and self.old_mouse_pos is not None:
@@ -210,6 +222,20 @@ class BaseDNATask(BaseTask):
         return (win_x <= mouse_x < win_x + hwnd_window.window_width) and \
                (win_y <= mouse_y < win_y + hwnd_window.window_height)
     
+    def rel_move_if_in_win(self, x=0.5, y=0.5):
+        """
+        如果鼠标在窗口内，则将其移动到游戏窗口内的相对位置。
+
+        Args:
+            x (float): 相对 x 坐标 (0.0 到 1.0)。
+            y (float): 相对 y 坐标 (0.0 到 1.0)。
+        """
+        if not self.is_mouse_in_window():
+            return False
+        abs_pos = self.executor.device_manager.hwnd_window.get_abs_cords(self.width_of_screen(x), self.height_of_screen(y))
+        win32api.SetCursorPos(abs_pos)
+        return True
+    
     def create_ticker(self, action: Callable, interval: Union[float, int, Callable] = 1.0) -> Callable:
         last_time = 0
         armed = False
@@ -287,3 +313,37 @@ def color_filter(img, color):
     img_modified = img.copy()
     img_modified[mask == 0] = 0
     return img_modified
+
+def invert_max_area_only(mat):
+    # 转灰度并二值化
+    gray = cv2.cvtColor(mat, cv2.COLOR_BGR2GRAY)
+    _, thresh = cv2.threshold(gray, 0, 255, cv2.THRESH_BINARY)
+
+    # 连通组件分析
+    num_labels, labels, stats, centroids = cv2.connectedComponentsWithStats(thresh)
+    
+    # 找最大连通区域（排除背景）
+    areas = stats[1:, 4]
+    if len(areas) == 0:
+        return None, None, 0
+    # max_area = np.max(areas)
+    max_idx = np.argmax(areas) + 1
+
+    # 生成只包含最大区域的掩码
+    max_region = (labels == max_idx).astype(np.uint8) * 255
+
+    # 对这个区域做黑白反转，其他部分全部置为0
+    inverted_region = 255 - max_region
+
+    # 再计算反转后的最大白色区域（一般只有一块）
+    num_labels2, labels2, stats2, centroids2 = cv2.connectedComponentsWithStats(inverted_region)
+    areas2 = stats2[1:, 4]
+    if len(areas2) == 0:
+        return None, None, 0
+    max_area2 = np.max(areas2)
+    max_idx2 = np.argmax(areas2) + 1
+
+    # 提取最终掩码
+    final_mask = (labels2 == max_idx2).astype(np.uint8) * 255
+
+    return inverted_region, final_mask, max_area2

@@ -517,7 +517,7 @@ class AutoEscortTask(DNAOneTimeTask, CommissionsTask, BaseCombatTask):
         while time.time() - start_time < timeout:
             self.puzzle_task.run()
             self.sleep(0.5)
-            if self.puzzle_task.is_puzzle_solved():
+            if self.puzzle_task.puzzle_solved:
                 logger.info("✅ 解密完成，puzzle 已消失")
                 self.wait_until(self.in_team, time_out=10)
                 self.sleep(0.5)  # 额外等待一下确保稳定

@@ -28,7 +28,7 @@ class CombatCheck(BaseDNATask):
                 return self.reset_to_false(recheck=True, reason='on user stop')
             return True
         else:
-            in_combat = self.manual_in_combat and self.in_team() and og.device_manager.hwnd_window.is_foreground()
+            in_combat = self.manual_in_combat and og.device_manager.hwnd_window.is_foreground()
             if in_combat:
                 from src.tasks.trigger.AutoCombatTask import AutoCombatTask
                 if isinstance(self, AutoCombatTask):
