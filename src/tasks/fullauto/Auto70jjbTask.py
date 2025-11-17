@@ -118,116 +118,190 @@ class Auto70jjbTask(DNAOneTimeTask, CommissionsTask, BaseCombatTask):
         n = self.config.get('轮次', 3)
         if n == 1 or self.current_round >= n:
             return True
-
-    def find_next_hint(self, x1, y1, x2, y2, s, box_name='hint_text'):
-        texts = self.ocr(box=self.box_of_screen(x1, y1, x2, y2, hcenter=True),
-                         target_height=540, name=box_name)
-        fps_text = find_boxes_by_name(texts,
-                                      re.compile(s, re.IGNORECASE))
-        if fps_text:
-            return True
-        return False
-
-    def find_and_click(self, x1, y1, x2, y2, s):
-        if self.find_next_hint(x1, y1, x2, y2, s):
-            self.click((x1 + x2) / 2, (y1 + y2) / 2, after_sleep=0.5)
-            return True
-        return False
-
-    def wait_hint(self, x1, y1, x2, y2, hint, timeout=2):
-        if self.wait_until(lambda: self.find_next_hint(x1, y1, x2, y2, hint), time_out=timeout):
-            self.sleep(0.2)
-            return True
-        return False
-
+        
+    def find_track_point(self, x1, y1, x2, y2) -> bool:
+        box = self.box_of_screen_scaled(2560, 1440, 2560*x1, 1440*y1, 2560*x2, 1440*y2, name="find_track_point", hcenter=True)
+        return super().find_track_point(threshold=0.7, box=box)
+        
     def walk_to_aim(self):
-        if self.find_next_hint(0.18, 0.52, 0.23, 0.55, r'保护目标'):
-            # 无电梯
-            self.send_key_down('w')
-            self.sleep(8.5)
-            self.send_key_up('w')
-            self.send_key_down('a')
-            self.sleep(0.2)
-            self.send_key_up('a')
-            self.middle_click(after_sleep=0.5)
-            self.send_key_down('w')
-            self.sleep(6)
-            self.send_key_down('d')
-            self.sleep(5.6)
-            self.send_key_up('d')
-            self.sleep(23)
-            self.send_key_up('w')
-            self.sleep(0.2)
-            # 分支1直接到达，未到达则进入分支2继续往前走
+        found_target = False
+        if self.find_track_point(0.20,0.54,0.22,0.59):
+            #70皎皎币-无电梯
+            found_target = True
+            self.send_key_down("lalt")
+            self.sleep(0.05)
+            self.send_key_down("w")
+            self.sleep(0.1)
+            self.send_key_down("a")
+            self.sleep(0.1)
+            self.send_key_down("lshift")
+            self.sleep(2.2)
+            self.send_key("lshift", down_time=0.2)
+            self.sleep(0.8)
+            self.send_key("lshift", down_time=0.2)
+            self.sleep(0.8)
+            self.send_key_down("lshift")
+            self.sleep(2.2)
+            self.send_key_up("w")
+            self.sleep(1)
+            self.send_key("space", down_time=0.1)
+            self.sleep(1)
+            self.send_key_up("lshift")
+            self.sleep(0.1)
+            self.send_key("lshift", down_time=0.2)
+            self.sleep(0.8)
+            self.send_key("lshift", down_time=0.2)
+            self.sleep(0.8)
+            self.send_key_down("lshift")
+            self.sleep(1.8)
+            self.send_key("lshift", down_time=0.2)
+            self.sleep(0.8)
+            self.send_key("lshift", down_time=0.2)
+            self.sleep(0.8)
+            self.send_key_down("lshift")
+            self.sleep(2.2)
+            self.send_key_up("lshift")
+            self.sleep(0.1)
+            self.send_key_up("a")
+            #分支1直接到达，未到达则进入分支2继续往前走
             start = time.time()
             self.current_wave = -1
             while self.current_wave == -1 and time.time() - start < 2:
                 self.get_wave_info()
-                self.sleep(0.2)
+                self.sleep(0.2) 
             if self.current_wave == -1:
-                self.send_key_down('w')
-                self.sleep(6)
-                self.send_key('space', down_time=0.2, after_sleep=2.7)
-                self.send_key_up('w')
-            return
-        self.send_key('w', down_time=12.1, after_sleep=0.2)
-        if self.find_next_hint(0.77, 0.34, 0.83, 0.38, r'保护目标'):
-            # 电梯右
-            self.sleep(0.5)
-            self.send_key('space', down_time=0.2, after_sleep=0.2)
-            self.send_key('w', down_time=0.8, after_sleep=0.2)
-            self.send_key('d', down_time=0.2, after_sleep=0.2)
-            self.middle_click(after_sleep=0.5)
-            self.send_key('w', down_time=3.4, after_sleep=0.2)
+                self.send_key_down('a')
+                self.sleep(0.2)
+                self.send_key_down("lshift")
+                self.sleep(1)
+                self.send_key('space', down_time=0.2, after_sleep=1.8)
+                self.send_key_up("lshift")
+                self.sleep(0.1)
+                self.send_key_up('a')
+            self.send_key_up("lalt")
+            return             
+
+        if self.find_track_point(0.66,0.67,0.69,0.72):
+            #70皎皎币-电梯右
+            found_target = True
+            self.reset_and_transport()
+            self.send_key('s', down_time=0.2,after_sleep=0.2)
+            self.middle_click(after_sleep=0.2)
+            self.send_key_down("lalt")
+            self.sleep(0.05)
             self.send_key_down('a')
-            self.sleep(3.4)
-            self.send_key_down('w')
-            self.sleep(2.6)
-            self.send_key_up('a')
-            self.sleep(2.1)
-            self.send_key('a', down_time=0.4, after_sleep=6.4)
-            self.send_key_up('w')
             self.sleep(0.2)
-            self.send_key('a', down_time=6.1, after_sleep=0.2)
-            self.send_key('w', down_time=8, after_sleep=0.2)
-            # 两种地图均可复位到达
-            self.reset_and_transport()
-            return
-        if self.find_next_hint(0.17, 0.39, 0.23, 0.43, r'保护目标'):
-            # 电梯左
+            self.send_key_down("lshift")
+            self.sleep(0.4)
+            self.send_key_down('w')
+            self.sleep(0.7)
+            self.send_key_up('lshift')
+            self.sleep(0.1)
+            self.send_key_up("a")
+            self.sleep(0.1)
+            self.send_key('space',down_time=0.3,after_sleep=0.2)
+            self.send_key('space',down_time=0.3,after_sleep=0.4)
+            self.send_key("lshift", down_time=0.2)
+            self.sleep(0.8)
+            self.send_key_down("lshift")
+            self.sleep(2.2)
+            self.send_key_down('d')
+            self.sleep(0.1)
+            self.send_key_up("lshift")
+            self.sleep(0.2)
+            self.send_key("lshift", down_time=0.2)
+            self.sleep(0.1)
+            self.send_key_up("w")
+            self.sleep(0.7)
+            self.send_key_down("lshift")
             self.sleep(0.5)
-            self.send_key('space', down_time=0.2, after_sleep=0.2)
             self.send_key_down('w')
-            self.sleep(3.8)
-            self.send_key('d', down_time=0.4, after_sleep=3)
-            self.send_key('d', down_time=0.4, after_sleep=6.7)
-            self.send_key_up('w')
+            self.sleep(1)
+            self.send_key_up('d')
+            self.sleep(0.7)
+            self.send_key_up("lshift")
+            self.sleep(0.1)
+            self.send_key("lshift", down_time=0.2)
+            self.sleep(0.8)
+            self.send_key_down("lshift")
+            self.sleep(2.5)
+            self.send_key_up("lshift")
             self.sleep(0.2)
-            self.send_key('a', down_time=0.2, after_sleep=0.2)
-            self.middle_click(after_sleep=0.5)
-            self.send_key_down('w')
-            self.sleep(8.7)
-            self.send_key('d', down_time=1, after_sleep=0.5)
-            self.send_key('d', down_time=0.6, after_sleep=1.3)
-            self.send_key('d', down_time=0.6, after_sleep=6.2)
-            self.send_key('d', down_time=0.4, after_sleep=0.5)
-            self.send_key('d', down_time=0.4, after_sleep=4.5)
             self.send_key_up('w')
-            # 两种地图均可复位到达
+            self.send_key_up("lalt")
             self.reset_and_transport()
-            return
-            # 电梯中
-        self.sleep(0.5)
-        self.send_key('space', down_time=0.2, after_sleep=0.2)
-        self.send_key_down('w')
-        self.sleep(4.8)
-        self.send_key('d', down_time=1.8, after_sleep=9.6)
-        self.send_key('d', down_time=3.4, after_sleep=3.4)
-        self.send_key_up('w')
-        self.sleep(0.2)
-        self.send_key('a', down_time=1.9, after_sleep=0.2)
-        self.send_key('w', down_time=6, after_sleep=0.2)
-        # 两种地图均可复位到达
-        self.reset_and_transport()
-        # finish
-        return
+            return            
+
+        if self.find_track_point(0.32,0.67,0.35,0.73):
+            #70皎皎币-电梯左
+            found_target = True
+            self.reset_and_transport()
+            self.send_key_down("lalt")
+            self.sleep(0.05)
+            self.send_key_down('w')
+            self.sleep(0.2)
+            self.send_key_down("lshift")
+            self.sleep(0.6)
+            self.send_key_down("a")
+            self.sleep(0.6)
+            self.send_key_up('a')
+            self.sleep(0.8)
+            self.send_key_up("lshift")
+            self.sleep(0.1)
+            self.send_key("lshift", down_time=0.2)
+            self.sleep(0.8)
+            self.send_key_down("lshift")
+            self.sleep(2)
+            self.send_key_down("d")
+            self.sleep(1)
+            self.send_key_up('d')
+            self.sleep(0.8)
+            self.send_key_up("lshift")
+            self.sleep(0.1)
+            self.send_key("lshift", down_time=0.2)
+            self.sleep(0.8)
+            self.send_key_down("lshift")
+            self.sleep(1)
+            self.send_key_down("d")
+            self.sleep(0.5)
+            self.send_key_up('d')
+            self.sleep(3.6)
+            self.send_key_up("lshift")
+            self.sleep(0.2)
+            self.send_key_up('w')
+            self.send_key_up("lalt")
+            self.reset_and_transport()
+            return            
+
+        if self.find_track_point(0.50,0.71,0.53,0.76):
+            #70皎皎币-电梯中
+            found_target = True
+            self.reset_and_transport()
+            self.send_key_down("lalt")
+            self.sleep(0.05)
+            self.send_key_down('w')
+            self.sleep(0.2)
+            self.send_key_down('d')
+            self.sleep(0.2)
+            self.send_key_down("lshift")
+            self.sleep(0.7)
+            self.send_key_up('w')
+            self.sleep(1.2)
+            self.send_key_up("lshift")
+            self.sleep(0.2)
+            self.send_key("lshift", down_time=0.2)
+            self.sleep(0.4)
+            self.send_key_down('s')
+            self.sleep(0.3)
+            self.send_key_down("lshift")
+            self.sleep(0.4)
+            self.send_key_up('s')
+            self.sleep(1)
+            self.send_key("lshift", down_time=0.2)
+            self.sleep(2)
+            self.send_key_up("lshift")
+            self.sleep(0.1)
+            self.send_key_up('d')
+            self.send_key_up("lalt")
+            self.reset_and_transport()
+            return     
