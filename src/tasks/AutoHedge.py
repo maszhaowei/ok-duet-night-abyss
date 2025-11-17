@@ -8,6 +8,7 @@ from ok import Logger, TaskDisabledException
 from src.tasks.CommissionsTask import CommissionsTask, QuickMoveTask, Mission, _default_movement
 from src.tasks.BaseCombatTask import BaseCombatTask
 from src.tasks.DNAOneTimeTask import DNAOneTimeTask
+from src.tasks.trigger.AutoWheelTask import AutoWheelTask
 
 logger = Logger.get_logger(__name__)
 
@@ -47,6 +48,7 @@ class AutoHedge(DNAOneTimeTask, CommissionsTask, BaseCombatTask):
         self.ocr_executor = None
         self.ocr_future = None
         self.last_ocr_result = -1
+        self.wheel_task = None
 
     @property
     def config(self):
@@ -81,6 +83,7 @@ class AutoHedge(DNAOneTimeTask, CommissionsTask, BaseCombatTask):
             raise
 
     def do_run(self):
+        self.init_task()
         self.init_all()
         self.load_char()
 
@@ -90,7 +93,8 @@ class AutoHedge(DNAOneTimeTask, CommissionsTask, BaseCombatTask):
         while True:
             if self.in_team():
                 self.handle_in_mission()
-
+            else:
+                self.wheel_task.run()
             _status = self.handle_mission_interface(stop_func=self.stop_func)
             if _status == Mission.START:
                 self.wait_until(self.in_team, time_out=DEFAULT_ACTION_TIMEOUT)
@@ -221,3 +225,7 @@ class AutoHedge(DNAOneTimeTask, CommissionsTask, BaseCombatTask):
         if box is not None:
             ret = box.x
         return ret
+    
+    def init_task(self):
+        if self.wheel_task is None:
+            self.wheel_task = self.get_task_by_class(AutoWheelTask)

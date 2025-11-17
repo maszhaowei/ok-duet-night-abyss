@@ -356,13 +356,14 @@ class AutoWheelTask(BaseDNATask, TriggerTask):
         # print(f"解答序列: {solution}")
         if type(solution) == str:
             return
-        for i in solution:
-            target_ang = self.mech_angle[i]
-            while True:
+        while True:
+            for idx, value in enumerate(solution[:]):
+                target_ang = self.mech_angle[value]
                 ang = self.get_control_ang()
-                if ang != -1:
-                    if target_ang - 5 < ang < target_ang + 5:
-                        # print(f"触发 {ang} 角度 {target_ang}")
-                        self.send_key("space")
-                        break
-                self.next_frame()
+                if target_ang - 5 < ang < target_ang + 5:
+                    self.send_key("space")
+                    solution.pop(idx)
+                    break
+            if len(solution) == 0:
+                break
+            self.next_frame()
