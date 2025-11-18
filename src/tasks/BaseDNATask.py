@@ -285,6 +285,29 @@ class BaseDNATask(BaseTask):
         tick.start_next_tick = start_next_tick
         return tick
 
+    def get_interact_key(self):
+        """获取交互的按键。
+
+        Returns:
+            str: 交互的按键字符串。
+        """
+        return self.key_config['Interact Key']
+
+    def get_dodge_key(self):
+        """获取闪避的按键。
+
+        Returns:
+            str: 闪避的按键字符串。
+        """
+        return self.key_config['Dodge Key']
+
+    def get_spiral_dive_key(self):
+        """获取螺旋飞跃的按键。
+
+        Returns:
+            str: 螺旋飞跃的按键字符串。
+        """
+        return self.key_config['HelixLeap Key']
 
 track_point_color = {
     "r": (121, 255),  # Red range

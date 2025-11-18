@@ -7,10 +7,16 @@ version = "dev"
 #不需要修改version, Github Action打包会自动修改
 
 key_config_option = ConfigOption('Game Hotkey Config', { #全局配置示例
+    'Interact Key': 'f',
     'Combat Key': 'e',
     'Ultimate Key': 'q',
     'Geniemon Key': 'z',
-}, description='In Game Hotkey for Skills')
+    'Dodge Key': 'lshift',
+    'HelixLeap Key': '4'
+}, description='In Game Hotkey for Skills', config_type={
+    'Interact Key': {'type': 'drop_down', 'options': ['f', 'e']}
+})
+
 
 afk_config_option = ConfigOption('挂机设置', { #全局配置示例
     '提示音': 2,

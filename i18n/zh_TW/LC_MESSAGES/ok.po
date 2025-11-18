@@ -428,3 +428,12 @@ msgstr "無悠閒全自動釣魚 (原作者: B站無敵大蜜瓜)"
 
 msgid "自动避险"
 msgstr "自動避險"
+
+msgid "Interact Key"
+msgstr "互动按鍵"
+
+msgid "Dodge Key"
+msgstr "閃避按鍵"
+
+msgid "HelixLeap Key"
+msgstr "螺旋飛躍按鍵"

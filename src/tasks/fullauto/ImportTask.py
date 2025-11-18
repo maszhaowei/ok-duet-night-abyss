@@ -75,8 +75,8 @@ class ImportTask(DNAOneTimeTask, CommissionsTask, BaseCombatTask):
 
     def run(self):
         path = Path.cwd()
-        self.script = self.process_json_files(f'{path}\mod\{self.config.get('外部文件夹')}\scripts')
-        self.img = self.load_png_files(f'{path}\mod\{self.config.get('外部文件夹')}\map')
+        self.script = self.process_json_files(f'{path}\mod\{self.config.get("外部文件夹")}\scripts')
+        self.img = self.load_png_files(f'{path}\mod\{self.config.get("外部文件夹")}\map')
         DNAOneTimeTask.run(self)
         self.move_mouse_to_safe_position(save_current_pos=False)
         self.set_check_monthly_card()
@@ -288,6 +288,10 @@ class ImportTask(DNAOneTimeTask, CommissionsTask, BaseCombatTask):
                 action['key'] = normalize_key(action['key'])
                 if action['key'] == 'f4':
                     self.reset_and_transport()
+                elif action['key'] == 'lshift':
+                    self.send_key_down(self.get_dodge_key())
+                elif action['key'] == 'f':
+                    self.send_key_down(self.get_interact_key())
                 else:
                     self.send_key_down(action['key'])
             elif action['type'] == "key_up":

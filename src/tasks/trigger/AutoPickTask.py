@@ -20,7 +20,7 @@ class AutoPickTask(TriggerTask, BaseDNATask):
         self.scene: DNAScene | None = None
 
     def send_fs(self):
-        self.send_key('f')
+        self.send_key(self.get_interact_key())
         self.sleep(0.2)
 
     def run(self):
@@ -29,7 +29,7 @@ class AutoPickTask(TriggerTask, BaseDNATask):
         start = time.time()
         while time.time() - start < 1:
             f = self.find_one('pick_up_f', box=self.f_search_box,
-                              threshold=0.8)
+                              threshold=0.7)
             if not f:
                 return
             percent = self.calculate_color_percentage(f_black_color, f)

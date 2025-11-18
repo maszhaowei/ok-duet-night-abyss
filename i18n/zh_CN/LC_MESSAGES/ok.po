@@ -428,3 +428,12 @@ msgstr ""
 
 msgid "自动避险"
 msgstr ""
+
+msgid "Interact Key"
+msgstr "交互按键"
+
+msgid "Dodge Key"
+msgstr "闪避按键"
+
+msgid "HelixLeap Key"
+msgstr "螺旋飞跃按键"

@@ -143,7 +143,7 @@ class Auto65ArtifactTask_Fast(DNAOneTimeTask, CommissionsTask, BaseCombatTask):
 
             # 1.11s: 开始冲刺 (0.59s后)
             self.sleep(0.59)
-            self.send_key_down("lshift")
+            self.send_key_down(self.get_dodge_key())
 
             # 1.33s: 向左移动 (0.22s后)
             self.sleep(0.22)
@@ -167,13 +167,13 @@ class Auto65ArtifactTask_Fast(DNAOneTimeTask, CommissionsTask, BaseCombatTask):
 
             # 5.22s-7.82s: Shift连续切换 (可能在调整位置)
             self.sleep(0.38)
-            self.send_key_up("lshift")
+            self.send_key_up(self.get_dodge_key())
             self.sleep(0.24)
-            self.send_key("lshift", down_time=0.35)
+            self.send_key(self.get_dodge_key(), down_time=0.35)
             self.sleep(0.79)
-            self.send_key("lshift", down_time=0.41)
+            self.send_key(self.get_dodge_key(), down_time=0.41)
             self.sleep(0.80)
-            self.send_key_down("lshift")
+            self.send_key_down(self.get_dodge_key())
 
             # 9.09s: 停止前进 (1.27s后)
             self.sleep(1.27)
@@ -205,7 +205,7 @@ class Auto65ArtifactTask_Fast(DNAOneTimeTask, CommissionsTask, BaseCombatTask):
 
             # 18.89s-18.99s: 释放所有移动键 (4.93s后)
             self.sleep(4.93)
-            self.send_key_up("lshift")
+            self.send_key_up(self.get_dodge_key())
             self.sleep(0.10)
             self.send_key_up("a")
 
@@ -230,5 +230,5 @@ class Auto65ArtifactTask_Fast(DNAOneTimeTask, CommissionsTask, BaseCombatTask):
             self.send_key_up("a")
             self.send_key_up("s")
             self.send_key_up("d")
-            self.send_key_up("lshift")
+            self.send_key_up(self.get_dodge_key())
             self.send_key_up("lalt")
