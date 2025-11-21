@@ -114,7 +114,7 @@ config = {
         'resize_to': [(2560, 1440), (1920, 1080), (1600, 900)], #可选, 如果非16:9自动缩放为 resize_to
     },
     'analytics': {
-        'report_url': 'http://report.ok-script.cn:8080/report', #上报日活, 可选
+        'report_url': None, #上报日活, 可选
     },
     'links': { # 关于里显示的链接, 可选
             'default': {
