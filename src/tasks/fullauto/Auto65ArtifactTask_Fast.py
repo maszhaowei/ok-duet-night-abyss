@@ -154,7 +154,10 @@ class Auto65ArtifactTask_Fast(DNAOneTimeTask, CommissionsTask, BaseCombatTask):
                 self.send_key_down("a")
                 self.sleep(0.1)
                 self.send_key_down("lshift")
-                self.sleep(2.2)
+                self.sleep(2)
+                #下落时间有波动可能导致落地硬直,跳跃重置下落高度
+                self.send_key("space", down_time=0.1)
+                self.sleep(0.1)
                 self.send_key("lshift", down_time=0.2)
                 self.sleep(0.8)
                 self.send_key("lshift", down_time=0.2)
