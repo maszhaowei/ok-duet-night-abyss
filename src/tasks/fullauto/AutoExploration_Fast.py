@@ -64,7 +64,7 @@ class AutoExploration_Fast(DNAOneTimeTask, CommissionsTask, BaseCombatTask):
             self.send_key_down("a")
             self.sleep(0.1)
             self.send_key_down(self.get_dodge_key())
-            self.sleep(0.8)
+            self.sleep(0.85)
             self.send_key(self.get_dodge_key(), down_time=0.2,after_sleep=0.8)
             self.send_key(self.get_dodge_key(), down_time=0.2,after_sleep=1.6)
             self.send_key_down("s")
