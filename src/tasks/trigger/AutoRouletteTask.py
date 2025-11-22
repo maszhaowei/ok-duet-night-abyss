@@ -8,22 +8,21 @@ from ok import TriggerTask
 from qfluentwidgets import FluentIcon
 from src.tasks.BaseDNATask import BaseDNATask
 
-class AutoWheelTask(BaseDNATask, TriggerTask):
+class AutoRouletteTask(BaseDNATask, TriggerTask):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.icon = FluentIcon.FLAG
-        self.name = "自动轮盘机关"
+        self.name = "自动解锁轮盘"
         self.description = "随便搞的，基于2k写的其他分辨率要是有问题就不管了，有bug也不用反馈因为拿到巧手后就不维护了(狗头)"
         self.croppe_center = None
         self.mech_number = 0
         self.mech_angle = []
-        self.first_sleep = True
         self.img_croppe = None
-        self._puzzle_solved = False
+        self._unlocked = False
 
     @property
-    def puzzle_solved(self):
-        return self._puzzle_solved
+    def unlocked(self):
+        return self._unlocked
         
     def solve_mech_wheel(self, mech_wheel, control):
         """
@@ -324,53 +323,63 @@ class AutoWheelTask(BaseDNATask, TriggerTask):
         return self.ring_mask(self.img_croppe, 0.67, 0.75)
 
     def run(self):
-        self._puzzle_solved = False
+        self._unlocked = False
         if self.scene.in_team(self.in_team_and_world):
-            self.first_sleep = True
             return
         
         if not self.ocr(box=self.box_of_screen_scaled(2560, 1440, 1878, 736, 1963, 769, name="space_text", hcenter=True),
                     match=re.compile("space", re.IGNORECASE)):
             return
-        if self.first_sleep:
-            self.sleep(1)
-            self.first_sleep = False
-        
-        self.get_croppe_img()
-        img_mech = self.get_img_mech()
-        img_control = self.get_img_control()
-
-        mech_result = self.find_white_regions(img_mech)
-        self.mech_number = self.get_mech_number(img_mech)
-        if self.mech_number == 0:
-            return
-        # print(f"机械轮盘数量: {self.mech_number}")
-        
-        self.mech_angle = []
-        for i in range(self.mech_number):
-            step = 360 / self.mech_number
-            self.mech_angle.append(i*step)
-
-        mech_result = self.find_white_regions(img_mech)
-        control_result = self.detect_control(img_control)
-        mech_wheel = self.angle_bucket(mech_result)
-        control = self.get_control(control_result)
-
-        solution = self.solve_mech_wheel(mech_wheel, control)
-
-        # print(f"输入: mech_wheel={mech_wheel}, control={control}")
-        # print(f"解答序列: {solution}")
-        if type(solution) == str:
+        else:
+            self.sleep(0.1)
+        f_search_box = self.box_of_screen_scaled(2560, 1440, 2275, 1235, 2365, 1315, name="f_search", hcenter=True)
+        f = self.find_best_match_in_box(f_search_box, ["pick_up_f"], threshold=0.8)
+        if f :
+            self.sleep(0.5)
+            self.send_key("f", after_sleep=1)
+            self._unlocked = True
             return
         while True:
-            for idx, value in enumerate(solution[:]):
-                target_ang = self.mech_angle[value]
-                ang = self.get_control_ang()
-                if target_ang - 5 < ang < target_ang + 5:
-                    self.send_key("space")
-                    solution.pop(idx)
+            self.get_croppe_img()
+            img_mech = self.get_img_mech()
+            img_control = self.get_img_control()
+
+            mech_result = self.find_white_regions(img_mech)
+            self.mech_number = self.get_mech_number(img_mech)
+            if self.mech_number == 0:
+                return
+            self.log_info(f"机械轮盘数量: {self.mech_number}")
+            
+            self.mech_angle = []
+            for i in range(self.mech_number):
+                step = 360 / self.mech_number
+                self.mech_angle.append(i*step)
+
+            mech_result = self.find_white_regions(img_mech)
+            control_result = self.detect_control(img_control)
+            mech_wheel = self.angle_bucket(mech_result)
+            control = self.get_control(control_result)
+
+            solution = self.solve_mech_wheel(mech_wheel, control)
+
+            self.log_info(f"输入: mech_wheel={mech_wheel}, control={control}")
+            self.log_info(f"解答序列: {solution}")
+            if type(solution) is str:
+                return
+            while True:
+                for idx, value in enumerate(solution[:]):
+                    target_ang = self.mech_angle[value]
+                    ang = self.get_control_ang()
+                    if target_ang - 5 < ang < target_ang + 5:
+                        self.send_key("space")
+                        solution.pop(idx)
+                        break
+                if len(solution) == 0:
                     break
-            if len(solution) == 0:
+                self.next_frame()
+            if self.wait_until(self.in_team, time_out=2):
+                self._unlocked = True
                 break
-            self.next_frame()
-        self._puzzle_solved = True
+            else:
+                self.screenshot("img_mech", img_mech)
+                self.screenshot("img_control", img_control)

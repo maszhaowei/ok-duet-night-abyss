@@ -10,481 +10,481 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 msgid "100%"
-msgstr ""
+msgstr "100%"
 
 msgid "2"
-msgstr ""
+msgstr "2"
 
 msgid "200%"
-msgstr ""
+msgstr "200%"
 
 msgid "2000%"
-msgstr ""
+msgstr "2000%"
 
 msgid "800%"
-msgstr ""
+msgstr "800%"
 
 msgid "Auto"
-msgstr ""
+msgstr "自動"
 
 msgid "Auto Pick"
-msgstr ""
+msgstr "自動拾取"
 
 msgid "Auto Pick in Game World"
-msgstr ""
+msgstr "大世界自動拾取"
 
 msgid "Auto Resize Game Window"
-msgstr ""
+msgstr "自動調整遊戲視窗大小"
 
 msgid "Auto Start Game When App Starts"
-msgstr ""
+msgstr "應用啟動時自動啟動遊戲"
 
 msgid "Basic Options"
-msgstr ""
+msgstr "基本選項"
 
 msgid "Check Monthly Card"
-msgstr ""
+msgstr "檢查月卡"
 
 msgid "Check for monthly card to avoid interruption of tasks"
-msgstr ""
+msgstr "設定避免小月卡彈出視窗打斷任務"
 
 msgid "Combat Key"
-msgstr ""
+msgstr "戰技"
 
 msgid "Diagnosis"
-msgstr ""
+msgstr "診斷"
 
 msgid "Dodge Key"
-msgstr ""
+msgstr "閃避按鍵"
 
 msgid "END_WAIT_SPACE"
-msgstr ""
+msgstr "每輪結束等待時間"
 
 msgid "Exit App when Game Exits"
-msgstr ""
+msgstr "遊戲結束時退出應用"
 
 msgid "Game Hotkey Config"
-msgstr ""
+msgstr "遊戲快捷鍵設置"
 
 msgid "Geniemon Key"
-msgstr ""
+msgstr "魔靈支援"
 
 msgid "HelixLeap Key"
-msgstr ""
+msgstr "螺旋飛躍按鍵"
 
 msgid "In Game Hotkey for Skills"
-msgstr ""
+msgstr "遊戲內技能快捷鍵"
 
 msgid "Increase Delay between Trigger Tasks to Reduce CPU/GPU Usage(Milliseconds)"
-msgstr ""
+msgstr "增加觸發任務之間的延遲以減少 CPU/GPU 使用率（毫秒）"
 
 msgid "Interact Key"
-msgstr ""
+msgstr "互動按鍵"
 
 msgid "MAX_END_SEC"
-msgstr ""
+msgstr "結束階段超時"
 
 msgid "MAX_FIGHT_SEC"
-msgstr ""
+msgstr "溜魚階段超時"
 
 msgid "MAX_ROUNDS"
-msgstr ""
+msgstr "最大輪數"
 
 msgid "MAX_START_SEC"
-msgstr ""
+msgstr "開始階段超時"
 
 msgid "Minimize Window to System Tray when Closing"
-msgstr ""
+msgstr "關閉時最小化視窗到系統匣"
 
 msgid "Monthly Card Config"
-msgstr ""
+msgstr "小月卡設定"
 
 msgid "Monthly Card Time"
-msgstr ""
+msgstr "月卡時間"
 
 msgid "Mute Game while in Background"
-msgstr ""
+msgstr "遊戲在背景時靜音"
 
 msgid "No"
-msgstr ""
+msgstr "否"
 
 msgid "Operation"
-msgstr ""
+msgstr "操作"
 
 msgid "Performance Test"
-msgstr ""
+msgstr "性能測試"
 
 msgid "Trigger Interval"
-msgstr ""
+msgstr "觸發間隔"
 
 msgid "Turn on to avoid interruption by monthly card when executing tasks"
-msgstr ""
+msgstr "開啟以避免執行任務時被月卡中斷"
 
 msgid "Ultimate Key"
-msgstr ""
+msgstr "終結技"
 
 msgid "Use DirectML"
-msgstr ""
+msgstr "使用 DirectML"
 
 msgid "Use GPU to Improve Performance"
-msgstr ""
+msgstr "使用 GPU 提高性能"
 
 msgid "Yes"
-msgstr ""
+msgstr "是"
 
 msgid "Your computer's local time when the monthly card will popup, hour in (1-24)"
-msgstr ""
+msgstr "您的電腦本地時間，月卡彈出的小時（1-24）"
 
 msgid "e"
-msgstr ""
+msgstr "e"
 
 msgid "f"
-msgstr ""
+msgstr "f"
 
 msgid "right"
-msgstr ""
+msgstr "右鍵"
 
 msgid "test"
-msgstr ""
+msgstr "測試"
 
 msgid "x1"
-msgstr ""
+msgstr "x1"
 
 msgid "x2"
-msgstr ""
+msgstr "x2"
 
 msgid "不使用"
-msgstr ""
+msgstr "不使用"
 
 msgid "不重开时会发出声音提示"
-msgstr ""
+msgstr "不重開時會發出聲音提示"
 
 msgid "主画面侦测"
-msgstr ""
+msgstr "主畫面偵測"
 
 msgid "优先选择持有数为0的密函奖励"
-msgstr ""
+msgstr "優先選擇持有數為0的密函獎勵"
 
 msgid "使用外部移动逻辑自动打本"
-msgstr ""
+msgstr "使用外部移動邏輯自動打本"
 
 msgid "使用技能"
-msgstr ""
+msgstr "使用技能"
 
 msgid "使用键盘"
-msgstr ""
+msgstr "使用鍵盤"
 
 msgid "全自动"
-msgstr ""
+msgstr "全自動"
 
 msgid ""
 "全自动80护送任务，搬运自emt，欢迎路径作者署名。\n"
 "需要使用水母主控，近战武器选择0精春玦戟。魔之楔配置为金色迅捷+5，紫色穿引共鸣，紫色迅捷蓄势+5，紫色迅捷坠击+5，不要携带其他魔之楔，面板攻速为1.67。\n"
 "设置中控制设置水平灵敏度和垂直灵敏度设置为1.0，默认镜头距离设置为1.3。确认好自身魔之楔和设置后展开下方配置点击我已阅读后运行"
-msgstr ""
+msgstr "全自動80護送任務，搬運自emt，歡迎路徑作者署名。\n需要使用水母主控，近戰武器選擇0精春玦戟。魔之楔配置為金色迅捷+5，紫色穿引共鳴，紫色迅捷蓄勢+5，紫色迅捷墜擊+5，不要攜帶其他魔之楔，面板攻速為1.67。\n設置中控制設置水平靈敏度和垂直靈敏度設置為1.0，預設鏡頭距離設置為1.3。確認好自身魔之楔和設置後展開下方配置點擊我已閱讀後運行"
 
 msgid "刷几次"
-msgstr ""
+msgstr "刷幾次"
 
 msgid "刷武器密函时推荐同时开启下一选项"
-msgstr ""
+msgstr "刷武器密函時推薦同時開啟下一選項"
 
 msgid "副本类型"
-msgstr ""
+msgstr "副本類型"
 
 msgid "半自动"
-msgstr ""
+msgstr "半自動"
 
 msgid "半自动 (只有基础操作)"
-msgstr ""
+msgstr "半自動 (只有基礎操作)"
 
 msgid "单次提示响几次"
-msgstr ""
+msgstr "單次提示響幾次"
 
 msgid "发出声音提醒"
-msgstr ""
+msgstr "發出聲音提醒"
 
 msgid "右键按住多久(秒)"
-msgstr ""
+msgstr "右鍵按住多久(秒)"
 
 msgid "右键释放后等待多久(秒)"
-msgstr ""
+msgstr "右鍵釋放後等待多久(秒)"
 
 msgid "启动任务时和特定场景下会将鼠标移动到安全位置"
-msgstr ""
+msgstr "啟動任務時和特定場景下會將滑鼠移動到安全位置"
 
 msgid "启动转盘解迷"
-msgstr ""
+msgstr "啟動轉盤解迷"
 
 msgid "启动迷宫解迷"
-msgstr ""
+msgstr "啟動迷宮解迷"
 
 msgid "启用"
-msgstr ""
+msgstr "啟用"
 
 msgid "启用自动穿引共鸣"
-msgstr ""
+msgstr "啟用自動穿引共鳴"
 
 msgid "在上一选项启用时生效，多个目标时选择靠左的"
-msgstr ""
+msgstr "在上一選項啟用時生效，多個目標時選擇靠左的"
 
 msgid "在需要时发出声音提醒"
-msgstr ""
+msgstr "在需要時發出聲音提醒"
 
 msgid "在需要跑图时时启用触发任务的自动穿引共鸣"
-msgstr ""
+msgstr "在需要跑圖時啟用觸發任務的自動穿引共鳴"
 
 msgid "外部文件夹"
-msgstr ""
+msgstr "外部資料夾"
 
 msgid "如果不在可操控角色的画面则结束任务"
-msgstr ""
+msgstr "如果不在可操控角色的畫面則結束任務"
 
 msgid "如果是无尽关卡，选择打几个轮次"
-msgstr ""
+msgstr "如果是無盡關卡，選擇打幾個輪次"
 
 msgid "委托手册"
-msgstr ""
+msgstr "委託手冊"
 
 msgid "完成几次护送任务后停止"
-msgstr ""
+msgstr "完成幾次護送任務後停止"
 
 msgid "完成时播放提示音"
-msgstr ""
+msgstr "完成時播放提示音"
 
 msgid "左键按住多久"
-msgstr ""
+msgstr "左鍵按住多久"
 
 msgid "左键释放后等待多久"
-msgstr ""
+msgstr "左鍵釋放後等待多久"
 
 msgid "开始阶段超时(秒)"
-msgstr ""
+msgstr "開始階段超時(秒)"
 
 msgid "开局向前走"
-msgstr ""
+msgstr "開局向前走"
 
 msgid "开局向前走几秒"
-msgstr ""
+msgstr "開局向前走幾秒"
 
 msgid "开局重置角色位置"
-msgstr ""
+msgstr "開局重置角色位置"
 
 msgid "弹出通知"
-msgstr ""
+msgstr "彈出通知"
 
 msgid "必须勾选才能执行任务！"
-msgstr ""
+msgstr "必須勾選才能執行任務！"
 
 msgid "总共刷多少次副本"
-msgstr ""
+msgstr "總共刷多少次副本"
 
 msgid "我已阅读注意事项并确认配置"
-msgstr ""
+msgstr "我已閱讀注意事項並確認配置"
 
 msgid "战技"
-msgstr ""
+msgstr "戰技"
 
 msgid "打几个轮次"
-msgstr ""
+msgstr "打幾個輪次"
 
 msgid "扼守无尽"
-msgstr ""
+msgstr "扼守無盡"
 
 msgid "技能"
-msgstr ""
+msgstr "技能"
 
 msgid "技能释放频率"
-msgstr ""
+msgstr "技能釋放頻率"
 
 msgid "挂机模式"
-msgstr ""
+msgstr "掛機模式"
 
 msgid "挂机相关设置"
-msgstr ""
+msgstr "掛機相關設定"
 
 msgid "挂机设置"
-msgstr ""
+msgstr "掛機設定"
 
 msgid "按下时间"
-msgstr ""
+msgstr "按下時間"
 
 msgid "按住普攻"
-msgstr ""
+msgstr "按住普攻"
 
 msgid "探险无尽"
-msgstr ""
+msgstr "探險無盡"
 
 msgid "提示音"
-msgstr ""
+msgstr "提示音"
 
 msgid "无悠闲全自动钓鱼 (原作者: B站无敌大蜜瓜)"
-msgstr ""
+msgstr "無悠閒全自動釣魚 (原作者: B站無敵大蜜瓜)"
 
 msgid "是否在任务中随机移动"
-msgstr ""
+msgstr "是否在任務中隨機移動"
 
 msgid "是否弹出windows通知"
-msgstr ""
+msgstr "是否彈出windows通知"
 
 msgid "普攻"
-msgstr ""
+msgstr "普攻"
 
 msgid "最大轮数(0=无限制)"
-msgstr ""
+msgstr "最大輪數(0=無限制)"
 
 msgid "武器突破"
-msgstr ""
+msgstr "武器突破"
 
 msgid "毎几秒释放一次技能"
-msgstr ""
+msgstr "每幾秒釋放一次技能"
 
 msgid "每轮结束等待时间(秒)"
-msgstr ""
+msgstr "每輪結束等待時間(秒)"
 
 msgid "波次超时后将发出提示"
-msgstr ""
+msgstr "波次超時後將發出提示"
 
 msgid "溜鱼阶段超时(秒)"
-msgstr ""
+msgstr "溜魚階段超時(秒)"
 
 msgid "激活键"
-msgstr ""
+msgstr "啟用鍵"
 
 msgid "示例-无巧手30火突破素材(1080p) by望目"
-msgstr ""
+msgstr "範例-無巧手30火突破素材(1080p) by望目"
 
 msgid "移动延迟（秒）"
-msgstr ""
+msgstr "移動延遲（秒）"
 
 msgid "终结技"
-msgstr ""
+msgstr "終結技"
 
 msgid "结束阶段超时(秒)"
-msgstr ""
+msgstr "結束階段超時(秒)"
 
 msgid "自动30/65级魔之楔本"
-msgstr ""
+msgstr "自動30/65級魔之楔本"
 
 msgid "自动70级皎皎币本"
-msgstr ""
+msgstr "自動70級皎皎幣本"
 
 msgid "自动勘察"
-msgstr ""
+msgstr "自動勘察"
 
 msgid "自动战斗"
-msgstr ""
+msgstr "自動戰鬥"
 
 msgid "自动扼守"
-msgstr ""
+msgstr "自動扼守"
 
 msgid "自动探险"
-msgstr ""
+msgstr "自動探險"
 
 msgid "自动探险/无尽"
-msgstr ""
+msgstr "自動探險/無盡"
 
 msgid "自动点击肉鸽对话"
-msgstr ""
+msgstr "自動點擊肉鴿對話"
 
 msgid "自动穿引共鸣"
-msgstr ""
+msgstr "自動穿引共鳴"
 
 msgid "自动肉鸽对话"
-msgstr ""
+msgstr "自動肉鴿對話"
 
 msgid "自动花序弓蓄力瞄准"
-msgstr ""
+msgstr "自動花序弓蓄力瞄準"
 
 msgid "自动解锁迷宫(无巧手)"
-msgstr ""
+msgstr "自動解鎖迷宮(無巧手)"
 
 msgid "自动识别并进行迷宫解密"
-msgstr ""
+msgstr "自動識別並進行迷宮解密"
 
 msgid "自动轮盘机关"
-msgstr ""
+msgstr "自動輪盤機關"
 
 msgid "自动选择首个密函和密函奖励"
-msgstr ""
+msgstr "自動選擇首個密函和密函獎勵"
 
 msgid "自动避险"
-msgstr ""
+msgstr "自動避險"
 
 msgid "自动释放技能"
-msgstr ""
+msgstr "自動釋放技能"
 
 msgid "自动钓鱼"
-msgstr ""
+msgstr "自動釣魚"
 
 msgid "自动飞枪80护送（无需巧手）【需要游戏处于前台】"
-msgstr ""
+msgstr "自動飛槍80護送（無需巧手）【需要遊戲處於前台】"
 
 msgid "自动驱离"
-msgstr ""
+msgstr "自動驅離"
 
 msgid "角色经验"
-msgstr ""
+msgstr "角色經驗"
 
 msgid "解密失败自动重开"
-msgstr ""
+msgstr "解密失敗自動重開"
 
 msgid "超时后将发出提示"
-msgstr ""
+msgstr "超時後將發出提示"
 
 msgid "超时后将重启任务"
-msgstr ""
+msgstr "超時後將重啟任務"
 
 msgid "超时时间"
-msgstr ""
+msgstr "超時時間"
 
 msgid "跳过对话"
-msgstr ""
+msgstr "跳過對話"
 
 msgid "轮次"
-msgstr ""
+msgstr "輪次"
 
 msgid "选择mod目录下的外部逻辑"
-msgstr ""
+msgstr "選擇mod目錄下的外部邏輯"
 
 msgid "通用型半自动"
-msgstr ""
+msgstr "通用型半自動"
 
 msgid "释放间隔"
-msgstr ""
+msgstr "釋放間隔"
 
 msgid "键盘"
-msgstr ""
+msgstr "鍵盤"
 
 msgid "间隔时间"
-msgstr ""
+msgstr "間隔時間"
 
 msgid "防止鼠标干扰"
-msgstr ""
+msgstr "防止滑鼠干擾"
 
 msgid "随便搞的，基于2k写的其他分辨率要是有问题就不管了，有bug也不用反馈因为拿到巧手后就不维护了(狗头)"
-msgstr ""
+msgstr "隨便搞的，基於2k寫的其他分辨率要是有問題就不管了，有bug也不用反饋因為拿到巧手後就不維護了(狗頭)"
 
 msgid "随机游走"
-msgstr ""
+msgstr "隨機遊走"
 
 msgid "需主动激活"
-msgstr ""
+msgstr "需主動啟用"
 
 msgid "需主动激活，运行中也可使用左键打断"
-msgstr ""
+msgstr "需主動啟用，運行中也可使用左鍵打斷"
 
 msgid "需主动激活，运行中可使用右键或左键打断"
-msgstr ""
+msgstr "需主動啟用，運行中可使用右鍵或左鍵打斷"
 
 msgid "需要巧手可后台全自动，不要使用小体型自机"
-msgstr ""
+msgstr "需要巧手可後台全自動，不要使用小體型自機"
 
 msgid "魔灵支援"
-msgstr ""
+msgstr "魔靈支援"
 
 msgid "默认"
-msgstr ""
+msgstr "預設"
 
 msgid "鼠标键或键盘按键"
-msgstr ""
+msgstr "滑鼠鍵或鍵盤按鍵"

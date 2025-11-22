@@ -4,6 +4,7 @@ import numpy as np
 import cv2
 import winsound
 import win32api
+import win32con
 from datetime import datetime, timedelta
 from concurrent.futures import ThreadPoolExecutor
 
@@ -328,6 +329,13 @@ class BaseDNATask(BaseTask):
             str: 螺旋飞跃的按键字符串。
         """
         return self.key_config['HelixLeap Key']
+    
+    def try_bring_to_front(self):
+        if not self.hwnd.is_foreground():
+            win32api.keybd_event(win32con.VK_MENU, 0, 0, 0)
+            win32api.keybd_event(win32con.VK_MENU, 0, win32con.KEYEVENTF_KEYUP, 0)
+            self.hwnd.bring_to_front()
+            self.sleep(0.5)
 
 track_point_color = {
     "r": (121, 255),  # Red range

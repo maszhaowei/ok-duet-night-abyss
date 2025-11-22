@@ -8,7 +8,7 @@ from src.tasks.DNAOneTimeTask import DNAOneTimeTask
 from src.tasks.BaseCombatTask import BaseCombatTask
 from src.tasks.CommissionsTask import CommissionsTask, Mission
 from src.tasks.AutoExcavation import AutoExcavation
-from src.tasks.trigger.AutoPuzzleTask import AutoPuzzleTask
+from src.tasks.trigger.AutoMazeTask import AutoMazeTask
 
 logger = Logger.get_logger(__name__)
 
@@ -67,7 +67,7 @@ class AutoEscortTask(DNAOneTimeTask, CommissionsTask, BaseCombatTask):
             "selected_path": None,  # 当前选择的路径
         }
 
-        self.puzzle_task = None
+        self.maze_task = None
 
     def _load_escort_paths(self):
         """从 JSON 文件加载护送路径数据"""
@@ -374,7 +374,7 @@ class AutoEscortTask(DNAOneTimeTask, CommissionsTask, BaseCombatTask):
             return None
 
     def execute_escort_path(self):
-        """执行护送路径中的所有动作，遇到 f 键时等待 AutoPuzzleTask 完成
+        """执行护送路径中的所有动作，遇到 f 键时等待 AutoMazeTask 完成
 
         Returns:
             bool: True=成功完成, False=失败需要重新开始
@@ -398,9 +398,9 @@ class AutoEscortTask(DNAOneTimeTask, CommissionsTask, BaseCombatTask):
 
             self.execute_path_segment(segment, skip_first_delay=skip_first_delay)
 
-            # 如果这个片段包含 f 键，等待 AutoPuzzleTask 完成解密
+            # 如果这个片段包含 f 键，等待 AutoMazeTask 完成解密
             if self.segment_has_f_key(segment):
-                logger.info("检测到 f 键，等待 AutoPuzzleTask 完成解密...")
+                logger.info("检测到 f 键，等待 AutoMazeTask 完成解密...")
                 success = self.wait_for_puzzle_completion()
                 if not success:
                     # 解密失败，需要重新开始任务
@@ -496,7 +496,7 @@ class AutoEscortTask(DNAOneTimeTask, CommissionsTask, BaseCombatTask):
                 logger.warning(f"未知动作类型: {action_type}")
 
     def wait_for_puzzle_completion(self, timeout=30):
-        """等待 AutoPuzzleTask 完成解密
+        """等待 AutoMazeTask 完成解密
 
         主动检测 puzzle 并触发解密，然后等待解密完成
 
@@ -504,9 +504,9 @@ class AutoEscortTask(DNAOneTimeTask, CommissionsTask, BaseCombatTask):
             bool: True=成功完成或无需解密, False=检测失败需要重新开始任务
         """
 
-        # 获取 AutoPuzzleTask 实例
-        if self.puzzle_task is None:
-            self.puzzle_task = self.get_task_by_class(AutoPuzzleTask)
+        # 获取 AutoMazeTask 实例
+        if self.maze_task is None:
+            self.maze_task = self.get_task_by_class(AutoMazeTask)
 
         # 等待一小段时间让界面稳定
         self.wait_until(lambda: not self.in_team(), time_out=10)
@@ -515,9 +515,9 @@ class AutoEscortTask(DNAOneTimeTask, CommissionsTask, BaseCombatTask):
         # 等待直到屏幕上没有 puzzle 为止
         start_time = time.time()
         while time.time() - start_time < timeout:
-            self.puzzle_task.run()
+            self.maze_task.run()
             self.sleep(0.5)
-            if self.puzzle_task.puzzle_solved:
+            if self.maze_task.unlocked:
                 logger.info("✅ 解密完成，puzzle 已消失")
                 self.wait_until(self.in_team, time_out=10)
                 self.sleep(0.5)  # 额外等待一下确保稳定

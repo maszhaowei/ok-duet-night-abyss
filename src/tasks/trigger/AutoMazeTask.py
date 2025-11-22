@@ -10,25 +10,25 @@ from src.tasks.BaseDNATask import BaseDNATask
 logger = Logger.get_logger(__name__)
 
 
-class AutoPuzzleTask(BaseDNATask, TriggerTask):
+class AutoMazeTask(BaseDNATask, TriggerTask):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.name = "自动解锁迷宫(无巧手)"
-        self.description = "自动识别并进行迷宫解密"
+        self.name = "自动解锁迷宫"
+        self.description = "自动识别并进行迷宫解锁"
         self.default_config.update({
             "启用": True,
             "移动延迟（秒）": 0.1,
         })
-        self._puzzle_solved = False
+        self._unlocked = False
         self._last_no_puzzle_log = 0
         self.puzzle_paths = self._load_puzzle_paths()
 
     @property
-    def puzzle_solved(self):
-        return self._puzzle_solved
+    def unlocked(self):
+        return self._unlocked
 
     def run(self):
-        self._puzzle_solved = False
+        self._unlocked = False
         if self.scene.in_team(self.in_team_and_world):
             return
         
@@ -42,7 +42,7 @@ class AutoPuzzleTask(BaseDNATask, TriggerTask):
                                                        hcenter=True), threshold=0.65):
             self.sleep(0.5)
             self.send_key("f", after_sleep=1)
-            self._puzzle_solved = True
+            self._unlocked = True
             return
         if not self.find_one("mech_retry",
                              box=self.box_of_screen_scaled(3840, 2160, 3367, 1632, 3548, 1811, name="mech_retry",
@@ -68,7 +68,7 @@ class AutoPuzzleTask(BaseDNATask, TriggerTask):
                 logger.debug("未检测到解密拼图")
                 self._last_no_puzzle_log = now
 
-        self._puzzle_solved = found_any
+        self._unlocked = found_any
 
     def solve_puzzle(self, puzzle_name):
         """执行 puzzle 解密（需要游戏窗口在前台）"""
@@ -80,10 +80,7 @@ class AutoPuzzleTask(BaseDNATask, TriggerTask):
         hwnd_window = self.executor.device_manager.hwnd_window
 
         # 确保游戏窗口在前台，解密需要游戏窗口在前台（鼠标拖拽操作无法后台执行）
-        if not hwnd_window.is_foreground():
-            win32api.keybd_event(win32con.VK_MENU, 0, 0, 0)
-            win32api.keybd_event(win32con.VK_MENU, 0, win32con.KEYEVENTF_KEYUP, 0)
-            hwnd_window.bring_to_front()
+        self.try_bring_to_front()
 
         puzzle_data = self.puzzle_paths[puzzle_name]
         # 提取 coordinates 字段（如果是新格式），否则使用原数据（兼容旧格式）

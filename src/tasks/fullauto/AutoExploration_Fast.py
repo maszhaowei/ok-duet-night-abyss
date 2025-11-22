@@ -6,8 +6,8 @@ from qfluentwidgets import FluentIcon
 from src.tasks.AutoExploration import AutoExploration
 from src.tasks.CommissionsTask import CommissionsTask, QuickMoveTask
 from src.tasks.DNAOneTimeTask import DNAOneTimeTask
-from src.tasks.trigger.AutoPuzzleTask import AutoPuzzleTask
-from src.tasks.trigger.AutoWheelTask import AutoWheelTask
+from src.tasks.trigger.AutoMazeTask import AutoMazeTask
+from src.tasks.trigger.AutoRouletteTask import AutoRouletteTask
 from src.tasks.BaseCombatTask import BaseCombatTask
 
 logger = Logger.get_logger(__name__)
@@ -159,15 +159,15 @@ class AutoExploration_Fast(DNAOneTimeTask, CommissionsTask, BaseCombatTask):
         return super().find_track_point(threshold=0.7, box=box)
         
     def try_solving_puzzle(self):
-        puzzle_task = self.get_task_by_class(AutoPuzzleTask)
-        wheel_task = self.get_task_by_class(AutoWheelTask)
+        maze_task = self.get_task_by_class(AutoMazeTask)
+        roulette_task = self.get_task_by_class(AutoRouletteTask)
         if not self.wait_until(
             self.in_team, 
             post_action = lambda: self.send_key(self.get_interact_key(), after_sleep=0.1),
             time_out = 1.5
         ):
-            puzzle_task.run()
-            wheel_task.run()
+            maze_task.run()
+            roulette_task.run()
             if not self.wait_until(self.in_team, time_out=1.5):           
                 if self.config.get("解密失败自动重开", True):                    
                     self.log_info("未成功处理解密，等待重开")

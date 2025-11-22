@@ -99,6 +99,7 @@ class AutoExploration(DNAOneTimeTask, CommissionsTask, BaseCombatTask):
 
     def init_all(self):
         self.init_for_next_round()
+        self.skill_tick.reset()
         self.current_round = 0
 
     def init_for_next_round(self):
@@ -106,7 +107,6 @@ class AutoExploration(DNAOneTimeTask, CommissionsTask, BaseCombatTask):
 
     def init_runtime_state(self):
         self.runtime_state = {"start_time": 0, "wait_next_round": False}
-        self.skill_tick.reset()
 
     def handle_in_mission(self):
         if self.find_serum():

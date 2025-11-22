@@ -7,7 +7,7 @@ from ok import Logger, TaskDisabledException
 from src.tasks.CommissionsTask import CommissionsTask, QuickMoveTask, Mission, _default_movement
 from src.tasks.BaseCombatTask import BaseCombatTask
 from src.tasks.DNAOneTimeTask import DNAOneTimeTask
-from src.tasks.trigger.AutoWheelTask import AutoWheelTask
+from src.tasks.trigger.AutoRouletteTask import AutoRouletteTask
 
 logger = Logger.get_logger(__name__)
 
@@ -46,7 +46,7 @@ class AutoHedge(DNAOneTimeTask, CommissionsTask, BaseCombatTask):
         self.mission_complete = False
         self.ocr_future = None
         self.last_ocr_result = -1
-        self.wheel_task = None
+        self.roulette_task = None
 
     @property
     def config(self):
@@ -92,7 +92,7 @@ class AutoHedge(DNAOneTimeTask, CommissionsTask, BaseCombatTask):
             if self.in_team():
                 self.handle_in_mission()
             else:
-                self.wheel_task.run()
+                self.roulette_task.run()
             _status = self.handle_mission_interface(stop_func=self.stop_func)
             if _status == Mission.START:
                 self.wait_until(self.in_team, time_out=DEFAULT_ACTION_TIMEOUT)
@@ -108,6 +108,7 @@ class AutoHedge(DNAOneTimeTask, CommissionsTask, BaseCombatTask):
 
     def init_all(self):
         self.init_for_next_round()
+        self.skill_tick.reset()
         self.current_round = 0
         self.track_point_pos = 0
         self.mission_complete = False
@@ -119,7 +120,6 @@ class AutoHedge(DNAOneTimeTask, CommissionsTask, BaseCombatTask):
 
     def init_runtime_state(self):
         self.runtime_state = {"start_time": 0, "in_progress": False, "wait_next_round": False}
-        self.skill_tick.reset()
 
     def handle_in_mission(self):
         self.update_mission_status()
@@ -147,7 +147,7 @@ class AutoHedge(DNAOneTimeTask, CommissionsTask, BaseCombatTask):
                 if self.external_movement_evac is not _default_movement:
                     self.log_info("任务结束")
                     self.external_movement_evac()
-                    self.log_info(f"外部移动执行完毕。")
+                    self.log_info("外部移动执行完毕。")
                     self.wait_until(lambda: not self.in_team(), time_out=30)
                     return
                 else:
@@ -159,9 +159,9 @@ class AutoHedge(DNAOneTimeTask, CommissionsTask, BaseCombatTask):
         if self.external_movement is not _default_movement:
             self.log_info("任务开始")
             self.external_movement()
-            self.log_info(f"外部移动执行完毕，等待战斗开始，{DEFAULT_ACTION_TIMEOUT}秒后超时")
+            self.log_info(f"外部移动执行完毕，等待战斗开始，{DEFAULT_ACTION_TIMEOUT+10}秒后超时")
             if not self.wait_until(self.runtime_state["in_progress"], post_action=self.update_mission_status,
-                                   time_out=DEFAULT_ACTION_TIMEOUT):
+                                   time_out=DEFAULT_ACTION_TIMEOUT+10):
                 self.log_info("超时重开")
                 self.open_in_mission_menu()
                 return
@@ -204,9 +204,11 @@ class AutoHedge(DNAOneTimeTask, CommissionsTask, BaseCombatTask):
                     if pct > self.last_ocr_result and pct <= 100:
                         self.last_ocr_result = pct
                         # self.info_set("进度", f"{pct}%")
+            return self.last_ocr_result
         if self.ocr_future is None:
             box = self.box_of_screen_scaled(2560, 1440, 115, 399, 217, 461, name="process_info", hcenter=True)
-            self.ocr_future = self.thread_pool_executor.submit(self.ocr, box=box, match=re.compile(r"\d+%"))
+            frame = self.frame.copy()
+            self.ocr_future = self.thread_pool_executor.submit(self.ocr, frame=frame, box=box, match=re.compile(r"\d+%"))
         return self.last_ocr_result
 
     def find_top_right_track_pos(self):
@@ -220,5 +222,5 @@ class AutoHedge(DNAOneTimeTask, CommissionsTask, BaseCombatTask):
         return ret
 
     def init_task(self):
-        if self.wheel_task is None:
-            self.wheel_task = self.get_task_by_class(AutoWheelTask)
+        if self.roulette_task is None:
+            self.roulette_task = self.get_task_by_class(AutoRouletteTask)

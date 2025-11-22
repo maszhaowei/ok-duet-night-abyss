@@ -29,7 +29,7 @@ class Auto70jjbTask(DNAOneTimeTask, CommissionsTask, BaseCombatTask):
         })
 
         self.setup_commission_config()
-        keys_to_remove = ["启用自动穿引共鸣", "自动选择首个密函和密函奖励"]
+        keys_to_remove = ["启用自动穿引共鸣"]
         for key in keys_to_remove:
             self.default_config.pop(key, None)
 

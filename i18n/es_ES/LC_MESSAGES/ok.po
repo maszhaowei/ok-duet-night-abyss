@@ -437,3 +437,114 @@ msgstr "Reinicio automático cuando falla el descifrado"
 
 msgid "不重开时会发出声音提示"
 msgstr "Se emitirá un sonido de aviso cuando se seleccione No"
+
+msgid "Dodge Key"
+msgstr "Tecla de Esquivar"
+
+msgid "HelixLeap Key"
+msgstr "Tecla de Salto Hélice"
+
+msgid "Interact Key"
+msgstr "Tecla de Interactuar"
+
+msgid "e"
+msgstr "e"
+
+msgid "f"
+msgstr "f"
+
+msgid "【30火&60火】-密函线索"
+msgstr "【30 Fuego y 60 Fuego】-Pista de Cofre"
+
+msgid "【50mod】-中速-水母-主控可调"
+msgstr "【50mod】-Velocidad media-Medusa-Control principal ajustable"
+
+msgid "【55&80mod】-磐石水母-主控可调"
+msgstr "【55&80mod】-Roca Medusa-Control principal ajustable"
+
+msgid "【60mod&驱离-密函】-水母-主控可调（不要带黎瑟协战）-超时建议90s"
+msgstr "【60mod&Repeler-Cofre】-Medusa-Control principal ajustable (No llevar a Lise en cooperativo)-Tiempo de espera recomendado 90s"
+
+msgid "【60角色经验】-磐石水母"
+msgstr "【60 EXP de Personaje】-Roca Medusa"
+
+msgid "【65mod】-黎瑟主控（或者水母主控带个黎瑟助战）"
+msgstr "【65mod】-Control principal Lise (o control principal Medusa con Lise de apoyo)"
+
+msgid "【70jjb】-中低速-水母-主控可调"
+msgstr "【70mc】-Velocidad media-baja-Medusa-Control principal ajustable"
+
+msgid "【密函-拆解】-无巧手版-280范围水母"
+msgstr "【Cofre-Desmontaje】-Versión sin Habilidad-Medusa rango 280"
+
+msgid "【密函-拆解】-需巧手-280范围水母"
+msgstr "【Cofre-Desmontaje】-Requiere Habilidad-Medusa rango 280"
+
+msgid "【无飞枪80红豆（有巧手可后台）】-磐石黎瑟-使用前看文件夹内说明-超时建议5~10s"
+msgstr "【Sin Lanza Voladora 80 Frijol Rojo (con Habilidad puede ejecutarse en segundo plano)】-Roca Lise-Leer instrucciones en la carpeta antes de usar-Tiempo de espera recomendado 5~10s"
+
+msgid "【武器材料60&70】-磐石水母-超时建议20s"
+msgstr "【Material de Arma 60&70】-Roca Medusa-Tiempo de espera recomendado 20s"
+
+msgid "【武器经验50】-磐石水母-超时建议20s"
+msgstr "【EXP de Arma 50】-Roca Medusa-Tiempo de espera recomendado 20s"
+
+msgid "【武器经验80】-磐石水母-含配置参考-超时建议20s"
+msgstr "【EXP de Arma 80】-Roca Medusa-Incluye referencia de configuración-Tiempo de espera recomendado 20s"
+
+msgid ""
+"全自动80护送任务，搬运自emt，欢迎路径作者署名。\n"
+"需要使用水母主控，近战武器选择0精春玦戟。魔之楔配置为金色迅捷+5，紫色穿引共鸣，紫色迅捷蓄势+5，紫色迅捷坠击+5，不要携带其他魔之楔，面板攻速为1.67。\n"
+"设置中控制设置水平灵敏度和垂直灵敏度设置为1.0，默认镜头距离设置为1.3。确认好自身魔之楔和设置后展开下方配置点击我已阅读后运行"
+msgstr ""
+"Misión de escolta 80 totalmente automática, portada de emt, se agradece la atribución del autor de la ruta.\n"
+"Requiere control principal de Medusa, arma cuerpo a cuerpo seleccionar Alabarda de Jade de Primavera con 0 de refinamiento. La configuración de la Cuña del Diablo es Rapidez Dorada+5, Sonda de Resonancia Púrpura, Impulso de Rapidez Púrpura+5, Caída en Picado de Rapidez Púrpura+5, no lleves otras Cuñas del Diablo, la velocidad de ataque del panel es 1.67.\n"
+"En los ajustes, establece la sensibilidad horizontal y vertical en 1.0, y la distancia de la cámara predeterminada en 1.3. Después de confirmar tu Cuña del Diablo y los ajustes, despliega la configuración de abajo y haz clic en 'He leído' para ejecutar."
+
+msgid "半自动 (只有基础操作)"
+msgstr "Semiautomático (solo operaciones básicas)"
+
+msgid "启动解锁机关"
+msgstr "Activar Mecanismo de Desbloqueo"
+
+msgid "启用"
+msgstr "Activar"
+
+msgid "委托手册指定轮次"
+msgstr "Rondas Especificadas del Manual de Encargos"
+
+msgid "完成几次护送任务后停止"
+msgstr "Detener después de completar varias misiones de escolta"
+
+msgid "必须勾选才能执行任务！"
+msgstr "¡Debe estar marcado para ejecutar la tarea!"
+
+msgid "我已阅读注意事项并确认配置"
+msgstr "He leído las precauciones y confirmado la configuración"
+
+msgid "移动延迟（秒）"
+msgstr "Retraso de Movimiento (segundos)"
+
+msgid "自动解锁轮盘"
+msgstr "Desbloqueo Automático de Rueda"
+
+msgid "自动解锁迷宫"
+msgstr "Desbloqueo Automático de Laberinto"
+
+msgid "自动识别并进行迷宫解锁"
+msgstr "Identificar y realizar desbloqueo de laberinto automáticamente"
+
+msgid "自动飞枪80护送（无需巧手）【需要游戏处于前台】"
+msgstr "Escolta Automática con Lanza Voladora 80 (no requiere Habilidad) [Requiere que el juego esté en primer plano]"
+
+msgid "范例: 3,5,8"
+msgstr "Ejemplo: 3,5,8"
+
+msgid "通用型半自动"
+msgstr "Semiautomático de Propósito General"
+
+msgid "随便搞的，基于2k写的其他分辨率要是有问题就不管了，有bug也不用反馈因为拿到巧手后就不维护了(狗头)"
+msgstr "Hecho a la rápida, basado en 2k, no me haré cargo de problemas en otras resoluciones, no hace falta reportar bugs porque no se mantendrá después de conseguir la Habilidad (perro)"
+
+msgid "魔灵支援"
+msgstr "Apoyo Geniemon"

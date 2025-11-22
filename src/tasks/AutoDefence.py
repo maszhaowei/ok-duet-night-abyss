@@ -99,6 +99,7 @@ class AutoDefence(DNAOneTimeTask, CommissionsTask, BaseCombatTask):
 
     def init_all(self):
         self.init_for_next_round()
+        self.skill_tick.reset()
         self.current_round = 0
 
     def init_for_next_round(self):
@@ -106,7 +107,6 @@ class AutoDefence(DNAOneTimeTask, CommissionsTask, BaseCombatTask):
 
     def init_runtime_state(self):
         self.runtime_state = {"wave_start_time": 0, "wave": -1, "wait_next_wave": False}
-        self.skill_tick.reset()
         self.reset_wave_info()
 
     def handle_in_mission(self):
@@ -145,9 +145,9 @@ class AutoDefence(DNAOneTimeTask, CommissionsTask, BaseCombatTask):
         if self.external_movement is not _default_movement:
             self.log_info("任务开始，执行外部移动逻辑")
             self.external_movement()
-            self.log_info(f"外部移动执行完毕，等待战斗开始，{DEFAULT_ACTION_TIMEOUT}秒后超时")
+            self.log_info(f"外部移动执行完毕，等待战斗开始，{DEFAULT_ACTION_TIMEOUT+10}秒后超时")
             if not self.wait_until(lambda: self.current_wave != -1, post_action=self.get_wave_info,
-                                   time_out=DEFAULT_ACTION_TIMEOUT):
+                                   time_out=DEFAULT_ACTION_TIMEOUT+10):
                 self.log_info("等待战斗开始超时，重开任务")
                 self.open_in_mission_menu()
             else:

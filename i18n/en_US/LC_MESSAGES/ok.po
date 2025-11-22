@@ -136,7 +136,7 @@ msgid "如果不在可操控角色的画面则结束任务"
 msgstr "End task if not on the controllable character screen"
 
 msgid "如果是无尽关卡，选择打几个轮次"
-msgstr "For endless stages, select number of rounds"
+msgstr "For endless stages, select number of Wave"
 
 msgid "委托手册"
 msgstr "Commission Handbook"
@@ -160,7 +160,7 @@ msgid "战技"
 msgstr "Combat Skill"
 
 msgid "打几个轮次"
-msgstr "Number of rounds"
+msgstr "Number of Wave"
 
 msgid "扼守无尽"
 msgstr "Endless Defense"
@@ -283,7 +283,7 @@ msgid "跳过对话"
 msgstr "Skip Dialogue"
 
 msgid "轮次"
-msgstr "Rounds"
+msgstr "Wave"
 
 msgid "选择mod目录下的外部逻辑"
 msgstr "Select external logic from mod directory"
@@ -438,3 +438,113 @@ msgstr "Automatically restart when decryption fails"
 msgid "不重开时会发出声音提示"
 msgstr "A sound prompt will be issued when No is selected."
 
+msgid "Dodge Key"
+msgstr "Dodge Key"
+
+msgid "HelixLeap Key"
+msgstr "HelixLeap Key"
+
+msgid "Interact Key"
+msgstr "Interact Key"
+
+msgid "e"
+msgstr "e"
+
+msgid "f"
+msgstr "f"
+
+msgid "【30火&60火】-密函线索"
+msgstr "【30 Fire & 60 Fire】-Casket Clue"
+
+msgid "【50mod】-中速-水母-主控可调"
+msgstr "【50mod】-Medium Speed-Jellyfish-Main Control Adjustable"
+
+msgid "【55&80mod】-磐石水母-主控可调"
+msgstr "【55&80mod】-Rock Jellyfish-Main Control Adjustable"
+
+msgid "【60mod&驱离-密函】-水母-主控可调（不要带黎瑟协战）-超时建议90s"
+msgstr "【60mod&Expulsion-Casket】-Jellyfish-Main Control Adjustable (Don't bring Lise in co-op)-Timeout recommended 90s"
+
+msgid "【60角色经验】-磐石水母"
+msgstr "【60 Character EXP】-Rock Jellyfish"
+
+msgid "【65mod】-黎瑟主控（或者水母主控带个黎瑟助战）"
+msgstr "【65mod】-Lise Main Control (or Jellyfish main control with Lise support)"
+
+msgid "【70jjb】-中低速-水母-主控可调"
+msgstr "【70sc】-Medium-Low Speed-Jellyfish-Main Control Adjustable"
+
+msgid "【密函-拆解】-无巧手版-280范围水母"
+msgstr "【Casket-Disassembly】-No Skillful version-280 range Jellyfish"
+
+msgid "【密函-拆解】-需巧手-280范围水母"
+msgstr "【Casket-Disassembly】-Skillful required-280 range Jellyfish"
+
+msgid "【无飞枪80红豆（有巧手可后台）】-磐石黎瑟-使用前看文件夹内说明-超时建议5~10s"
+msgstr "【No Flying Spear 80 Red Bean (Skillful can run in background)】-Rock Lise-Read instructions in folder before use-Timeout recommended 5~10s"
+
+msgid "【武器材料60&70】-磐石水母-超时建议20s"
+msgstr "【Weapon Material 60&70】-Rock Jellyfish-Timeout recommended 20s"
+
+msgid "【武器经验50】-磐石水母-超时建议20s"
+msgstr "【Weapon EXP 50】-Rock Jellyfish-Timeout recommended 20s"
+
+msgid "【武器经验80】-磐石水母-含配置参考-超时建议20s"
+msgstr "【Weapon EXP 80】-Rock Jellyfish-Includes config reference-Timeout recommended 20s"
+
+msgid ""
+"全自动80护送任务，搬运自emt，欢迎路径作者署名。\n"
+"需要使用水母主控，近战武器选择0精春玦戟。魔之楔配置为金色迅捷+5，紫色穿引共鸣，紫色迅捷蓄势+5，紫色迅捷坠击+5，不要携带其他魔之楔，面板攻速为1.67。\n"
+"设置中控制设置水平灵敏度和垂直灵敏度设置为1.0，默认镜头距离设置为1.3。确认好自身魔之楔和设置后展开下方配置点击我已阅读后运行"
+msgstr ""
+"Fully automatic 80 escort mission, ported from emt, path author attribution is welcome.\n"
+"Requires Jellyfish main control, melee weapon select 0 refinement Spring Jade Halberd. Devil's Wedge configuration is Golden Swiftness+5, Purple Resonance Probe, Purple Swiftness Momentum+5, Purple Swiftness Plunge+5, do not carry other Devil's Wedges, panel attack speed is 1.67.\n"
+"In settings, set horizontal and vertical sensitivity to 1.0, and default camera distance to 1.3. After confirming your Devil's Wedge and settings, expand the configuration below and click 'I have read' to run."
+
+msgid "半自动 (只有基础操作)"
+msgstr "Semi-auto (basic operations only)"
+
+msgid "启动解锁机关"
+msgstr "Activate Unlocking Mechanism"
+
+msgid "启用"
+msgstr "Enable"
+
+msgid "委托手册指定轮次"
+msgstr "Commission Handbook Specified Wave"
+
+msgid "完成几次护送任务后停止"
+msgstr "Stop after completing several escort missions"
+
+msgid "必须勾选才能执行任务！"
+msgstr "Must be checked to execute the task!"
+
+msgid "我已阅读注意事项并确认配置"
+msgstr "I have read the precautions and confirmed the configuration"
+
+msgid "移动延迟（秒）"
+msgstr "Movement Delay (seconds)"
+
+msgid "自动解锁轮盘"
+msgstr "Auto Unlock Roulette"
+
+msgid "自动解锁迷宫"
+msgstr "Auto Unlock Maze"
+
+msgid "自动识别并进行迷宫解锁"
+msgstr "Auto-identify and perform maze unlocking"
+
+msgid "自动飞枪80护送（无需巧手）【需要游戏处于前台】"
+msgstr "Auto Flying Spear 80 Escort (No Skillful required) [Requires game to be in foreground]"
+
+msgid "范例: 3,5,8"
+msgstr "Example: 3,5,8"
+
+msgid "通用型半自动"
+msgstr "General Purpose Semi-Auto"
+
+msgid "随便搞的，基于2k写的其他分辨率要是有问题就不管了，有bug也不用反馈因为拿到巧手后就不维护了(狗头)"
+msgstr "Just a quick job, based on 2k, won't fix issues on other resolutions, no need to report bugs as it won't be maintained after getting Skillful (doge)"
+
+msgid "魔灵支援"
+msgstr "Geniemon Support"

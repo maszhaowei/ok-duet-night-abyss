@@ -40,7 +40,7 @@ class AutoFishTask(DNAOneTimeTask, BaseDNATask):
 
         # 配置描述（便于GUI显示）
         self.config_description.update({
-            "MAX_ROUNDS": "最大轮数(0=无限制)",
+            "MAX_ROUNDS": "最大轮数",
             "END_WAIT_SPACE": "每轮结束等待时间(秒)",
             "MAX_START_SEC": "开始阶段超时(秒)",
             "MAX_FIGHT_SEC": "溜鱼阶段超时(秒)",
@@ -478,14 +478,11 @@ class AutoFishTask(DNAOneTimeTask, BaseDNATask):
     # main run
     def do_run(self):
         cfg = self.config
-        max_rounds = cfg.get("MAX_ROUNDS", 0)
+        max_rounds = cfg.get("MAX_ROUNDS", 1)
 
         logger.info("=" * 50)
         logger.info("自动钓鱼任务启动，使用 COCO 标注识别")
-        if max_rounds > 0:
-            logger.info(f"目标轮数: {max_rounds} 轮")
-        else:
-            logger.info("目标轮数: 无限制")
+        logger.info(f"目标轮数: {max_rounds} 轮")
         logger.info("=" * 50)
 
         # 初始化统计
@@ -497,14 +494,13 @@ class AutoFishTask(DNAOneTimeTask, BaseDNATask):
         self.info_set("完成轮数", 0)
         self.info_set("授渔以鱼", 0)
         self.info_set("当前阶段", "准备中")
-        if max_rounds > 0:
-            self.info_set("目标轮数", max_rounds)
+        self.info_set("目标轮数", max_rounds)
 
         # main loop: start -> fight -> end
         while True:
             try:
                 # 检查是否达到目标轮数（在phase_start之前检查，因为可能会遇到授渔以鱼导致轮数减少）
-                if max_rounds > 0 and self.stats["rounds_completed"] >= max_rounds:
+                if self.stats["rounds_completed"] >= max_rounds:
                     # 需要再执行一次phase_start来检查是否有授渔以鱼
                     # 如果有授渔以鱼，上一轮不计数，需要继续
 
@@ -559,9 +555,8 @@ class AutoFishTask(DNAOneTimeTask, BaseDNATask):
                 logger.info(f"✓ 完成第 {self.stats['rounds_completed']} 轮")
                 logger.info(f"  总耗时: {hours:02d}:{minutes:02d}:{seconds:02d}")
                 logger.info(f"  平均每轮: {avg_time:.1f} 秒")
-                if max_rounds > 0:
-                    remaining = max_rounds - self.stats["rounds_completed"]
-                    logger.info(f"  剩余轮数: {remaining}")
+                remaining = max_rounds - self.stats["rounds_completed"]
+                logger.info(f"  剩余轮数: {remaining}")
                 logger.info("=" * 50)
 
                 # 继续下一轮

@@ -53,8 +53,10 @@ class CommissionsTask(BaseDNATask):
             "options": ["不使用", "战技", "终结技", "魔灵支援"],
         }
 
-    def find_quit_btn(self, threshold=0):
-        return self.find_one("ingame_quit_icon", threshold=threshold)
+    def find_quit_btn(self, threshold=0, box=None):
+        if box is None:
+            box = self.box_of_screen_scaled(2560, 1440, 729, 960, 854, 1025, name="quit_mission", hcenter=True)
+        return self.find_one("ingame_quit_icon", threshold=threshold, box=box)
 
     def find_continue_btn(self, threshold=0, box=None):
         if box is None:
@@ -348,7 +350,9 @@ class CommissionsTask(BaseDNATask):
         if self.wave_future is None:
             mission_info_box = self.box_of_screen_scaled(2560, 1440, 275, 372, 445, 470, name="mission_info",
                                                          hcenter=True)
-            self.wave_future = self.thread_pool_executor.submit(self.ocr, box=mission_info_box,
+            frame = self.frame.copy()
+            self.wave_future = self.thread_pool_executor.submit(self.ocr, frame=frame,
+                                                                box=mission_info_box,
                                                                 frame_processor=isolate_white_text_to_black,
                                                                 match=re.compile(r"\d/\d"))
 

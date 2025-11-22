@@ -168,12 +168,12 @@ config = {
         ["ok", "DiagnosisTask"],
     ],
     'trigger_tasks':[
-        ["src.tasks.trigger.AutoWheelTask", "AutoWheelTask"],
+        ["src.tasks.trigger.AutoRouletteTask", "AutoRouletteTask"],
+        ["src.tasks.trigger.AutoMazeTask", "AutoMazeTask"],
         ["src.tasks.trigger.AutoPickTask", "AutoPickTask"],
         ["src.tasks.trigger.AutoCombatTask", "AutoCombatTask"],
         ["src.tasks.trigger.AutoMoveTask", "AutoMoveTask"],
         ["src.tasks.trigger.AutoAimTask", "AutoAimTask"],
         ["src.tasks.trigger.AutoRogueDialogTask", "AutoRogueDialogTask"],
-        ["src.tasks.trigger.AutoPuzzleTask", "AutoPuzzleTask"],
     ], 'scene': ["src.scene.DNAScene", "DNAScene"],
 }
