@@ -33,6 +33,7 @@ class AutoRogueDialogTask(BaseDNATask, TriggerTask):
             if self.ocr(
                     box=self.box_of_screen_scaled(2560, 1440, 2092, 1380, 2183, 1418, name="space_text", hcenter=True),
                     match=re.compile("space", re.IGNORECASE)):
+                self.sleep(0.4)
                 self.send_key("space", down_time=2.5)
                 self.sleep(1)
 
