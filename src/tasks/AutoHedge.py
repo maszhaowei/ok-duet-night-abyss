@@ -8,6 +8,7 @@ from src.tasks.CommissionsTask import CommissionsTask, QuickMoveTask, Mission, _
 from src.tasks.BaseCombatTask import BaseCombatTask
 from src.tasks.DNAOneTimeTask import DNAOneTimeTask
 from src.tasks.trigger.AutoRouletteTask import AutoRouletteTask
+from src.tasks.trigger.AutoMazeTask import AutoMazeTask
 
 logger = Logger.get_logger(__name__)
 
@@ -47,6 +48,7 @@ class AutoHedge(DNAOneTimeTask, CommissionsTask, BaseCombatTask):
         self.ocr_future = None
         self.last_ocr_result = -1
         self.roulette_task = None
+        self.maze_task = None
 
     @property
     def config(self):
@@ -93,6 +95,8 @@ class AutoHedge(DNAOneTimeTask, CommissionsTask, BaseCombatTask):
                 self.handle_in_mission()
             else:
                 self.roulette_task.run()
+                self.maze_task.run()
+
             _status = self.handle_mission_interface(stop_func=self.stop_func)
             if _status == Mission.START:
                 self.wait_until(self.in_team, time_out=DEFAULT_ACTION_TIMEOUT)
@@ -224,3 +228,5 @@ class AutoHedge(DNAOneTimeTask, CommissionsTask, BaseCombatTask):
     def init_task(self):
         if self.roulette_task is None:
             self.roulette_task = self.get_task_by_class(AutoRouletteTask)
+        if self.maze_task is None:
+            self.maze_task = self.get_task_by_class(AutoMazeTask)
