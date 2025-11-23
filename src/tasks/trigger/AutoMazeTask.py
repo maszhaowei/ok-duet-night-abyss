@@ -103,7 +103,7 @@ class AutoMazeTask(BaseDNATask, TriggerTask):
         logger.debug(f"按下并移动到: ({abs_x}, {abs_y})")
 
         win32api.SetCursorPos((abs_x, abs_y))
-        self.sleep(0.01)
+        self.sleep(0.1)
         win32api.mouse_event(win32con.MOUSEEVENTF_LEFTDOWN, 0, 0, 0, 0)
         self.sleep(move_delay)
 
