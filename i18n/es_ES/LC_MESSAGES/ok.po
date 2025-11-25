@@ -548,3 +548,36 @@ msgstr "Hecho a la rápida, basado en 2k, no me haré cargo de problemas en otra
 
 msgid "魔灵支援"
 msgstr "Apoyo Geniemon"
+
+msgid "【50mod】-中低速-水母-主控可调"
+msgstr "【50mod】-Velocidad media-baja-Medusa-Control principal ajustable"
+
+msgid "【60mod&驱离密函】-磐石水母-主控可调（不要带黎瑟协战）-超时建议90s"
+msgstr "【60mod&Cofre de Expulsión】-Roca Medusa-Control principal ajustable (No llevar a Lise en cooperativo)-Tiempo de espera recomendado 90s"
+
+msgid "【无飞枪80红豆（有巧手可后台）】-磐石黎瑟-使用前看文件夹内说明"
+msgstr "【Sin Lanza Voladora 80 Frijol Rojo (con Habilidad puede ejecutarse en segundo plano)】-Roca Lise-Leer instrucciones en la carpeta antes de usar"
+
+msgid "【武器材料60&70】-磐石水母"
+msgstr "【Material de Arma 60&70】-Roca Medusa"
+
+msgid "优先选择密函奖励"
+msgstr "Priorizar Recompensas de Cofre"
+
+msgid "启动机关解锁"
+msgstr "Activar Desbloqueo de Mecanismo"
+
+msgid "在上一选项启用时生效"
+msgstr "Efectivo cuando la opción anterior está habilitada"
+
+msgid "持有数为0"
+msgstr "Cantidad poseída es 0"
+
+msgid "持有数最多"
+msgstr "Mayor cantidad poseída"
+
+msgid "持有数最少"
+msgstr "Menor cantidad poseída"
+
+msgid "最大轮数"
+msgstr "Rondas Máximas"

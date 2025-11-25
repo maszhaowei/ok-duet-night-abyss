@@ -548,3 +548,36 @@ msgstr "Just a quick job, based on 2k, won't fix issues on other resolutions, no
 
 msgid "魔灵支援"
 msgstr "Geniemon Support"
+
+msgid "【50mod】-中低速-水母-主控可调"
+msgstr "【50mod】-Medium-Low Speed-Jellyfish-Main Control Adjustable"
+
+msgid "【60mod&驱离密函】-磐石水母-主控可调（不要带黎瑟协战）-超时建议90s"
+msgstr "【60mod&Expulsion Casket】-Rock Jellyfish-Main Control Adjustable (Don't bring Lise in co-op)-Timeout recommended 90s"
+
+msgid "【无飞枪80红豆（有巧手可后台）】-磐石黎瑟-使用前看文件夹内说明"
+msgstr "【No Flying Spear 80 Red Bean (Skillful can run in background)】-Rock Lise-Read instructions in folder before use"
+
+msgid "【武器材料60&70】-磐石水母"
+msgstr "【Weapon Material 60&70】-Rock Jellyfish"
+
+msgid "优先选择密函奖励"
+msgstr "Prioritize Casket Rewards"
+
+msgid "启动机关解锁"
+msgstr "Activate Mechanism Unlock"
+
+msgid "在上一选项启用时生效"
+msgstr "Effective when the previous option is enabled"
+
+msgid "持有数为0"
+msgstr "Owned count is 0"
+
+msgid "持有数最多"
+msgstr "Highest owned count"
+
+msgid "持有数最少"
+msgstr "Lowest owned count"
+
+msgid "最大轮数"
+msgstr "Max Rounds"

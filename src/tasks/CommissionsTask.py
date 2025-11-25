@@ -33,7 +33,7 @@ class CommissionsTask(BaseDNATask):
             "启用自动穿引共鸣": True,
             "发出声音提醒": True,
             "自动选择首个密函和密函奖励": True,
-            "优先选择持有数为0的密函奖励": False,
+            "优先选择密函奖励": "不使用",
         })
         self.config_description.update({
             "委托手册指定轮次": "范例: 3,5,8",
@@ -42,7 +42,7 @@ class CommissionsTask(BaseDNATask):
             "启用自动穿引共鸣": "在需要跑图时时启用触发任务的自动穿引共鸣",
             "发出声音提醒": "在需要时发出声音提醒",
             "自动选择首个密函和密函奖励": "刷武器密函时推荐同时开启下一选项",
-            "优先选择持有数为0的密函奖励": "在上一选项启用时生效，多个目标时选择靠左的",
+            "优先选择密函奖励": "在上一选项启用时生效",
         })
         self.config_type["委托手册"] = {
             "type": "drop_down",
@@ -51,6 +51,10 @@ class CommissionsTask(BaseDNATask):
         self.config_type["使用技能"] = {
             "type": "drop_down",
             "options": ["不使用", "战技", "终结技", "魔灵支援"],
+        }
+        self.config_type["优先选择密函奖励"] = {
+            "type": "drop_down",
+            "options": ["不使用", "持有数为0", "持有数最少", "持有数最多"],
         }
 
     def find_quit_btn(self, threshold=0, box=None):
@@ -109,7 +113,7 @@ class CommissionsTask(BaseDNATask):
 
     def start_mission(self, timeout=0):
         action_timeout = self.action_timeout if timeout == 0 else timeout
-        box = self.box_of_screen_scaled(2560, 1440, 60, 1029, 1582, 1332, name="reward_drag_area", hcenter=True)
+        box = self.box_of_screen_scaled(2560, 1440, 60, 1029, 2056, 1332, name="reward_drag_area", hcenter=True)
         start_time = time.time()
         while time.time() - start_time < action_timeout:
             if btn := self.find_retry_btn() or self.find_bottom_start_btn() or self.find_big_bottom_start_btn():
@@ -244,29 +248,75 @@ class CommissionsTask(BaseDNATask):
                 raise_if_not_found=True,
             )
 
-    def choose_letter_reward_zero(self):
-        self.wait_until(
-            condition=lambda: self.find_next_hint(0.60, 0.64, 0.67, 0.67, r'[:：]') and self.find_next_hint(
-                0.33, 0.64, 0.40, 0.67, r'[:：]'), time_out=4)
-        if self.find_next_hint(0.33, 0.64, 0.40, 0.67, r'[:：]0'):
-            self.log_info_notify("选择第一个奖励")
-            self.click(0.36, 0.66, after_sleep=0.5)
-        elif self.find_next_hint(0.47, 0.64, 0.53, 0.67, r'[:：]0'):
-            self.log_info_notify("选择第二个奖励")
-            self.click(0.50, 0.66, after_sleep=0.5)
-        elif self.find_next_hint(0.60, 0.64, 0.67, 0.67, r'[:：]0'):
-            self.log_info_notify("选择第三个奖励")
-            self.click(0.63, 0.66, after_sleep=0.5)
+    def choose_target_letter_reward(self):
+        def get_rewards():
+            box = self.box_of_screen(0.328, 0.643, 0.678, 0.672, hcenter=True, name="letter_reward")
+            return self.ocr(box=box, match=re.compile(r'[:：][0-9]+'))
+        
+        start = time.time()
+        while time.time() - start < 10:
+            rewards = get_rewards()
+            if len(rewards) == 3:
+                break
+            self.sleep(0.1)
         else:
-            self.log_info("未识别到持有数为0的奖励")
+            self.log_info("超时：未识别到3个奖励选项，使用默认奖励")
+            return
+        
+        self.sleep(0.3)
+        rewards = get_rewards()
+        
+        if len(rewards) != 3:
+            self.log_info(f"异常：稳定后识别数量不符 (识别到 {len(rewards)} 个)，使用默认奖励")
+            return
+
+        rewards.sort(key=lambda reward: reward.x)
+        
+        parsed_items = []
+        for idx, reward in enumerate(rewards):
+            match = re.search(r'[:：]([0-9]+)', reward.name)
+            if not match:
+                self.log_info(f"第 {idx + 1} 个奖励数量识别失败，使用默认奖励")
+                return
+            count = int(match.group(1))
+            parsed_items.append({
+                'index': idx + 1,
+                'count': count,
+                'reward_obj': reward,
+                'name': reward.name
+            })
+
+        strategy = self.config.get("优先选择密函奖励")
+        target_item = None
+
+        self.log_info(f"当前识别到的奖励持有数: {[item['count'] for item in parsed_items]}")
+
+        if strategy == "持有数为0":
+            for item in parsed_items:
+                if item['count'] == 0:
+                    target_item = item
+                    break
+            if not target_item:
+                self.log_info("未识别到持有数为0的奖励，使用默认奖励")
+                return
+
+        elif strategy == "持有数最少":
+            target_item = min(parsed_items, key=lambda x: x['count'])
+
+        elif strategy == "持有数最多":
+            target_item = max(parsed_items, key=lambda x: x['count'])
+
+        if target_item:
+            self.log_info(f"策略[{strategy}] -> 选择第 {target_item['index']} 个奖励，持有数: {target_item['count']}")
+            self.click_box(target_item['reward_obj'], down_time=0.02, after_sleep=0.5)
 
     def choose_letter_reward(self, timeout=0):
         if not hasattr(self, "config"):
             return
         action_timeout = self.action_timeout if timeout == 0 else timeout
         if self.config.get("自动选择首个密函和密函奖励", False):
-            if self.config.get("优先选择持有数为0的密函奖励", False):
-                self.choose_letter_reward_zero()
+            if self.config.get("优先选择密函奖励", "不使用") != "不使用":
+                self.choose_target_letter_reward()
             self.wait_until(
                 condition=lambda: not self.find_letter_reward_btn(),
                 post_action=lambda: self.click(0.50, 0.83, after_sleep=0.25),
@@ -412,8 +462,8 @@ class CommissionsTask(BaseDNATask):
             target_height=540,
             name=box_name,
         )
-        fps_text = find_boxes_by_name(texts, re.compile(s, re.IGNORECASE))
-        if fps_text:
+        target_text = find_boxes_by_name(texts, re.compile(s, re.IGNORECASE))
+        if target_text:
             return True
 
     def reset_and_transport(self):

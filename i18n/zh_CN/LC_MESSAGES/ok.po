@@ -623,3 +623,36 @@ msgstr ""
 
 msgid "范例: 3,5,8"
 msgstr ""
+
+msgid "【50mod】-中低速-水母-主控可调"
+msgstr ""
+
+msgid "【60mod&驱离密函】-磐石水母-主控可调（不要带黎瑟协战）-超时建议90s"
+msgstr ""
+
+msgid "【无飞枪80红豆（有巧手可后台）】-磐石黎瑟-使用前看文件夹内说明"
+msgstr ""
+
+msgid "【武器材料60&70】-磐石水母"
+msgstr ""
+
+msgid "优先选择密函奖励"
+msgstr ""
+
+msgid "启动机关解锁"
+msgstr ""
+
+msgid "在上一选项启用时生效"
+msgstr ""
+
+msgid "持有数为0"
+msgstr ""
+
+msgid "持有数最多"
+msgstr ""
+
+msgid "持有数最少"
+msgstr ""
+
+msgid "最大轮数"
+msgstr ""

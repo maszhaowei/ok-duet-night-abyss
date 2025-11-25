@@ -151,6 +151,7 @@ class BaseDNATask(BaseTask):
             start = time.time()
             ret = self.handle_monthly_card()
             cost = time.time() - start
+            logger.info(f'check_for_monthly_card: ret {ret} cost {cost}')
             return ret, cost
             # start = time.time()
             # logger.info(f'check_for_monthly_card start check')
@@ -166,6 +167,7 @@ class BaseDNATask(BaseTask):
         return False, 0
 
     def should_check_monthly_card(self):
+        logger.info(f'next_monthly_card_start: {self.next_monthly_card_start} time left: {time.time() - self.next_monthly_card_start}')
         if self.next_monthly_card_start > 0:
             if 0 < time.time() - self.next_monthly_card_start < 120:
                 return True
@@ -185,16 +187,22 @@ class BaseDNATask(BaseTask):
             logger.info('set next monthly card start time to {}'.format(next_monthly_card_start_date_time))
         else:
             self.next_monthly_card_start = 0
+            logger.info('set next monthly card start to {}'.format(self.next_monthly_card_start))
 
     def handle_monthly_card(self):
         monthly_card = self.find_one('monthly_card', threshold=0.8)
-        # self.screenshot('monthly_card1')
+        if not hasattr(self, '_last_monthly_card_check_time'):
+            self._last_monthly_card_check_time = 0
+        now = time.time()
+        if now - self._last_monthly_card_check_time >= 10:
+            self._last_monthly_card_check_time = now
+            self.screenshot('monthly_card1')
         ret = monthly_card is not None
         if ret:
             self.wait_until(self.in_team, time_out=10,
                             post_action=lambda: self.click_relative(0.50, 0.89, after_sleep=1))
             self.set_check_monthly_card(next_day=True)
-        logger.debug(f'check_monthly_card {monthly_card}')
+        logger.info(f'check_monthly_card {monthly_card}')
         return ret
 
     def find_track_point(self, threshold: float = 0, box: Box | None = None, template=None, frame_processor=None,

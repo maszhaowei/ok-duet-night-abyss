@@ -29,8 +29,9 @@ class Auto65ArtifactTask_Fast(DNAOneTimeTask, CommissionsTask, BaseCombatTask):
         })
 
         self.setup_commission_config()
-        keys_to_remove = ["启用自动穿引共鸣", "自动选择首个密函和密函奖励"]
-        for key in keys_to_remove:
+        substrings_to_remove = ["穿引共鸣", "密函"]
+        keys_to_delete = [key for key in self.default_config for sub in substrings_to_remove if sub in key]
+        for key in keys_to_delete:
             self.default_config.pop(key, None)
 
         self.config_description.update({
