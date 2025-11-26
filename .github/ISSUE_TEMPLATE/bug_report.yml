@@ -70,7 +70,7 @@ body:
         2. **Drag & Drop** images, videos, or `.log` files into the text area below, or paste directly.
       placeholder: 请将截图、屏幕录像或日志文件拖放到此处... / Drag and drop screenshots, recordings, or logs here...
     validations:
-      required: false
+      required: true
 
   # --- 6. 版本信息 / Versions ---
   - type: input
