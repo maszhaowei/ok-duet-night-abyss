@@ -118,7 +118,7 @@ class CommissionsTask(BaseDNATask):
         while time.time() - start_time < action_timeout:
             if btn := self.find_retry_btn() or self.find_bottom_start_btn() or self.find_big_bottom_start_btn():
                 self.move_mouse_to_safe_position(box=box)
-                self.click_box(btn, after_sleep=0)
+                self.click_box_random(btn, after_sleep=0)
                 self.move_back_from_safe_position()
             self.sleep(0.2)
             if self.wait_until(condition=lambda: self.find_start_btn() or self.find_letter_interface(), time_out=1):
@@ -137,7 +137,7 @@ class CommissionsTask(BaseDNATask):
         self.sleep(0.5)
         self.wait_until(
             condition=lambda: not self.find_quit_btn(),
-            post_action=lambda: self.click_box(quit_btn, after_sleep=0.25),
+            post_action=lambda: self.click_box_random(quit_btn, after_sleep=0.25),
             time_out=action_timeout,
             raise_if_not_found=True,
         )
@@ -158,7 +158,7 @@ class CommissionsTask(BaseDNATask):
         self.sleep(0.5)
         self.wait_until(
             condition=lambda: not self.find_start_btn(box=box),
-            post_action=lambda: self.click_box(self.find_start_btn(box=box), after_sleep=0.25),
+            post_action=lambda: self.click_box_random(self.find_start_btn(box=box), after_sleep=0.25),
             time_out=action_timeout,
             raise_if_not_found=True,
         )
@@ -174,7 +174,7 @@ class CommissionsTask(BaseDNATask):
         continue_btn = self.wait_until(self.find_continue_btn, time_out=action_timeout, raise_if_not_found=True)
         self.wait_until(
             condition=lambda: not self.find_continue_btn(),
-            post_action=lambda: self.click_box(continue_btn, after_sleep=0.25),
+            post_action=lambda: self.click_box_random(continue_btn, after_sleep=0.25),
             time_out=action_timeout,
             raise_if_not_found=True,
         )
@@ -187,7 +187,7 @@ class CommissionsTask(BaseDNATask):
         self.choose_drop_rate_item()
         self.wait_until(
             condition=lambda: not self.find_drop_item() and not self.find_drop_item(800),
-            post_action=lambda: self.click_box(self.find_drop_rate_btn(), after_sleep=0.25),
+            post_action=lambda: self.click_box_random(self.find_drop_rate_btn(), after_sleep=0.25),
             time_out=action_timeout,
             raise_if_not_found=True,
         )
@@ -309,7 +309,7 @@ class CommissionsTask(BaseDNATask):
 
         if target_item:
             self.log_info(f"策略[{strategy}] -> 选择第 {target_item['index']} 个奖励，持有数: {target_item['count']}")
-            self.click_box(target_item['reward_obj'], down_time=0.02, after_sleep=0.5)
+            self.click_box_random(target_item['reward_obj'], down_time=0.02, after_sleep=0.5)
 
     def choose_letter_reward(self, timeout=0):
         if not hasattr(self, "config"):
@@ -480,7 +480,7 @@ class CommissionsTask(BaseDNATask):
                                         raise_if_not_found=True)
         self.wait_until(
             condition=lambda: self.calculate_color_percentage(setting_menu_selected_color, setting_other) > 0.24,
-            post_action=lambda: self.click_box(setting_other, after_sleep=0.5),
+            post_action=lambda: self.click_box_random(setting_other, after_sleep=0.5),
             time_out=10,
         )
         confirm_box = self.box_of_screen_scaled(2560, 1440, 1298, 776, 1368, 843, name="confirm_btn", hcenter=True)

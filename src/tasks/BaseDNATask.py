@@ -1,10 +1,11 @@
 import time
-from typing import Union, Callable
+from typing import Union, Callable, List
 import numpy as np
 import cv2
 import winsound
 import win32api
 import win32con
+import random
 from datetime import datetime, timedelta
 from concurrent.futures import ThreadPoolExecutor
 
@@ -17,6 +18,9 @@ f_black_color = {
     'b': (0, 20)  # Blue range
 }
 
+
+def random_relative():
+    return random.random() * 0.85 + 0.1
 
 class BaseDNATask(BaseTask):
 
@@ -186,6 +190,33 @@ class BaseDNATask(BaseTask):
         else:
             self.next_monthly_card_start = 0
             logger.info('set next monthly card start to {}'.format(self.next_monthly_card_start))
+
+    def click_box_random(
+        self,
+        box: Union["Box", List["Box"], str] = None,
+        relative_x: float = None,
+        relative_y: float = None,
+        raise_if_not_found: bool = False,
+        move_back: bool = False,
+        down_time: float = 0.01,
+        after_sleep: float = 1,
+    ):
+        if box is None:
+            return False
+        if relative_x is None:
+            relative_x: float = random_relative()
+        if relative_y is None:
+            relative_y: float = random_relative()
+        self.log_info(f"点击Box: {box.name}, {relative_x}, {relative_y}")
+        return self.click_box(
+            box,
+            relative_x,
+            relative_y,
+            raise_if_not_found,
+            move_back,
+            down_time,
+            after_sleep,
+        )
 
     def handle_monthly_card(self):
         monthly_card = self.find_one('monthly_card', threshold=0.8)
