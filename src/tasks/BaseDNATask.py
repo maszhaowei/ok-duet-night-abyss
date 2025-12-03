@@ -528,10 +528,10 @@ class BaseDNATask(BaseTask):
             if self.executor.current_task:
                 self.log_info("jitter loop task start")
             while self.executor.current_task is not None and not self.executor.exit_event.is_set():
-                if self.executor.paused:
+                if self.executor.paused or not self.afk_config.get("鼠标抖动", True):
                     time.sleep(0.1)
                     continue
-                if self.afk_config.get("鼠标抖动强制在游戏窗口内", True):
+                if self.afk_config.get("鼠标抖动锁定在窗口范围", True):
                     self.set_mouse_in_window()
 
                 dist_sq = current_drift[0]**2 + current_drift[1]**2
