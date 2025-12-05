@@ -20,7 +20,7 @@ class CommissionsTask(BaseDNATask):
         self.current_round = 0
         self.current_wave = -1
         self.mission_status = None
-        self.action_timeout = 10
+        self.action_timeout = 15
         self.wave_future = None
 
     def setup_commission_config(self):
