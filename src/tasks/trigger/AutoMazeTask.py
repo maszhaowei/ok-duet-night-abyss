@@ -40,7 +40,7 @@ class AutoMazeTask(BaseDNATask, TriggerTask):
         if self.find_one("mech_retry",
                          box=self.box_of_screen_scaled(2560, 1440, 2287, 1006, 2414, 1132, name="mech_retry",
                                                        hcenter=True), threshold=0.65):
-            self.sleep(0.5)
+            self.sleep_random(0.5, random_range=(1, 1.2))
             self.send_key("f", after_sleep=1)
             self._unlocked = True
             return
@@ -103,9 +103,9 @@ class AutoMazeTask(BaseDNATask, TriggerTask):
         logger.debug(f"按下并移动到: ({abs_x}, {abs_y})")
 
         win32api.SetCursorPos((abs_x, abs_y))
-        self.sleep(0.1)
+        self.sleep_random(0.1, random_range=(1, 1.2))
         win32api.mouse_event(win32con.MOUSEEVENTF_LEFTDOWN, 0, 0, 0, 0)
-        self.sleep(move_delay)
+        self.sleep_random(move_delay, random_range=(1, 1.2))
 
         # 中间点：移动鼠标（保持按下状态）
         for i in range(1, len(path)):
@@ -115,14 +115,14 @@ class AutoMazeTask(BaseDNATask, TriggerTask):
             logger.debug(f"拖拽到: ({abs_x}, {abs_y})")
 
             win32api.SetCursorPos((abs_x, abs_y))
-            self.sleep(move_delay)
+            self.sleep_random(move_delay, random_range=(1, 1.2))
 
         # 最后：释放鼠标左键
         logger.debug("释放")
         win32api.mouse_event(win32con.MOUSEEVENTF_LEFTUP, 0, 0, 0, 0)
 
         logger.info(f"✅ {puzzle_name} 解密完成")
-        self.sleep(1)  # 等待游戏响应
+        self.sleep_random(1, random_range=(1, 1.2))
 
     def _load_puzzle_paths(self):
         """从 JSON 文件加载解密路径数据"""
@@ -136,10 +136,10 @@ class AutoMazeTask(BaseDNATask, TriggerTask):
             logger.error(f"✗ 解密路径文件不存在: {json_path}")
             return {}
         except json.JSONDecodeError as e:
-            logger.error(f"✗ 解密路径 JSON 解析失败: {e}")
+            logger.error("✗ 解密路径 JSON 解析失败", e)
             return {}
         except Exception as e:
-            logger.error(f"✗ 加载解密路径失败: {e}")
+            logger.error("✗ 加载解密路径失败", e)
             return {}
         
     

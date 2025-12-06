@@ -17,15 +17,26 @@ key_config_option = ConfigOption('Game Hotkey Config', { #全局配置示例
     'Interact Key': {'type': 'drop_down', 'options': ['f', 'e']}
 })
 
+sensitivity_config_option = ConfigOption('Game Sensitivity Config', { #全局配置示例
+    'Game Sensitivity Switch': False,
+    'X-axis sensitivity': 1.0,
+    'Y-axis sensitivity': 1.0
+}, description='Game Sensitivity Description')
 
 afk_config_option = ConfigOption('挂机设置', { #全局配置示例
-    '提示音': 2,
+    "提示音": True,
+    '提示音次数': 2,
     '弹出通知': True,
     '防止鼠标干扰': True,
+    '鼠标抖动': True,
+    '鼠标抖动锁定在窗口范围': True,
 }, description='挂机相关设置', config_description={
-    '提示音': '单次提示响几次',
+    "提示音": "在需要时发出声音提醒",
+    '提示音次数': '单次提示响几次',
     '弹出通知': '是否弹出windows通知',
     '防止鼠标干扰': '启动任务时和特定场景下会将鼠标移动到安全位置',
+    '鼠标抖动': '建议启用',
+    '鼠标抖动锁定在窗口范围': '建议启用, 鼠标抖动时如果不在窗口范围则设置到窗口范围内',
 })
 
 monthly_card_config_option = ConfigOption('Monthly Card Config', {
@@ -74,7 +85,7 @@ config = {
     'debug': False,  # Optional, default: False
     'use_gui': True, # 目前只支持True
     'config_folder': 'configs', #最好不要修改
-    'global_configs': [key_config_option, afk_config_option, monthly_card_config_option],
+    'global_configs': [key_config_option, sensitivity_config_option, afk_config_option, monthly_card_config_option],
     'screenshot_processor': make_bottom_right_black, # 在截图的时候对frame进行修改, 可选
     'gui_icon': 'icons/icon.png', #窗口图标, 最好不需要修改文件名
     'wait_until_before_delay': 0,
@@ -85,13 +96,6 @@ config = {
         'params': {
             'use_openvino': True,
         }
-    },
-    # required if using feature detection
-    'template_matching': {
-        'coco_feature_json': os.path.join('assets', 'result.json'),
-        'default_horizontal_variance': 0.002,
-        'default_vertical_variance': 0.002,
-        'default_threshold': 0.8,
     },
     'windows': {  # required  when supporting windows game
         'exe': ['EM-Win64-Shipping.exe'],
@@ -112,9 +116,6 @@ config = {
         'ratio': '16:9', #支持的游戏分辨率
         'min_size': (1600, 900), #支持的最低游戏分辨率
         'resize_to': [(2560, 1440), (1920, 1080), (1600, 900)], #可选, 如果非16:9自动缩放为 resize_to
-    },
-    'analytics': {
-        'report_url': None, #上报日活, 可选
     },
     'links': { # 关于里显示的链接, 可选
             'default': {

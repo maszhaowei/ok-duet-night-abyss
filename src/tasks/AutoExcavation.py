@@ -100,6 +100,8 @@ class AutoExcavation(DNAOneTimeTask, CommissionsTask, BaseCombatTask):
             self.skill_tick()
         else:
             if self.runtime_state["start_time"] > 0:
+                if self.wait_until(lambda: self.find_target_health_bar(), time_out=2):
+                    return
                 self.init_runtime_state()
                 self.excavator_count += 1
                 if self.excavator_count < 3:

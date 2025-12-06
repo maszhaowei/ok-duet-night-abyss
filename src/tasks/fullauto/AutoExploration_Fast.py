@@ -32,7 +32,7 @@ class AutoExploration_Fast(DNAOneTimeTask, CommissionsTask, BaseCombatTask):
             '轮次': 3,
             '超时时间': 120,
             '解密失败自动重开': True,
-            '地图选择': '全部地图',
+            '地图选择': ["探险电梯", "探险高台", "探险平地"],
         })
         self.config_description.update({
             '轮次': '打几个轮次',
@@ -47,8 +47,8 @@ class AutoExploration_Fast(DNAOneTimeTask, CommissionsTask, BaseCombatTask):
         
         # 设置地图选择为下拉选择
         self.config_type["地图选择"] = {
-            "type": "drop_down",
-            "options": ["全部地图", "探险电梯", "探险高台", "探险平地"],
+            "type": "multi_selection",
+            "options": ["探险电梯", "探险高台", "探险平地"],
         }
         self.action_timeout = DEFAULT_ACTION_TIMEOUT
         self.quick_move_task = QuickMoveTask(self)
@@ -89,7 +89,7 @@ class AutoExploration_Fast(DNAOneTimeTask, CommissionsTask, BaseCombatTask):
             raise
 
     def walk_to_aim(self):
-        map_selection = self.config.get("地图选择", "全部地图")
+        map_selection = self.config.get("地图选择", [])
         
         # 检测当前地图类型
         current_map = self.detect_current_map()
@@ -99,8 +99,8 @@ class AutoExploration_Fast(DNAOneTimeTask, CommissionsTask, BaseCombatTask):
             raise MapDetectionError("无法识别当前地图类型")
         
         # 如果选择了特定地图，但当前不是该地图，抛出地图识别错误
-        if map_selection != "全部地图" and current_map != map_selection:
-            raise MapDetectionError(f"当前地图({current_map})不匹配选择的地图({map_selection})")
+        if len(map_selection) != 0 and current_map not in map_selection:
+            raise MapDetectionError(f"当前地图[{current_map}]不匹配选择的地图{map_selection}")
         
         # 执行对应地图的移动逻辑
         if current_map in self.map_configs:
@@ -108,7 +108,7 @@ class AutoExploration_Fast(DNAOneTimeTask, CommissionsTask, BaseCombatTask):
             return self.map_configs[current_map]["execute_func"]()
         else:
             # 这种情况理论上不应该发生，因为current_map是从map_configs中检测出来的
-            raise MapDetectionError(f"地图配置不一致，检测到地图({current_map})但找不到对应的执行函数")
+            raise MapDetectionError(f"地图配置不一致，检测到地图[{current_map}]但找不到对应的执行函数")
     
     def detect_current_map(self):
         """检测当前地图类型"""

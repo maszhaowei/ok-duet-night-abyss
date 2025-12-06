@@ -95,7 +95,7 @@ class AutoAimTask(BaseListenerTask, BaseCombatTask, TriggerTask):
         step = 0.2
         while remaining > 0:
             s = step if remaining > step else remaining
-            self.sleep(s)
+            self.sleep_random(s, random_range=(1, 1.2))
             remaining -= s
             if self._should_interrupt(check_signal_flag):
                 self.switch_state()

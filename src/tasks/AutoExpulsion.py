@@ -130,24 +130,11 @@ class AutoExpulsion(DNAOneTimeTask, CommissionsTask, BaseCombatTask):
 
     def create_random_walk_ticker(self):
         """创建一个随机游走的计时器函数。"""
-        last_time = 0
-
-        def tick():
-            nonlocal last_time
+        def action():
             if not self.config.get("随机游走", False):
                 return
-            
-            interval = 3
-            duration = 1
-            now = time.perf_counter()
-            if now - last_time >= interval:
-                last_time = now
-                direction = random.choice(["w", "a", "s", "d"])
-                self.send_key(direction, down_time=duration)
+            duration = random.uniform(0, 1)
+            direction = random.choice(["w", "a", "s", "d"])
+            self.send_key(direction, down_time=duration)
 
-        def reset():
-            nonlocal last_time
-            last_time = 0
-
-        tick.reset = reset
-        return tick
+        return self.create_ticker(action, interval=5, interval_random_range=(0.8, 2))
