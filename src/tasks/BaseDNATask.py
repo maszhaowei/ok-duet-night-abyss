@@ -6,6 +6,7 @@ import winsound
 import win32api
 import win32con
 import random
+from collections import deque
 
 from datetime import datetime, timedelta
 from concurrent.futures import ThreadPoolExecutor
@@ -79,6 +80,8 @@ class BaseDNATask(BaseTask):
         self.enable_fidget_action = True
         self.hold_lalt = False
         self.sensitivity_config = self.get_global_config('Game Sensitivity Config')  # 游戏灵敏度配置
+        self.onetime_seen = set()
+        self.onetime_queue = deque()
 
     @property
     def f_search_box(self) -> Box:
@@ -119,6 +122,21 @@ class BaseDNATask(BaseTask):
         """
         # 确保引用的是正确的类
         return PyDirectInteraction(self.executor.interaction.capture, self.hwnd)
+    
+    def enable(self):
+        self.onetime_seen = set()
+        super().enable()
+
+    def log_onetime_info(self, msg: str, key=None|str):
+        if key is None:
+            key = msg
+        if key in self.onetime_seen:
+            return
+        self.onetime_seen.add(key)
+        self.log_info(msg)
+        if len(self.onetime_queue) > 100:
+            oldest_msg = self.onetime_queue.popleft()
+            self.onetime_seen.discard(oldest_msg)
 
     def in_team(self, frame=None) -> bool:
         _frame = self.frame if frame is None else frame
