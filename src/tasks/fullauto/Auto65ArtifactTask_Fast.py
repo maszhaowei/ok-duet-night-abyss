@@ -1,10 +1,8 @@
 from qfluentwidgets import FluentIcon
 import time
 import win32con
-import re
 
-from ok import Logger, TaskDisabledException, Box
-from ok import find_boxes_by_name
+from ok import Logger, TaskDisabledException
 from src.tasks.DNAOneTimeTask import DNAOneTimeTask
 from src.tasks.CommissionsTask import CommissionsTask, Mission
 from src.tasks.BaseCombatTask import BaseCombatTask
@@ -16,12 +14,13 @@ logger = Logger.get_logger(__name__)
 
 class Auto65ArtifactTask_Fast(DNAOneTimeTask, CommissionsTask, BaseCombatTask):
     """
+    移动更快的自动30/65级mod，路径参考EMT
     """
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.icon = FluentIcon.FLAG
-        self.name = "自动30/50/65级魔之楔本"
+        self.name = "自动30/65级魔之楔本"
         self.description = "全自动"
         self.group_name = "全自动"
         self.group_icon = FluentIcon.CAFE
@@ -37,7 +36,7 @@ class Auto65ArtifactTask_Fast(DNAOneTimeTask, CommissionsTask, BaseCombatTask):
     def run(self):
         """主运行方法"""
         DNAOneTimeTask.run(self)
-        self.move_mouse_to_safe_position()
+        self.move_mouse_to_safe_position(save_current_pos=False)
         self.set_check_monthly_card()
         try:
             _to_do_task = self.get_task_by_class(AutoDefence)
@@ -130,9 +129,11 @@ class Auto65ArtifactTask_Fast(DNAOneTimeTask, CommissionsTask, BaseCombatTask):
     def walk_to_aim(self, delay=0):
         """
         从起点走到目标位置的路径
+        路径参考: EMT中的扼守-30or65.json，使用复位
         """
         logger.info("开始移动到目标位置")
         move_start = time.time()
+
         try:
             # ===== 根据扼守-30or65.json录制的路径 =====
 
@@ -210,88 +211,10 @@ class Auto65ArtifactTask_Fast(DNAOneTimeTask, CommissionsTask, BaseCombatTask):
             self.sleep(0.10)
             self.send_key_up("a")
 
-            if self.find_next_hint(0.475,0.255,0.525,0.285,r'保护目标'):
-                #50扼守中-142米
-                self.send_key_down("lalt")
-                self.sleep(0.05)
-                self.send_key_down("w")
-                self.sleep(0.1)
-                self.send_key_down("lshift")
-                self.sleep(0.8)
-                self.send_key("lshift", down_time=0.2)
-                self.sleep(0.6)
-                self.send_key_up("lshift")
-                self.sleep(0.1)
-                self.send_key_up("w")
-                self.reset_and_transport()
-                self.sleep(0.5)
-                if self.find_next_hint(0.47,0.16,0.52,0.19,r'保护目标'):
-                    #分支1-上电梯
-                    found_target = True
-                    self.send_key_down("s")
-                    self.sleep(0.1)
-                    self.send_key_down("lshift")
-                    self.sleep(0.6)
-                    self.send_key_up("lshift")
-                    self.sleep(0.2)
-                    self.send_key_up("s")
-                    self.sleep(0.1)
-                    self.send_key('f',down_time=0.1)
-                    self.sleep(0.1)
-                    self.send_key('f',down_time=0.1)
-                    self.sleep(10)
-                    self.send_key_down("s")
-                    self.sleep(0.1)
-                    self.send_key("space", down_time=0.1)
-                    self.sleep(0.4)
-                    self.send_key("space", down_time=0.1)
-                    self.sleep(0.4)
-                    self.send_key_down("lshift")
-                    self.sleep(0.8)
-                    self.send_key("lshift", down_time=0.2)
-                    self.sleep(0.8)
-                    self.send_key_up("lshift")
-                    self.sleep(0.1)
-                    self.send_key_up("s")
-                    self.send_key_up("lalt")
-                    self.reset_and_transport()
-                    self.send_key_down("d")
-                    self.sleep(1)
-                    self.send_key_up("d")
-                else:
-                    #分支2-上楼梯
-                    found_target = True
-                    self.send_key_down("d")
-                    self.sleep(0.2)
-                    self.send_key_down("s")
-                    self.sleep(0.1)
-                    self.send_key_down("lshift")
-                    self.sleep(0.4)
-                    self.send_key_up("s")
-                    self.sleep(0.3)
-                    self.send_key("space", down_time=0.1)
-                    self.sleep(0.3)
-                    self.send_key("space", down_time=0.1)
-                    self.sleep(0.3)
-                    self.send_key("space", down_time=0.1)
-                    self.sleep(0.2)
-                    self.send_key("lshift", down_time=0.2)
-                    self.sleep(0.6)
-                    self.send_key("lshift", down_time=0.2)
-                    self.sleep(0.6)
-                    self.send_key_up("lshift")
-                    self.sleep(0.1)
-                    self.send_key_up("d")
-                    self.send_key_up("lalt")
-                    self.reset_and_transport()
-                    self.send_key_down("d")
-                    self.sleep(1)
-                    self.send_key_up("d")
-
-            if not found_target:
-                self.send_key('esc', down_time=0.1)
-                return
-
+            self.send_key_up("lalt")
+            # 19.97s: 复位并传送到目标位置
+            if not self.reset_and_transport():
+                raise Exception("复位失败")
 
             # ===== 路径编写结束 =====
 
@@ -299,7 +222,7 @@ class Auto65ArtifactTask_Fast(DNAOneTimeTask, CommissionsTask, BaseCombatTask):
             logger.info(f"移动完成，用时 {elapsed:.1f}秒")
 
         except TaskDisabledException:
-            raise TaskDisabledException
+            raise
         except Exception as e:
             logger.error("移动过程出错", e)
             raise
@@ -309,5 +232,5 @@ class Auto65ArtifactTask_Fast(DNAOneTimeTask, CommissionsTask, BaseCombatTask):
             self.send_key_up("a")
             self.send_key_up("s")
             self.send_key_up("d")
-            self.send_key_up("lshift")
+            self.send_key_up(self.get_dodge_key())
             self.send_key_up("lalt")
