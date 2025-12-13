@@ -10,94 +10,158 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 msgid "100%"
-msgstr "100%"
+msgstr ""
 
 msgid "200%"
-msgstr "200%"
+msgstr ""
 
 msgid "2000%"
-msgstr "2000%"
+msgstr ""
 
 msgid "800%"
-msgstr "800%"
+msgstr ""
 
-msgid "BAR_MIN_AREA"
-msgstr "BAR_MIN_AREA"
+msgid "Auto Pick"
+msgstr ""
 
-msgid "CONTROL_ZONE_RATIO"
-msgstr "CONTROL_ZONE_RATIO"
+msgid "Auto Pick in Game World"
+msgstr ""
+
+msgid "Check Monthly Card"
+msgstr ""
+
+msgid "Check for monthly card to avoid interruption of tasks"
+msgstr ""
 
 msgid "Combat Key"
-msgstr "Combat Key"
+msgstr ""
+
+msgid "Dodge Key"
+msgstr ""
 
 msgid "END_WAIT_SPACE"
-msgstr "END_WAIT_SPACE"
+msgstr ""
+
+msgid "F10"
+msgstr ""
+
+msgid "F11"
+msgstr ""
+
+msgid "F12"
+msgstr ""
+
+msgid "F9"
+msgstr ""
 
 msgid "Game Hotkey Config"
-msgstr "Game Hotkey Config"
+msgstr ""
+
+msgid "Game Sensitivity Config"
+msgstr ""
+
+msgid "Game Sensitivity Description"
+msgstr ""
+
+msgid "Game Sensitivity Switch"
+msgstr ""
 
 msgid "Geniemon Key"
-msgstr "Geniemon Key"
+msgstr ""
 
-msgid "ICON_MAX_AREA"
-msgstr "ICON_MAX_AREA"
-
-msgid "ICON_MIN_AREA"
-msgstr "ICON_MIN_AREA"
+msgid "HelixLeap Key"
+msgstr ""
 
 msgid "In Game Hotkey for Skills"
-msgstr "In Game Hotkey for Skills"
+msgstr ""
+
+msgid "Interact Key"
+msgstr ""
 
 msgid "MAX_END_SEC"
-msgstr "MAX_END_SEC"
+msgstr ""
 
 msgid "MAX_FIGHT_SEC"
-msgstr "MAX_FIGHT_SEC"
+msgstr ""
 
 msgid "MAX_ROUNDS"
-msgstr "MAX_ROUNDS"
+msgstr ""
 
 msgid "MAX_START_SEC"
-msgstr "MAX_START_SEC"
+msgstr ""
+
+msgid "Monthly Card Config"
+msgstr ""
+
+msgid "Monthly Card Time"
+msgstr ""
+
+msgid "Turn on to avoid interruption by monthly card when executing tasks"
+msgstr ""
 
 msgid "Ultimate Key"
-msgstr "Ultimate Key"
+msgstr ""
+
+msgid "X-axis sensitivity"
+msgstr ""
+
+msgid "Y-axis sensitivity"
+msgstr ""
+
+msgid ""
+"Your computer's local time when the monthly card will popup, hour in (1-24)"
+msgstr ""
+
+msgid "e"
+msgstr ""
+
+msgid "f"
+msgstr ""
 
 msgid "right"
-msgstr "right"
-
-msgid "v2.996版本 10 30火 60 70皎皎币 70调停 花生"
-msgstr "v2.996 Version 10 30 Fire 60 70 Shell Credits 70 Mediation Peanut"
+msgstr ""
 
 msgid "x1"
-msgstr "x1"
+msgstr ""
 
 msgid "x2"
-msgstr "x2"
+msgstr ""
 
 msgid "不使用"
-msgstr "Not Used"
+msgstr "Not in use"
+
+msgid "不重开时会发出声音提示"
+msgstr "A sound alert will play if the task does not restart"
+
+msgid "不需要按开始"
+msgstr "No need to press Start"
 
 msgid "主画面侦测"
 msgstr "Main Screen Detection"
 
 msgid "使用外部移动逻辑自动打本"
-msgstr "Use external movement logic for auto-dungeon"
-
-msgid "使用技能"
-msgstr "Use Skill"
+msgstr "Use external movement logic for automated dungeon runs"
 
 msgid "使用键盘"
 msgstr "Use Keyboard"
 
+msgid "全局任务设定"
+msgstr "Global Task Settings"
+
+msgid "全局技能设定"
+msgstr "Global Skill Settings"
+
 msgid "全自动"
 msgstr "Full-Auto"
 
-msgid "刷几次"
-msgstr "Number of Runs"
-
-msgid "刷武器密函时不建议使用"
-msgstr "Not recommended when farming Weapon Caskets"
+msgid ""
+"全自动80护送 (源自emt)，欢迎作者署名。\n"
+"装备：水母 + 0精春玦戟。设置：水平灵敏度和垂直灵敏度1.0，镜头距离1.3，帧率120。\n"
+"魔之楔：金色迅捷+5 / 紫色穿引共鸣 / 紫色迅捷蓄势+5 / 紫色迅捷坠击+5（面板攻速1.67）。"
+msgstr ""
+"Fully automatic 80 escort (from emt), author attribution welcome.\n"
+"Equipment: Jellyfish + 0 refined Spring Jade Halberd. Settings: Horizontal and vertical sensitivity 1.0, camera distance 1.3, frame rate 120.\n"
+"Demon's Wedge: Gold Swiftness+5 / Purple Resonance Pull / Purple Swiftness Charge+5 / Purple Swiftness Plunge+5 (panel attack speed 1.67)."
 
 msgid "副本类型"
 msgstr "Dungeon Type"
@@ -105,62 +169,99 @@ msgstr "Dungeon Type"
 msgid "半自动"
 msgstr "Semi-Auto"
 
-msgid "单次提示响几次"
-msgstr "Alert sounds per notification"
+msgid "半自动 (只有基础操作)"
+msgstr "Semi-automatic (basic operations only)"
 
-msgid "发出声音提醒"
-msgstr "Sound Alert"
+msgid "单次提示响几次"
+msgstr "How many times to beep for a single prompt"
 
 msgid "右键按住多久(秒)"
-msgstr "Right-click hold duration (sec)"
+msgstr "How long to hold the right mouse button (seconds)"
 
 msgid "右键释放后等待多久(秒)"
-msgstr "Wait after right-click release (sec)"
+msgstr "How long to wait after releasing the right mouse button (seconds)"
 
 msgid "启动任务时和特定场景下会将鼠标移动到安全位置"
-msgstr "Move mouse to a safe position on task start and in specific scenes"
+msgstr ""
+"Moves the mouse to a safe position when starting a task and in specific "
+"scenarios"
 
-msgid "启用自动穿引共鸣"
-msgstr "Enable Auto Resonance Probe"
+msgid "启动机关解锁"
+msgstr "Activate mechanism to unlock"
+
+msgid "启用"
+msgstr "Enable"
 
 msgid "在需要时发出声音提醒"
-msgstr "Play sound alert when needed"
+msgstr "Play a sound reminder when needed"
 
-msgid "在需要跑图时时启用触发任务的自动穿引共鸣"
-msgstr "Enable task-triggering Resonance Probe when map traversal is needed"
+msgid "在需要时启用触发任务的自动穿引共鸣"
+msgstr "Enable automatic Resonance Pull to trigger tasks when needed"
+
+msgid "在需要时启用触发任务的自动花弓"
+msgstr "Enable automatic Floral Bow to trigger tasks when needed"
+
+msgid "地图选择"
+msgstr "Map Selection"
 
 msgid "外部文件夹"
 msgstr "External Folder"
 
 msgid "如果不在可操控角色的画面则结束任务"
-msgstr "End task if not on the controllable character screen"
+msgstr "End the task if not on the controllable character screen"
 
 msgid "如果是无尽关卡，选择打几个轮次"
-msgstr "For endless stages, select number of Wave"
+msgstr "If it's an endless level, choose how many waves to fight"
 
 msgid "委托手册"
-msgstr "Commission Handbook"
+msgstr "Commission Manual"
+
+msgid "委托手册指定轮次"
+msgstr "Commission Manual specified waves"
+
+msgid "密函奖励偏好"
+msgstr "Secret Letter Reward Preference"
 
 msgid "左键按住多久"
-msgstr "Left-click hold duration"
+msgstr "How long to hold the left mouse button"
 
 msgid "左键释放后等待多久"
-msgstr "Wait after left-click release"
+msgstr "How long to wait after releasing the left mouse button"
+
+msgid "建议启用"
+msgstr "Recommended to enable"
+
+msgid "建议启用, 鼠标抖动时如果不在窗口范围则设置到窗口范围内"
+msgstr ""
+"Recommended to enable. If the mouse is outside the window during mouse "
+"shake, it will be moved within the window"
 
 msgid "开始阶段超时(秒)"
-msgstr "Start phase timeout (sec)"
+msgstr "Start phase timeout (seconds)"
+
+msgid "开局向前走"
+msgstr "Move forward at the start"
+
+msgid "开局向前走几秒"
+msgstr "How many seconds to move forward at the start"
+
+msgid "开局重置角色位置"
+msgstr "Reset character position at the start"
 
 msgid "弹出通知"
-msgstr "Popup Notification"
+msgstr "Pop-up Notification"
 
-msgid "总共刷多少次副本"
-msgstr "Total number of dungeon runs"
+msgid "必须勾选才能执行任务！"
+msgstr "Must be checked to execute the task!"
+
+msgid "我已阅读注意事项并确认配置"
+msgstr "I have read the notes and confirmed the configuration"
 
 msgid "战技"
 msgstr "Combat Skill"
 
 msgid "打几个轮次"
-msgstr "Number of Wave"
+msgstr "How many waves to fight"
 
 msgid "扼守无尽"
 msgstr "Endless Defense"
@@ -168,8 +269,53 @@ msgstr "Endless Defense"
 msgid "技能"
 msgstr "Skill"
 
-msgid "技能释放频率"
-msgstr "Skill Cast Frequency"
+msgid "技能1"
+msgstr "Skill 1"
+
+msgid "技能1_释放后等待"
+msgstr "Skill 1_Wait after cast"
+
+msgid "技能1_释放频率"
+msgstr "Skill 1_Cast frequency"
+
+msgid "技能2"
+msgstr "Skill 2"
+
+msgid "技能2_释放后等待"
+msgstr "Skill 2_Wait after cast"
+
+msgid "技能2_释放频率"
+msgstr "Skill 2_Cast frequency"
+
+msgid "技能3"
+msgstr "Skill 3"
+
+msgid "技能3_释放后等待"
+msgstr "Skill 3_Wait after cast"
+
+msgid "技能3_释放频率"
+msgstr "Skill 3_Cast frequency"
+
+msgid "技能4"
+msgstr "Skill 4"
+
+msgid "技能4_释放后等待"
+msgstr "Skill 4_Wait after cast"
+
+msgid "技能4_释放频率"
+msgstr "Skill 4_Cast frequency"
+
+msgid "持有数为0"
+msgstr "Quantity is 0"
+
+msgid "持有数最多"
+msgstr "Highest Quantity"
+
+msgid "持有数最少"
+msgstr "Lowest Quantity"
+
+msgid "挂机模式"
+msgstr "AFK Mode"
 
 msgid "挂机相关设置"
 msgstr "AFK Related Settings"
@@ -177,128 +323,196 @@ msgstr "AFK Related Settings"
 msgid "挂机设置"
 msgstr "AFK Settings"
 
+msgid "指定优先选择的奖励类型，需开启「自动处理密函」"
+msgstr ""
+"Specify the preferred reward type, requires 'Auto-process Secret Letters' to"
+" be enabled"
+
 msgid "按下时间"
-msgstr "Press Duration"
+msgstr "Press duration"
 
 msgid "按住普攻"
 msgstr "Hold Normal Attack"
 
+msgid "探险平地"
+msgstr "Exploration Plain"
+
 msgid "探险无尽"
-msgstr "Endless Exploration"
+msgstr "Exploration Endless"
+
+msgid "探险电梯"
+msgstr "Exploration Elevator"
+
+msgid "探险高台"
+msgstr "Exploration High Platform"
 
 msgid "提示音"
 msgstr "Alert Sound"
 
-msgid "无悠闲全自动钓鱼 (原作者: B站无敌大蜜瓜)，如果识别不到鱼条修改配置降低面积要求"
-msgstr "Leisurely Auto-Fishing (Original Author: Bilibili 无敌大蜜瓜), if the fishing bar is not detected, lower the area requirement in the configuration"
+msgid "提示音次数"
+msgstr "Number of Alerts"
+
+msgid "无悠闲全自动钓鱼 (原作者: B站无敌大蜜瓜)"
+msgstr ""
+"No-leisure fully automatic fishing (Original author: Bilibili's "
+"InvincibleBigMelon)"
 
 msgid "是否在任务中随机移动"
 msgstr "Randomly move during the task"
 
 msgid "是否弹出windows通知"
-msgstr "Popup Windows notifications"
+msgstr "Show Windows notifications"
 
 msgid "普攻"
 msgstr "Normal Attack"
 
-msgid "最大轮数(0=无限制)"
-msgstr "Max Rounds (0=unlimited)"
+msgid "最大轮数，鱼塘每天上限为100次"
+msgstr "Maximum waves, the daily limit for the fishing spot is 100 times"
 
-msgid "毎几秒释放一次技能"
+msgid "每几秒释放一次技能"
 msgstr "Cast skill every few seconds"
 
 msgid "每轮结束等待时间(秒)"
-msgstr "Wait time after each round (sec)"
+msgstr "Waiting time at the end of each wave (seconds)"
 
 msgid "波次超时后将发出提示"
-msgstr "Alert on wave timeout"
+msgstr "An alert will be issued after the wave times out"
 
 msgid "溜鱼阶段超时(秒)"
-msgstr "Fish fighting phase timeout (sec)"
+msgstr "Fish fighting phase timeout (seconds)"
 
 msgid "激活键"
 msgstr "Activation Key"
 
 msgid "示例-无巧手30火突破素材(1080p) by望目"
-msgstr "Example - No-Dex 30 Fire Ascend Material (1080p) by 望目"
+msgstr "Example - No-skill 30 fire breakthrough material (1080p) by 望目"
+
+msgid "移动延迟（秒）"
+msgstr "Movement Delay (seconds)"
 
 msgid "终结技"
 msgstr "Ultimate"
 
 msgid "结束阶段超时(秒)"
-msgstr "End phase timeout (sec)"
+msgstr "End phase timeout (seconds)"
 
 msgid "自动30/65级魔之楔本"
-msgstr "Auto Lvl 30/65 Devil's Wedge Dungeon"
+msgstr "Auto-run Lv.30/65 Demon's Wedge"
 
 msgid "自动70级皎皎币本"
-msgstr "Auto Lvl 70 Shell Credit Dungeon"
+msgstr "Auto-run Lv.70 Jiao Jiao Coin dungeon"
 
 msgid "自动勘察"
-msgstr "Auto Excavation"
+msgstr "Auto Survey"
+
+msgid "自动处理密函"
+msgstr "Auto-process Secret Letters"
+
+msgid "自动完成密函的对话交互与默认奖励领取"
+msgstr ""
+"Automatically complete secret letter dialogue interactions and claim default"
+" rewards"
 
 msgid "自动战斗"
-msgstr "Auto Combat"
+msgstr "Auto Battle"
 
 msgid "自动扼守"
-msgstr "Auto Defence"
+msgstr "Auto Defend"
 
 msgid "自动探险"
-msgstr "Auto Exploration"
+msgstr "Auto Explore"
 
-msgid "自动点击肉鸽对话"
-msgstr "Auto-click Roguelike dialogue"
+msgid "自动探险/无尽"
+msgstr "Auto Explore/Endless"
 
 msgid "自动穿引共鸣"
-msgstr "Auto Resonance Probe"
+msgstr "Auto Resonance Pull"
 
 msgid "自动肉鸽对话"
-msgstr "Auto Roguelike Dialogue"
+msgstr "Auto roguelike dialogue"
 
 msgid "自动花序弓蓄力瞄准"
-msgstr "Auto Inflorescence Bow Charged Aiming"
+msgstr "Auto-aim with charged Floral Bow"
 
-msgid "自动选择首个密函和密函奖励"
-msgstr "Auto-select first casket and its reward"
+msgid "自动花弓"
+msgstr "Auto Floral Bow"
+
+msgid "自动解锁轮盘"
+msgstr "Auto-unlock wheel"
+
+msgid "自动解锁迷宫"
+msgstr "Auto-unlock maze"
+
+msgid "自动识别并进行迷宫解锁"
+msgstr "Automatically identify and unlock the maze"
+
+msgid "自动跳过肉鸽对话"
+msgstr "Auto-skip roguelike dialogue"
+
+msgid "自动避险"
+msgstr "Auto-avoid danger"
 
 msgid "自动释放技能"
-msgstr "Auto Cast Skill"
+msgstr "Auto-cast skills"
 
 msgid "自动钓鱼"
 msgstr "Auto Fishing"
 
+msgid "自动飞枪80护送（无需巧手）【需要游戏处于前台】"
+msgstr ""
+"Auto flying spear 80 escort (no skill required) [Game must be in the "
+"foreground]"
+
 msgid "自动驱离"
-msgstr "Auto Expulsion"
+msgstr "Auto Repel"
+
+msgid "范例: 3,5,8"
+msgstr "Example: 3,5,8"
+
+msgid "解密失败自动重开"
+msgstr "Auto-restart on decryption failure"
 
 msgid "超时后将发出提示"
-msgstr "Alert on timeout"
+msgstr "An alert will be issued after timeout"
 
 msgid "超时后将重启任务"
-msgstr "Restart task on timeout"
+msgstr "The task will restart after timeout"
 
 msgid "超时时间"
 msgstr "Timeout"
-
-msgid "跳过对话"
-msgstr "Skip Dialogue"
 
 msgid "轮次"
 msgstr "Wave"
 
 msgid "选择mod目录下的外部逻辑"
-msgstr "Select external logic from mod directory"
+msgstr "Select external logic from the mod directory"
+
+msgid "选择要自动执行的地图类型"
+msgstr "Select the map type to auto-run"
+
+msgid "通用型半自动"
+msgstr "General Semi-automatic"
+
+msgid "释放后等待几秒"
+msgstr "Wait a few seconds after casting"
 
 msgid "释放间隔"
-msgstr "Cast Interval"
+msgstr "Cast interval"
 
 msgid "键盘"
 msgstr "Keyboard"
 
 msgid "间隔时间"
-msgstr "Interval"
+msgstr "Interval Time"
 
 msgid "防止鼠标干扰"
-msgstr "Prevent Mouse Interference"
+msgstr "Prevent mouse interference"
+
+msgid "随便搞的，基于2k写的其他分辨率要是有问题就不管了，有bug也不用反馈因为拿到巧手后就不维护了(狗头)"
+msgstr ""
+"Just threw this together, it's based on 2k so if other resolutions have "
+"issues I'm not gonna deal with it. No need to report bugs either because I "
+"won't maintain it after getting the skill (kappa)"
 
 msgid "随机游走"
 msgstr "Random Walk"
@@ -307,292 +521,32 @@ msgid "需主动激活"
 msgstr "Requires manual activation"
 
 msgid "需主动激活，运行中也可使用左键打断"
-msgstr "Requires manual activation, can be interrupted by left-click"
+msgstr ""
+"Requires manual activation, can be interrupted with the left mouse button "
+"during operation"
 
 msgid "需主动激活，运行中可使用右键或左键打断"
-msgstr "Requires manual activation, can be interrupted by right or left-click"
-
-msgid "鱼条最小面积(像素)"
-msgstr "Min fishing bar area (pixels)"
-
-msgid "鱼标按空格区域占比(0-0.5)"
-msgstr "Fishing marker spacebar press zone ratio (0-0.5)"
-
-msgid "鱼标最大面积(像素)"
-msgstr "Max fishing marker area (pixels)"
-
-msgid "鱼标最小面积(像素)"
-msgstr "Min fishing marker area (pixels)"
-
-msgid "默认"
-msgstr "Default"
-
-msgid "鼠标键或键盘按键"
-msgstr "Mouse button or keyboard key"
-
-msgid "Check Monthly Card"
-msgstr "Check Monthly Card"
-
-msgid "Check for monthly card to avoid interruption of tasks"
-msgstr "Check for monthly card to avoid interruption of tasks"
-
-msgid "Monthly Card Config"
-msgstr "Monthly Card Config"
-
-msgid "Monthly Card Time"
-msgstr "Monthly Card Time"
-
-msgid "OK-角色经验本50-巧手(主控猪妹,ai水母280范围,超时时间可设置10秒内保证跑错重开)"
-msgstr "OK-Character EXP Dungeon 50-Skillful (Main control Piggy, AI Jellyfish 280 range, timeout can be set within 10 seconds to ensure restart if path is wrong)"
-
-msgid "OK-角色经验本60-兼容无巧手(主控成年女磐石,ai水母280范围)"
-msgstr "OK-Character EXP Dungeon 60-Compatible without Skillful (Main control Adult Female Rock, AI Jellyfish 280 range)"
-
-msgid "Turn on to avoid interruption by monthly card when executing tasks"
-msgstr "Turn on to avoid interruption by monthly card when executing tasks"
-
-msgid "Your computer's local time when the monthly card will popup, hour in (1-24)"
-msgstr "Your computer's local time when the monthly card will popup, hour in (1-24)"
-
-msgid "ok-50MOD"
-msgstr "ok-50MOD"
-
-msgid "ok-55,70MOD(主控水母280范围)"
-msgstr "ok-55,70MOD (Main control Jellyfish 280 range)"
-
-msgid "ok-60MOD"
-msgstr "ok-60MOD"
-
-msgid "ok-80MOD(主控水母高范围)"
-msgstr "ok-80MOD (Main control Jellyfish high range)"
-
-msgid "ok-武器突破材料70-巧手(水母磐石280范围)"
-msgstr "ok-Weapon Breakthrough Material 70-Skillful (Jellyfish Rock 280 range)"
-
-msgid "ok-武器突破材料70-巧手稳定版(水母磐石280范围)"
-msgstr "ok-Weapon Breakthrough Material 70-Skillful Stable Version (Jellyfish Rock 280 range)"
-
-msgid "ok-武器经验本70(水母磐石280范围)"
-msgstr "ok-Weapon EXP Dungeon 70 (Jellyfish Rock 280 range)"
-
-msgid "ok-武器经验本80(水母磐石280范围)"
-msgstr "ok-Weapon EXP Dungeon 80 (Jellyfish Rock 280 range)"
-
-msgid "ok-火巧10-巧手(磐石)"
-msgstr "ok-Fire Skillful 10-Skillful (Rock)"
-
-msgid "ok-火巧30,60-巧手(磐石30-14轮,60-8轮)"
-msgstr "ok-Fire Skillful 30,60-Skillful (Rock 30-14 rounds, 60-8 rounds)"
-
-msgid "ok-火巧角色突破材料70-巧手(磐石,火10通用)"
-msgstr "ok-Fire Skillful Character Breakthrough Material 70-Skillful (Rock, Fire 10 universal)"
-
-msgid "ok-皎皎币60"
-msgstr "ok-Shell Credits 60"
-
-msgid "60角色经验本"
-msgstr "60 Character EXP Dungeon"
-
-msgid "Auto Pick"
-msgstr "Auto Pick"
-
-msgid "Auto Pick in Game World"
-msgstr "Auto Pick in Game World"
-
-msgid "优先选择持有数为0的密函奖励"
-msgstr "Prioritize casket rewards with 0 owned"
-
-msgid "刷武器密函时推荐同时开启下一选项"
-msgstr "Recommended to enable the next option when farming weapon caskets"
-
-msgid "在上一选项启用时生效，多个目标时选择靠左的"
-msgstr "Effective when the previous option is enabled, choose the leftmost if multiple targets"
-
-msgid "完成时播放提示音"
-msgstr "Play alert sound upon completion"
-
-msgid "开局向前走"
-msgstr "Walk forward at start"
-
-msgid "开局向前走几秒"
-msgstr "Walk forward for a few seconds at start"
-
-msgid "开局重置角色位置"
-msgstr "Reset character position at start"
-
-msgid "挂机模式"
-msgstr "AFK Mode"
-
-msgid "无悠闲全自动钓鱼 (原作者: B站无敌大蜜瓜)"
-msgstr "Leisurely Auto-Fishing (Original Author: Bilibili 无敌大蜜瓜)"
-
-msgid "自动避险"
-msgstr "Auto Hazard Avoidance"
-
-msgid "自动探险/无尽"
-msgstr "Auto Exploration/Endless"
-
-msgid "解密失败自动重开"
-msgstr "Automatically restart when decryption fails"
-
-msgid "不重开时会发出声音提示"
-msgstr "A sound prompt will be issued when No is selected."
-
-msgid "Dodge Key"
-msgstr "Dodge Key"
-
-msgid "HelixLeap Key"
-msgstr "HelixLeap Key"
-
-msgid "Interact Key"
-msgstr "Interact Key"
-
-msgid "e"
-msgstr "e"
-
-msgid "f"
-msgstr "f"
-
-msgid "【30火&60火】-密函线索"
-msgstr "【30 Fire & 60 Fire】-Casket Clue"
-
-msgid "【50mod】-中速-水母-主控可调"
-msgstr "【50mod】-Medium Speed-Jellyfish-Main Control Adjustable"
-
-msgid "【55&80mod】-磐石水母-主控可调"
-msgstr "【55&80mod】-Rock Jellyfish-Main Control Adjustable"
-
-msgid "【60mod&驱离-密函】-水母-主控可调（不要带黎瑟协战）-超时建议90s"
-msgstr "【60mod&Expulsion-Casket】-Jellyfish-Main Control Adjustable (Don't bring Lise in co-op)-Timeout recommended 90s"
-
-msgid "【60角色经验】-磐石水母"
-msgstr "【60 Character EXP】-Rock Jellyfish"
-
-msgid "【65mod】-黎瑟主控（或者水母主控带个黎瑟助战）"
-msgstr "【65mod】-Lise Main Control (or Jellyfish main control with Lise support)"
-
-msgid "【70jjb】-中低速-水母-主控可调"
-msgstr "【70sc】-Medium-Low Speed-Jellyfish-Main Control Adjustable"
-
-msgid "【密函-拆解】-无巧手版-280范围水母"
-msgstr "【Casket-Disassembly】-No Skillful version-280 range Jellyfish"
-
-msgid "【密函-拆解】-需巧手-280范围水母"
-msgstr "【Casket-Disassembly】-Skillful required-280 range Jellyfish"
-
-msgid "【无飞枪80红豆（有巧手可后台）】-磐石黎瑟-使用前看文件夹内说明-超时建议5~10s"
-msgstr "【No Flying Spear 80 Red Bean (Skillful can run in background)】-Rock Lise-Read instructions in folder before use-Timeout recommended 5~10s"
-
-msgid "【武器材料60&70】-磐石水母-超时建议20s"
-msgstr "【Weapon Material 60&70】-Rock Jellyfish-Timeout recommended 20s"
-
-msgid "【武器经验50】-磐石水母-超时建议20s"
-msgstr "【Weapon EXP 50】-Rock Jellyfish-Timeout recommended 20s"
-
-msgid "【武器经验80】-磐石水母-含配置参考-超时建议20s"
-msgstr "【Weapon EXP 80】-Rock Jellyfish-Includes config reference-Timeout recommended 20s"
-
-msgid ""
-"全自动80护送任务，搬运自emt，欢迎路径作者署名。\n"
-"需要使用水母主控，近战武器选择0精春玦戟。魔之楔配置为金色迅捷+5，紫色穿引共鸣，紫色迅捷蓄势+5，紫色迅捷坠击+5，不要携带其他魔之楔，面板攻速为1.67。\n"
-"设置中控制设置水平灵敏度和垂直灵敏度设置为1.0，默认镜头距离设置为1.3。确认好自身魔之楔和设置后展开下方配置点击我已阅读后运行"
 msgstr ""
-"Fully automatic 80 escort mission, ported from emt, path author attribution is welcome.\n"
-"Requires Jellyfish main control, melee weapon select 0 refinement Spring Jade Halberd. Devil's Wedge configuration is Golden Swiftness+5, Purple Resonance Probe, Purple Swiftness Momentum+5, Purple Swiftness Plunge+5, do not carry other Devil's Wedges, panel attack speed is 1.67.\n"
-"In settings, set horizontal and vertical sensitivity to 1.0, and default camera distance to 1.3. After confirming your Devil's Wedge and settings, expand the configuration below and click 'I have read' to run."
-
-msgid "半自动 (只有基础操作)"
-msgstr "Semi-auto (basic operations only)"
-
-msgid "启动解锁机关"
-msgstr "Activate Unlocking Mechanism"
-
-msgid "启用"
-msgstr "Enable"
-
-msgid "委托手册指定轮次"
-msgstr "Commission Handbook Specified Wave"
-
-msgid "完成几次护送任务后停止"
-msgstr "Stop after completing several escort missions"
-
-msgid "必须勾选才能执行任务！"
-msgstr "Must be checked to execute the task!"
-
-msgid "我已阅读注意事项并确认配置"
-msgstr "I have read the precautions and confirmed the configuration"
-
-msgid "移动延迟（秒）"
-msgstr "Movement Delay (seconds)"
-
-msgid "自动解锁轮盘"
-msgstr "Auto Unlock Roulette"
-
-msgid "自动解锁迷宫"
-msgstr "Auto Unlock Maze"
-
-msgid "自动识别并进行迷宫解锁"
-msgstr "Auto-identify and perform maze unlocking"
-
-msgid "自动飞枪80护送（无需巧手）【需要游戏处于前台】"
-msgstr "Auto Flying Spear 80 Escort (No Skillful required) [Requires game to be in foreground]"
-
-msgid "范例: 3,5,8"
-msgstr "Example: 3,5,8"
-
-msgid "通用型半自动"
-msgstr "General Purpose Semi-Auto"
-
-msgid "随便搞的，基于2k写的其他分辨率要是有问题就不管了，有bug也不用反馈因为拿到巧手后就不维护了(狗头)"
-msgstr "Just a quick job, based on 2k, won't fix issues on other resolutions, no need to report bugs as it won't be maintained after getting Skillful (doge)"
+"Requires manual activation, can be interrupted with the right or left mouse "
+"button during operation"
 
 msgid "魔灵支援"
 msgstr "Geniemon Support"
 
-msgid "【50mod】-中低速-水母-主控可调"
-msgstr "【50mod】-Medium-Low Speed-Jellyfish-Main Control Adjustable"
+msgid "默认"
+msgstr "Default"
 
-msgid "【60mod&驱离密函】-磐石水母-主控可调（不要带黎瑟协战）-超时建议90s"
-msgstr "【60mod&Expulsion Casket】-Rock Jellyfish-Main Control Adjustable (Don't bring Lise in co-op)-Timeout recommended 90s"
+msgid "鼠标抖动"
+msgstr "Mouse Jitter"
 
-msgid "【无飞枪80红豆（有巧手可后台）】-磐石黎瑟-使用前看文件夹内说明"
-msgstr "【No Flying Spear 80 Red Bean (Skillful can run in background)】-Rock Lise-Read instructions in folder before use"
+msgid "鼠标抖动锁定在窗口范围"
+msgstr "Lock mouse jitter within the window"
 
-msgid "【武器材料60&70】-磐石水母"
-msgstr "【Weapon Material 60&70】-Rock Jellyfish"
+msgid "鼠标键或键盘按键"
+msgstr "Mouse button or keyboard key"
 
-msgid "优先选择密函奖励"
-msgstr "Prioritize Casket Rewards"
+msgid "使用飞枪等存在视角移动的外部逻辑时可以启用"
+msgstr "Enable when using external logic involving camera movement, such as the Flying Gun."
 
-msgid "启动机关解锁"
-msgstr "Activate Mechanism Unlock"
-
-msgid "在上一选项启用时生效"
-msgstr "Effective when the previous option is enabled"
-
-msgid "持有数为0"
-msgstr "Owned count is 0"
-
-msgid "持有数最多"
-msgstr "Highest owned count"
-
-msgid "持有数最少"
-msgstr "Lowest owned count"
-
-msgid "最大轮数"
-msgstr "Max Rounds"
-
-msgid "Game Sensitivity Config"
-msgstr "In Game Sensitivity Config"
-
-msgid "Game Sensitivity Description"
-msgstr "When using a script of the rotation perspective type, there is no longer a need to adjust the in-game sensitivity"
-
-msgid "Game Sensitivity Switch"
-msgstr "Switch"
-
-msgid "X-axis sensitivity"
-msgstr "In-game horizontal sensitivity"
-
-msgid "Y-axis sensitivity"
-msgstr "In-game vertical sensitivity"
+msgid "关闭抖动"
+msgstr "Disable Shake"

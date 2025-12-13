@@ -569,7 +569,14 @@
         {
           "type": "mouse_rotation",
           "delay": 0.04,
-          "angle": 44,
+          "angle": 34,
+          "direction": "right",
+          "sensitivity": 10
+        },
+        {
+          "type": "mouse_rotation",
+          "delay": 0.5,
+          "angle": 10,
           "direction": "right",
           "sensitivity": 10
         },
@@ -1480,7 +1487,14 @@
         {
           "type": "mouse_rotation",
           "delay": 0.04,
-          "angle": 44,
+          "angle": 34,
+          "direction": "right",
+          "sensitivity": 10
+        },
+        {
+          "type": "mouse_rotation",
+          "delay": 0.5,
+          "angle": 10,
           "direction": "right",
           "sensitivity": 10
         },
@@ -2018,7 +2032,7 @@
         {
           "type": "mouse_rotation",
           "delay": 0.4243,
-          "angle": 15,
+          "angle": 14.5,
           "direction": "right",
           "sensitivity": 10
         },
@@ -2297,7 +2311,7 @@
         {
           "type": "mouse_rotation",
           "delay": 0.09,
-          "angle": 69,
+          "angle": 69.5,
           "direction": "right",
           "sensitivity": 10
         },
@@ -2475,7 +2489,14 @@
         {
           "type": "mouse_rotation",
           "delay": 0.04,
-          "angle": 44,
+          "angle": 34,
+          "direction": "right",
+          "sensitivity": 10
+        },
+        {
+          "type": "mouse_rotation",
+          "delay": 0.5,
+          "angle": 10,
           "direction": "right",
           "sensitivity": 10
         },
@@ -3354,7 +3375,14 @@
         {
           "type": "mouse_rotation",
           "delay": 0.04,
-          "angle": 44,
+          "angle": 34,
+          "direction": "right",
+          "sensitivity": 10
+        },
+        {
+          "type": "mouse_rotation",
+          "delay": 0.5,
+          "angle": 10,
           "direction": "right",
           "sensitivity": 10
         },

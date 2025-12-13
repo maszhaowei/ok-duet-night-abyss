@@ -1,14 +1,9 @@
 from qfluentwidgets import FluentIcon
-import re
 import time
-import win32con
-import win32gui
-import cv2
 
-from ok import Logger, TaskDisabledException, Box
-from ok import find_boxes_by_name
+from ok import Logger, TaskDisabledException
 from src.tasks.DNAOneTimeTask import DNAOneTimeTask
-from src.tasks.CommissionsTask import CommissionsTask, Mission, QuickMoveTask
+from src.tasks.CommissionsTask import CommissionsTask, QuickAssistTask
 from src.tasks.BaseCombatTask import BaseCombatTask
 
 from src.tasks.AutoDefence import AutoDefence
@@ -26,21 +21,10 @@ class Auto70jjbTask(DNAOneTimeTask, CommissionsTask, BaseCombatTask):
         self.group_name = "全自动"
         self.group_icon = FluentIcon.CAFE
 
-        self.default_config.update({
-            '轮次': 1,
-        })
-
         self.setup_commission_config()
-        keys_to_remove = ["启用自动穿引共鸣"]
-        for key in keys_to_remove:
-            self.default_config.pop(key, None)
-
-        self.config_description.update({
-            '轮次': '打几个轮次',
-        })
 
         self.action_timeout = 10
-        self.quick_move_task = QuickMoveTask(self)
+        self.quick_assist_task = QuickAssistTask(self)
 
     def run(self):
         DNAOneTimeTask.run(self)
@@ -49,12 +33,17 @@ class Auto70jjbTask(DNAOneTimeTask, CommissionsTask, BaseCombatTask):
         try:
             _to_do_task = self.get_task_by_class(AutoDefence)
             _to_do_task.config_external_movement(self.walk_to_aim, self.config)
+            original_info_set = _to_do_task.info_set
+            _to_do_task.info_set = self.info_set
             return _to_do_task.do_run()
         except TaskDisabledException:
             pass
         except Exception as e:
             logger.error('AutoDefence error', e)
             raise
+        finally:
+            if _to_do_task is not self:
+                _to_do_task.info_set = original_info_set
 
     # def do_run(self):
     #     self.init_param()
@@ -316,13 +305,13 @@ class Auto70jjbTask(DNAOneTimeTask, CommissionsTask, BaseCombatTask):
         self._release_all_move_keys()
         self.reset_and_transport()
 
-    def walk_to_aim(self):
+    def walk_to_aim(self, delay=0):
         """
         主寻路函数：根据识别到的坐标选择路径
         """
         try:
             self.send_key_down("lalt")
-            self.sleep(2) # 保持原有的启动延迟
+            self.sleep(delay)
 
             # 使用 if-elif 结构，优先级清晰，且只执行一个分支
             if self.find_track_point(0.20, 0.54, 0.22, 0.59):

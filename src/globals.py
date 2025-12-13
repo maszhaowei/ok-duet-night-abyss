@@ -33,6 +33,7 @@ class Globals(QObject):
         self.pynput_keyboard = None
         self._thread_pool_executor_max_workers = 0
         self.thread_pool_executor = None
+        self.shared_frame = None
         exit_event.bind_stop(self)
         self.init_pynput()
 

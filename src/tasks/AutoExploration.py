@@ -2,7 +2,7 @@ from qfluentwidgets import FluentIcon
 import time
 
 from ok import Logger, TaskDisabledException
-from src.tasks.CommissionsTask import CommissionsTask, QuickMoveTask, Mission, _default_movement
+from src.tasks.CommissionsTask import CommissionsTask, QuickAssistTask, Mission, _default_movement
 from src.tasks.BaseCombatTask import BaseCombatTask
 from src.tasks.DNAOneTimeTask import DNAOneTimeTask
 
@@ -21,19 +21,14 @@ class AutoExploration(DNAOneTimeTask, CommissionsTask, BaseCombatTask):
         self.group_name = "半自动"
         self.group_icon = FluentIcon.VIEW
 
-        self.default_config.update({
-            '轮次': 3,
-        })
-
         self.setup_commission_config()
 
         self.config_description.update({
-            '轮次': '打几个轮次',
             '超时时间': '超时后将发出提示',
         })
 
         self.action_timeout = DEFAULT_ACTION_TIMEOUT
-        self.quick_move_task = QuickMoveTask(self)
+        self.quick_assist_task = QuickAssistTask(self)
         self.external_movement = _default_movement
         self._external_config = None
         self.skill_tick = self.create_skill_ticker()
@@ -84,7 +79,6 @@ class AutoExploration(DNAOneTimeTask, CommissionsTask, BaseCombatTask):
             _status = self.handle_mission_interface(stop_func=self.stop_func)
             if _status == Mission.START:
                 self.wait_until(self.in_team, time_out=30)
-                self.sleep(2)
                 self.init_all()
                 self.handle_mission_start()
             elif _status == Mission.STOP:
@@ -112,7 +106,7 @@ class AutoExploration(DNAOneTimeTask, CommissionsTask, BaseCombatTask):
         if self.find_serum():
             if self.runtime_state["start_time"] == 0:
                 self.runtime_state["start_time"] = time.time()
-                self.quick_move_task.reset()
+                self.quick_assist_task.reset()
             
             if not self.runtime_state["wait_next_round"] and time.time() - self.runtime_state["start_time"] >= self.config.get("超时时间", 120):
                 if self.external_movement is not _default_movement:
@@ -129,19 +123,21 @@ class AutoExploration(DNAOneTimeTask, CommissionsTask, BaseCombatTask):
         else:
             if self.runtime_state["start_time"] > 0:
                 self.init_runtime_state()
-            self.quick_move_task.run()
+            self.quick_assist_task.run()
 
     def handle_mission_start(self):
         if self.external_movement is not _default_movement:
             self.log_info("任务开始")
-            self.external_movement()
-            self.log_info(f"外部移动执行完毕，等待战斗开始，{DEFAULT_ACTION_TIMEOUT+10}秒后超时")
-            if not self.wait_until(self.find_serum, time_out=DEFAULT_ACTION_TIMEOUT+10):
+            self.external_movement(delay=2)
+            time_out = DEFAULT_ACTION_TIMEOUT + 10
+            self.log_info(f"外部移动执行完毕，等待战斗开始，{time_out}秒后超时")
+            if not self.wait_until(lambda: self.find_serum() or self.find_esc_menu(), time_out=time_out):
                 self.log_info("超时重开")
                 self.open_in_mission_menu()
             else:
                 self.log_info("战斗开始")
         else:
+            self.sleep(2)
             self.log_info_notify("任务开始")
             self.soundBeep()
         

@@ -1,12 +1,10 @@
 from qfluentwidgets import FluentIcon
 import time
-import cv2
-import re
 
-from ok import Logger, TaskDisabledException, Box, find_color_rectangles, color_range_to_bound
+from ok import Logger, TaskDisabledException, find_color_rectangles
 from src.tasks.DNAOneTimeTask import DNAOneTimeTask
 from src.tasks.BaseCombatTask import BaseCombatTask
-from src.tasks.CommissionsTask import CommissionsTask, QuickMoveTask, Mission
+from src.tasks.CommissionsTask import CommissionsTask, QuickAssistTask, Mission
 
 logger = Logger.get_logger(__name__)
 
@@ -23,21 +21,13 @@ class AutoExcavation(DNAOneTimeTask, CommissionsTask, BaseCombatTask):
         self.group_name = "半自动"
         self.group_icon = FluentIcon.VIEW
 
-        self.default_config.update({
-            '轮次': 3,
-        })
-
         self.setup_commission_config()
         keys_to_remove = ["超时时间"]
         for key in keys_to_remove:
             self.default_config.pop(key, None)
 
-        self.config_description.update({
-            "轮次": "打几个轮次",
-        })
-
         self.action_timeout = DEFAULT_ACTION_TIMEOUT
-        self.quick_move_task = QuickMoveTask(self)
+        self.quick_assist_task = QuickAssistTask(self)
         self.skill_tick = self.create_skill_ticker()
 
     def run(self):
@@ -96,7 +86,7 @@ class AutoExcavation(DNAOneTimeTask, CommissionsTask, BaseCombatTask):
         if self.find_target_health_bar():
             if self.runtime_state["start_time"] == 0:
                 self.runtime_state["start_time"] = time.time()
-                self.quick_move_task.reset()
+                self.quick_assist_task.reset()
             self.skill_tick()
         else:
             if self.runtime_state["start_time"] > 0:
@@ -106,7 +96,7 @@ class AutoExcavation(DNAOneTimeTask, CommissionsTask, BaseCombatTask):
                 self.excavator_count += 1
                 if self.excavator_count < 3:
                     self.soundBeep(1)
-            self.quick_move_task.run()
+            self.quick_assist_task.run()
 
     def handle_mission_start(self):
         self.log_info_notify("任务开始")

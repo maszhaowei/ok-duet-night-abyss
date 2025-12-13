@@ -26,19 +26,11 @@ class Auto65ArtifactTask_Fast(DNAOneTimeTask, CommissionsTask, BaseCombatTask):
         self.group_name = "全自动"
         self.group_icon = FluentIcon.CAFE
 
-        self.default_config.update({
-            "刷几次": 999,
-        })
-
         self.setup_commission_config()
-        substrings_to_remove = ["穿引共鸣", "密函"]
+        substrings_to_remove = ["轮次"]
         keys_to_delete = [key for key in self.default_config for sub in substrings_to_remove if sub in key]
         for key in keys_to_delete:
             self.default_config.pop(key, None)
-
-        self.config_description.update({
-            "刷几次": "总共刷多少次副本",
-        })
 
         self.action_timeout = 10
 
@@ -50,12 +42,17 @@ class Auto65ArtifactTask_Fast(DNAOneTimeTask, CommissionsTask, BaseCombatTask):
         try:
             _to_do_task = self.get_task_by_class(AutoDefence)
             _to_do_task.config_external_movement(self.walk_to_aim, self.config)
+            original_info_set = _to_do_task.info_set
+            _to_do_task.info_set = self.info_set
             return _to_do_task.do_run()
         except TaskDisabledException:
             pass
         except Exception as e:
             logger.error("AutoMyDungeonTask error", e)
             raise
+        finally:
+            if _to_do_task is not self:
+                _to_do_task.info_set = original_info_set
 
     # def do_run(self):
     #     """执行任务的核心逻辑"""
@@ -130,155 +127,88 @@ class Auto65ArtifactTask_Fast(DNAOneTimeTask, CommissionsTask, BaseCombatTask):
     #         # 短暂休眠
     #         self.sleep(0.2)
 
-    def find_next_hint(self, x1, y1, x2, y2, s, box_name='hint_text'):
-        texts = self.ocr(box=self.box_of_screen(x1, y1, x2, y2, hcenter=True),
-                         target_height=1080, name=box_name)
-        fps_text = find_boxes_by_name(texts,
-                                      re.compile(s, re.IGNORECASE))
-        if fps_text:
-            return True
-        return False
-
-    def walk_to_aim(self):
+    def walk_to_aim(self, delay=0):
         """
         从起点走到目标位置的路径
         """
         logger.info("开始移动到目标位置")
         move_start = time.time()
         try:
-            found_target = False
-            if self.find_next_hint(0.18,0.52,0.23,0.55,r'保护目标'):
-                #30/65扼守
-                found_target = True
-                self.send_key_down("lalt")
-                self.sleep(0.05)
-                self.send_key_down("w")
-                self.sleep(0.3)
-                self.send_key_down("a")
-                self.sleep(1)
-                self.send_key_down("lshift")
-                self.sleep(1.5)
-                #下落时间有波动可能导致落地硬直,跳跃重置下落高度
-                self.send_key("space", down_time=0.1)
-                self.sleep(0.1)
-                self.send_key("lshift", down_time=0.2)
-                self.sleep(0.8)
-                self.send_key("lshift", down_time=0.2)
-                self.sleep(0.8)
-                self.send_key_down("lshift")
-                self.sleep(2)
-                self.send_key_up("w")
-                self.sleep(1)
-                self.send_key("space", down_time=0.1)
-                self.sleep(1)
-                self.send_key_up("lshift")
-                self.sleep(0.1)
-                self.send_key("lshift", down_time=0.2)
-                self.sleep(0.8)
-                self.send_key("lshift", down_time=0.2)
-                self.sleep(0.8)
-                self.send_key_down("lshift")
-                self.sleep(3.8)
-                self.send_key_up("lshift")
-                self.sleep(0.1)
-                self.send_key_up("a")
-                self.send_key_up("lalt")
-                self.reset_and_transport()
+            # ===== 根据扼守-30or65.json录制的路径 =====
 
-            if self.find_next_hint(0.73,0.57,0.78,0.6,r'保护目标'):
-                #50扼守右-上电梯
-                found_target = True
-                self.send_key_down("lalt")
-                self.sleep(0.05)
-                self.send_key_down("w")
-                self.sleep(0.1)
-                self.send_key_down("lshift")
-                self.sleep(1.2)
-                self.send_key("lshift", down_time=0.2)
-                self.sleep(0.4)
-                self.send_key_down("lshift")
-                self.sleep(0.4)
-                self.send_key_down("d")
-                self.sleep(0.3)
-                self.send_key("lshift", down_time=0.2)
-                self.sleep(0.8)
-                self.send_key_up("w")
-                self.sleep(0.2)
-                self.send_key_down("lshift")
-                self.sleep(1)
-                self.send_key("lshift", down_time=0.2)
-                self.sleep(0.8)
-                self.send_key("lshift", down_time=0.2)
-                self.sleep(0.32)
-                self.send_key_down("w")
-                self.sleep(0.1)
-                self.send_key_up("lshift")
-                self.sleep(0.1)
-                self.send_key_up("w")
-                self.send_key_up("d")
-                self.sleep(0.1)
-                self.send_key('f',down_time=0.1)
-                self.sleep(0.1)
-                self.send_key('f',down_time=0.1)
-                self.sleep(10)
-                self.send_key_down("d")
-                self.sleep(0.2)
-                self.send_key_down("lshift")
-                self.sleep(0.8)
-                self.send_key_down("w")
-                self.sleep(0.2)
-                self.send_key_up("w")
-                self.sleep(0.2)
-                self.send_key("lshift", down_time=0.2)
-                self.sleep(0.8)
-                self.send_key_up("lshift")
-                self.sleep(0.1)
-                self.send_key_up("d")
-                self.send_key_up("lalt")
-                self.reset_and_transport()
-                self.send_key_down("s")
-                self.sleep(1)
-                self.send_key_up("s")
+            # 0.52s: 开始向前移动
+            self.send_key_down("lalt")
 
-            if self.find_next_hint(0.445,0.24,0.495,0.27,r'保护目标'):
-                #50扼守中-神像复位下电梯
-                found_target = True
-                self.reset_and_transport()
-                self.send_key_down("lalt")
-                self.sleep(0.05)
-                self.send_key_down("a")
-                self.sleep(0.1)
-                self.send_key_down("lshift")
-                self.sleep(0.78)
-                self.send_key_down("w")
-                self.sleep(0.1)
-                self.send_key_up("a")
-                self.sleep(1.6)
-                self.send_key_down("a")
-                self.sleep(0.1)
-                self.send_key_up("w")
-                self.sleep(1)
-                self.send_key_down("s")
-                self.sleep(0.1)
-                self.send_key("lshift", down_time=0.2)
-                self.sleep(1.8)
-                self.send_key_up("s")
-                self.sleep(0.2)
-                self.send_key_down("lshift")
-                self.sleep(1.2)
-                self.send_key_up("lshift")
-                self.sleep(0.1)
-                self.send_key_up("a")
-                self.reset_and_transport()
-                self.send_key_down("w")
-                self.sleep(0.1)
-                self.send_key("lshift", down_time=0.2)
-                self.sleep(0.6)
-                self.send_key_up("w")
-                self.reset_and_transport()
-                self.send_key_down("a")
-                self.sleep(1)
-                self.send_key_up("a")
+            self.sleep(delay)
+            self.send_key_down("w")
+
+            # 1.11s: 开始冲刺 (0.59s后)
+            self.sleep(0.59)
+            self.send_key_down(self.get_dodge_key())
+
+            # 1.33s: 向左移动 (0.22s后)
+            self.sleep(0.22)
+            self.send_key_down("a")
+
+            # 2.41s: 停止前进 (1.08s后)
+            self.sleep(1.08)
+            self.send_key_up("w")
+
+            # 3.85s: 再次向前 (1.44s后)
+            self.sleep(1.44)
+            self.send_key_down("w")
+
+            # 3.94s: 停止向左 (0.09s后)
+            self.sleep(0.09)
+            self.send_key_up("a")
+
+            # 4.84s: 再次向左 (0.90s后)
+            self.sleep(0.90)
+            self.send_key_down("a")
+
+            # 5.22s-7.82s: Shift连续切换 (可能在调整位置)
+            self.sleep(0.38)
+            self.send_key_up(self.get_dodge_key())
+            self.sleep(0.24)
+            self.send_key(self.get_dodge_key(), down_time=0.35)
+            self.sleep(0.79)
+            self.send_key(self.get_dodge_key(), down_time=0.41)
+            self.sleep(0.80)
+            self.send_key_down(self.get_dodge_key())
+
+            # 9.09s: 停止前进 (1.27s后)
+            self.sleep(1.27)
+            self.send_key_up("w")
+
+            # 9.56s: 短暂前进 (0.47s后)
+            self.sleep(0.47)
+            self.send_key_down("w")
+
+            # 9.91s: 停止前进 (0.35s后)
+            self.sleep(0.35)
+            self.send_key_up("w")
+
+            # 10.70s: 跳跃 (0.79s后)
+            self.sleep(0.79)
+            self.send_key("space", down_time=0.09)
+
+            # 12.83s: 短暂后退调整 (2.04s后)
+            self.sleep(2.04)
+            self.send_key("s", down_time=0.09)
+
+            # 13.32s: 短暂前进调整 (0.40s后)
+            self.sleep(0.40)
+            self.send_key("w", down_time=0.10)
+
+            # 13.86s: 再次短暂后退 (0.44s后)
+            self.sleep(0.44)
+            self.send_key("s", down_time=0.10)
+
+            # 18.89s-18.99s: 释放所有移动键 (4.93s后)
+            self.sleep(4.93)
+            self.send_key_up(self.get_dodge_key())
+            self.sleep(0.10)
+            self.send_key_up("a")
 
             if self.find_next_hint(0.475,0.255,0.525,0.285,r'保护目标'):
                 #50扼守中-142米

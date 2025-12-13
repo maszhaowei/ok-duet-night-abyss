@@ -3,11 +3,10 @@ import time
 import json
 import os
 
-from ok import Logger, TaskDisabledException, GenshinInteraction
+from ok import Logger, TaskDisabledException
 from src.tasks.DNAOneTimeTask import DNAOneTimeTask
 from src.tasks.BaseCombatTask import BaseCombatTask
 from src.tasks.CommissionsTask import CommissionsTask, Mission
-from src.tasks.AutoExcavation import AutoExcavation
 from src.tasks.trigger.AutoMazeTask import AutoMazeTask
 
 logger = Logger.get_logger(__name__)
@@ -20,32 +19,18 @@ class AutoEscortTask(DNAOneTimeTask, CommissionsTask, BaseCombatTask):
         super().__init__(*args, **kwargs)
         self.icon = FluentIcon.FLAG
         self.name = "自动飞枪80护送（无需巧手）【需要游戏处于前台】"
-        self.description = "全自动80护送任务，搬运自emt，欢迎路径作者署名。\n需要使用水母主控，近战武器选择0精春玦戟。魔之楔配置为金色迅捷+5，紫色穿引共鸣，紫色迅捷蓄势+5，紫色迅捷坠击+5，不要携带其他魔之楔，面板攻速为1.67。\n设置中控制设置水平灵敏度和垂直灵敏度设置为1.0，默认镜头距离设置为1.3。确认好自身魔之楔和设置后展开下方配置点击我已阅读后运行"
+        self.description = "全自动80护送 (源自emt)，欢迎作者署名。\n"
+        self.description += "装备：水母 + 0精春玦戟。设置：水平灵敏度和垂直灵敏度1.0，镜头距离1.3，帧率120。\n"
+        self.description += "魔之楔：金色迅捷+5 / 紫色穿引共鸣 / 紫色迅捷蓄势+5 / 紫色迅捷坠击+5（面板攻速1.67）。"
         self.group_name = "全自动"
         self.group_icon = FluentIcon.CAFE
 
-        self.default_config.update(
-            {
-                "刷几次": 999,
-                "我已阅读注意事项并确认配置": False,
-            }
-        )
-
-        self.setup_commission_config()
-        keys_to_remove = [
-            "启用自动穿引共鸣",
-            "使用技能",
-            "技能释放频率",
-        ]
-        for key in keys_to_remove:
-            self.default_config.pop(key, None)
-
-        self.config_description.update(
-            {
-                "刷几次": "完成几次护送任务后停止",
-                "我已阅读注意事项并确认配置": "必须勾选才能执行任务！",
-            }
-        )
+        self.default_config.update({
+            "我已阅读注意事项并确认配置": False,
+        })
+        self.config_description.update({
+            "我已阅读注意事项并确认配置": "必须勾选才能执行任务！",
+        })
 
         self.action_timeout = 10
 
@@ -87,6 +72,8 @@ class AutoEscortTask(DNAOneTimeTask, CommissionsTask, BaseCombatTask):
             return {}
 
     def run(self):
+        mouse_jitter_setting = self.afk_config.get("鼠标抖动")
+        self.afk_config.update({"鼠标抖动": False})
         DNAOneTimeTask.run(self)
         self.move_mouse_to_safe_position(save_current_pos=False)
         self.set_check_monthly_card()
@@ -97,6 +84,8 @@ class AutoEscortTask(DNAOneTimeTask, CommissionsTask, BaseCombatTask):
         except Exception as e:
             logger.error("AutoEscortTask error", e)
             raise
+        finally:
+            self.afk_config.update({"鼠标抖动": mouse_jitter_setting})
 
     def do_run(self):
         # 检查是否已阅读注意事项
@@ -249,18 +238,18 @@ class AutoEscortTask(DNAOneTimeTask, CommissionsTask, BaseCombatTask):
                     logger.info(f"  总耗时: {time_str}")
                     logger.info(f"  平均每轮: {avg_time:.1f} 秒")
                     logger.info(f"  失败次数: {self.stats['failed_attempts']}")
-                    max_rounds = self.config.get("刷几次", 999)
-                    if max_rounds > 0:
-                        remaining = max_rounds - self.stats["rounds_completed"]
-                        logger.info(f"  剩余轮数: {remaining}")
+                    # max_rounds = self.config.get("刷几次", 999)
+                    # if max_rounds > 0:
+                    #     remaining = max_rounds - self.stats["rounds_completed"]
+                    #     logger.info(f"  剩余轮数: {remaining}")
                     logger.info("=" * 50)
 
-                if _count >= self.config.get("刷几次", 999):
-                    self.sleep(1)
-                    self.open_in_mission_menu()
-                    self.log_info_notify("任务终止")
-                    self.soundBeep()
-                    return
+                # if _count >= self.config.get("刷几次", 999):
+                #     self.sleep(1)
+                #     self.open_in_mission_menu()
+                #     self.log_info_notify("任务终止")
+                #     self.soundBeep()
+                #     return
                 self.log_info("任务开始")
                 self.stats["current_phase"] = "任务开始"
                 self.info_set("当前阶段", "任务开始")
@@ -320,7 +309,7 @@ class AutoEscortTask(DNAOneTimeTask, CommissionsTask, BaseCombatTask):
 
         # 使用 AutoExcavation 的 find_track_point 方法检测位置
         try:
-            track_point = AutoExcavation.find_track_point(self)
+            track_point = self.find_track_point()
 
             if track_point is None:
                 logger.warning("❌ 未检测到 track_point，无法确定路径，重新开始任务...")
@@ -459,18 +448,12 @@ class AutoEscortTask(DNAOneTimeTask, CommissionsTask, BaseCombatTask):
                 delay = 0
 
             # 等待指定的延迟时间（使用高精度等待）
-            if delay > 0:
-                if delay > 0.001:
-                    # 先 sleep 大部分时间，预留 0.5ms 缓冲
-                    time.sleep(max(0, delay - 0.0005))
+            target = time.perf_counter() + delay
+            if delay > 0.02:
+                self.sleep(delay - 0.02)
 
-                    # 自旋等待，提高时间精度
-                    end_time = time.perf_counter() + 0.0005
-                    while time.perf_counter() < end_time:
-                        pass
-                else:
-                    # 短延迟直接 sleep
-                    time.sleep(delay)
+            while time.perf_counter() < target:
+                pass
 
             # 执行不同类型的动作
             if action_type == "mouse_rotation":
@@ -494,7 +477,7 @@ class AutoEscortTask(DNAOneTimeTask, CommissionsTask, BaseCombatTask):
             else:
                 logger.warning(f"未知动作类型: {action_type}")
 
-    def wait_for_puzzle_completion(self, timeout=30):
+    def wait_for_puzzle_completion(self, timeout=10):
         """等待 AutoMazeTask 完成解密
 
         主动检测 puzzle 并触发解密，然后等待解密完成

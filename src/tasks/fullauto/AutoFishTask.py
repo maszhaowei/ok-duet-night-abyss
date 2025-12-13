@@ -39,7 +39,7 @@ class AutoFishTask(DNAOneTimeTask, BaseDNATask):
 
         # 配置描述（便于GUI显示）
         self.config_description.update({
-            "MAX_ROUNDS": "最大轮数",
+            "MAX_ROUNDS": "最大轮数，鱼塘每天上限为100次",
             "END_WAIT_SPACE": "每轮结束等待时间(秒)",
             "MAX_START_SEC": "开始阶段超时(秒)",
             "MAX_FIGHT_SEC": "溜鱼阶段超时(秒)",

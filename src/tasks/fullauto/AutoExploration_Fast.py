@@ -1,10 +1,8 @@
-import time
-
 from ok import Logger, TaskDisabledException
 from qfluentwidgets import FluentIcon
 
 from src.tasks.AutoExploration import AutoExploration
-from src.tasks.CommissionsTask import CommissionsTask, QuickMoveTask
+from src.tasks.CommissionsTask import CommissionsTask, QuickAssistTask
 from src.tasks.DNAOneTimeTask import DNAOneTimeTask
 from src.tasks.trigger.AutoMazeTask import AutoMazeTask
 from src.tasks.trigger.AutoRouletteTask import AutoRouletteTask
@@ -41,9 +39,6 @@ class AutoExploration_Fast(DNAOneTimeTask, CommissionsTask, BaseCombatTask):
             '地图选择': '选择要自动执行的地图类型',
         })
         self.setup_commission_config()
-        keys_to_remove = ["启用自动穿引共鸣"]
-        for key in keys_to_remove:
-            self.default_config.pop(key, None)
         
         # 设置地图选择为下拉选择
         self.config_type["地图选择"] = {
@@ -51,7 +46,7 @@ class AutoExploration_Fast(DNAOneTimeTask, CommissionsTask, BaseCombatTask):
             "options": ["探险电梯", "探险高台", "探险平地"],
         }
         self.action_timeout = DEFAULT_ACTION_TIMEOUT
-        self.quick_move_task = QuickMoveTask(self)
+        self.quick_assist_task = QuickAssistTask(self)
         
         # 地图检测点和执行函数的映射字典
         self.map_configs = {
@@ -76,6 +71,8 @@ class AutoExploration_Fast(DNAOneTimeTask, CommissionsTask, BaseCombatTask):
         try:
             _to_do_task = self.get_task_by_class(AutoExploration)
             _to_do_task.config_external_movement(self.walk_to_aim, self.config)
+            original_info_set = _to_do_task.info_set
+            _to_do_task.info_set = self.info_set
             while True:
                 try:
                     return _to_do_task.do_run()
@@ -87,8 +84,12 @@ class AutoExploration_Fast(DNAOneTimeTask, CommissionsTask, BaseCombatTask):
         except Exception as e:
             logger.error('AutoDefence error', e)
             raise
+        finally:
+            if _to_do_task is not self:
+                _to_do_task.info_set = original_info_set
 
-    def walk_to_aim(self):
+    def walk_to_aim(self, delay=0):
+        self.sleep(delay)
         map_selection = self.config.get("地图选择", [])
         
         # 检测当前地图类型

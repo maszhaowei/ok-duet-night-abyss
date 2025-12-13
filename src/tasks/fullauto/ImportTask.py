@@ -1,8 +1,6 @@
 from qfluentwidgets import FluentIcon
 import re
 import time
-import win32con
-import win32api
 import cv2
 import os
 import json
@@ -12,13 +10,9 @@ from functools import cached_property
 from pathlib import Path
 from PIL import Image
 from ok import Logger, TaskDisabledException, GenshinInteraction
-from ok import find_boxes_by_name
 from src.tasks.DNAOneTimeTask import DNAOneTimeTask
-from src.tasks.CommissionsTask import CommissionsTask, Mission, QuickMoveTask
+from src.tasks.CommissionsTask import CommissionsTask, Mission, QuickAssistTask
 from src.tasks.BaseCombatTask import BaseCombatTask
-
-from src.tasks.trigger.AutoMazeTask import AutoMazeTask
-from src.tasks.trigger.AutoRouletteTask import AutoRouletteTask
 
 from src.tasks.AutoDefence import AutoDefence
 from src.tasks.AutoExpulsion import AutoExpulsion
@@ -44,10 +38,12 @@ class ImportTask(DNAOneTimeTask, CommissionsTask, BaseCombatTask):
         self.last_f_time = 0
         self.last_f_was_interact = False
 
+        self.setup_commission_config()
+
         self.default_config.update({
-            '轮次': 10,
             '外部文件夹': "",
             '副本类型': "默认",
+            '关闭抖动': False,
             # '使用内建机关解锁': False,
         })
         self.config_type['外部文件夹'] = {
@@ -59,22 +55,22 @@ class ImportTask(DNAOneTimeTask, CommissionsTask, BaseCombatTask):
             "type": "drop_down",
             "options": ["默认", "扼守无尽", "探险无尽"],
         }
-        self.setup_commission_config()
-        keys_to_remove = ["启用自动穿引共鸣"]
-        for key in keys_to_remove:
-            self.default_config.pop(key, None)
 
         self.config_description.update({
             '轮次': '如果是无尽关卡，选择打几个轮次',
             '外部文件夹': '选择mod目录下的外部逻辑',
+            '关闭抖动': '使用飞枪等存在视角移动的外部逻辑时可以启用',
             # '使用内建解密': '使用ok内建解密功能',
         })
 
         self.skill_tick = self.create_skill_ticker()
         self.action_timeout = 10
-        self.quick_move_task = QuickMoveTask(self)
+        self.quick_assist_task = QuickAssistTask(self)
 
     def run(self):
+        if self.config.get('关闭抖动', False):
+            mouse_jitter_setting = self.afk_config.get("鼠标抖动")
+            self.afk_config.update({"鼠标抖动": False})
         DNAOneTimeTask.run(self)
         self.move_mouse_to_safe_position(save_current_pos=False)
         self.set_check_monthly_card()
@@ -82,22 +78,29 @@ class ImportTask(DNAOneTimeTask, CommissionsTask, BaseCombatTask):
             path = Path.cwd()
             self.script = self.process_json_files(f'{path}\mod\{self.config.get("外部文件夹")}\scripts')
             self.img = self.load_png_files(f'{path}\mod\{self.config.get("外部文件夹")}\map')
-            _to_do_task = self
             if self.config.get('副本类型') == '扼守无尽':
                 _to_do_task = self.get_task_by_class(AutoDefence)
-                _to_do_task.config_external_movement(self.walk_to_aim, self.config)
             elif self.config.get('副本类型') == '探险无尽':
                 _to_do_task = self.get_task_by_class(AutoExploration)
-                _to_do_task.config_external_movement(self.walk_to_aim, self.config)
             elif self.config.get('副本类型') == '驱离':
                 _to_do_task = self.get_task_by_class(AutoExpulsion)
+            else:
+                _to_do_task = self
+            if _to_do_task is not self:
                 _to_do_task.config_external_movement(self.walk_to_aim, self.config)
+                original_info_set = _to_do_task.info_set
+                _to_do_task.info_set = self.info_set
             return _to_do_task.do_run()
         except TaskDisabledException:
             pass
         except Exception as e:
             logger.error('AutoDefence error', e)
             raise
+        finally:
+            if self.config.get('关闭抖动', False):
+                self.afk_config.update({"鼠标抖动": mouse_jitter_setting})
+            if _to_do_task is not self:
+                _to_do_task.info_set = original_info_set
 
     def do_run(self):
         self.init_all()
@@ -130,8 +133,7 @@ class ImportTask(DNAOneTimeTask, CommissionsTask, BaseCombatTask):
                 self.wait_until(self.in_team, time_out=30)
                 self.log_info('任务开始')
                 self.init_all()
-                self.sleep(2)
-                self.walk_to_aim()
+                self.walk_to_aim(delay=2)
                 now = time.time()
                 self.runtime_state.update({"wave_start_time": now, "delay_task_start": now + 1})
             elif _status == Mission.CONTINUE:
@@ -215,10 +217,13 @@ class ImportTask(DNAOneTimeTask, CommissionsTask, BaseCombatTask):
         png_files = {key: png_files[key] for key in sorted(png_files.keys(), key=lambda x: (len(x), x))}
         return png_files
 
-    def walk_to_aim(self, former_index=None):
-        self.send_key_down("lalt")
-        ret = self._walk_to_aim(former_index)
-        self.send_key_up("lalt")
+    def walk_to_aim(self, former_index=None, delay=0):
+        try:
+            self.hold_lalt = True
+            self.sleep(delay)
+            ret = self._walk_to_aim(former_index)
+        finally:
+            self.hold_lalt = False
         return ret
 
     def _walk_to_aim(self, former_index=None):
@@ -299,7 +304,9 @@ class ImportTask(DNAOneTimeTask, CommissionsTask, BaseCombatTask):
         box = self.box_of_screen_scaled(2560, 1440, 1, 1, 2559, 1439, name="full_screen", hcenter=True)
 
         # 只裁剪和转换一次屏幕
-        cropped_screen = box.crop_frame(self.frame)
+        frame = self.frame
+        self.shared_frame = frame
+        cropped_screen = box.crop_frame(frame)
         screen_gray = cv2.cvtColor(cropped_screen, cv2.COLOR_BGR2GRAY)
 
         count = 0
@@ -350,6 +357,10 @@ class ImportTask(DNAOneTimeTask, CommissionsTask, BaseCombatTask):
 
             count += 1
 
+            # if self.height != 1080:
+            #     scale_factor = self.height / 1080
+            #     template_gray = cv2.resize(template_gray, (0, 0), fx=scale_factor, fy=scale_factor, interpolation=cv2.INTER_LINEAR)
+
             # 执行匹配
             result = cv2.matchTemplate(screen_gray, template_gray, cv2.TM_CCOEFF_NORMED)
             _, threshold, _, _, = cv2.minMaxLoc(result)
@@ -395,18 +406,20 @@ class ImportTask(DNAOneTimeTask, CommissionsTask, BaseCombatTask):
         for action in actions:
             target_time = action['time']
 
-            # 等待直到达到动作指定的时间戳
-            while True:
-                current_offset = time.perf_counter() - start_time
-                if current_offset >= target_time:
-                    break
+            if self.check_for_monthly_card()[0]:
+                raise MacroFailedException
 
-                # 检查中断条件
-                if self.check_for_monthly_card()[0]:
-                    raise MacroFailedException
+            self.next_frame()
+            self.shared_frame = self.frame
 
-                # 这里的 next_frame 最好包含微小的 sleep，防止 CPU 100% 空转
-                self.next_frame()
+            current_offset = time.perf_counter() - start_time
+            delay = target_time - current_offset
+            target = time.perf_counter() + delay
+            if delay > 0.02:
+                self.sleep(delay - 0.02)
+
+            while time.perf_counter() < target:
+                pass
 
             if action['type'] == "delay":
                 self.delay_index = map_index

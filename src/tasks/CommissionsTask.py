@@ -1,10 +1,12 @@
 import re
 import time
-import random
 from enum import Enum
+from functools import cached_property
 
 from ok import find_boxes_by_name, TaskDisabledException
 from src.tasks.BaseDNATask import BaseDNATask, isolate_white_text_to_black
+from src.tasks.config.CommissionConfig import CommissionConfig
+from src.tasks.config.CommissionSkillConfig import CommissionSkillConfig
 
 
 class Mission(Enum):
@@ -21,40 +23,26 @@ class CommissionsTask(BaseDNATask):
         self.current_round = 0
         self.current_wave = -1
         self.mission_status = None
-        self.action_timeout = 10
+        self.action_timeout = 15
         self.wave_future = None
+
+    @cached_property
+    def commission_config(self):
+        return self.get_task_by_class(CommissionConfig).config
+    
+    @cached_property
+    def commission_skill_config(self):
+        return self.get_task_by_class(CommissionSkillConfig).config
 
     def setup_commission_config(self):
         self.default_config.update({
-            '超时时间': 120,
-            "委托手册": "不使用",
-            "委托手册指定轮次": "",
-            "使用技能": "不使用",
-            "技能释放频率": 5.0,
-            "启用自动穿引共鸣": True,
-            "自动选择首个密函和密函奖励": True,
-            "优先选择密函奖励": "不使用",
+            "轮次": 5,
+            "超时时间": 90,
         })
         self.config_description.update({
-            "委托手册指定轮次": "范例: 3,5,8",
+            "轮次": "打几个轮次",
             "超时时间": "超时后将重启任务",
-            "技能释放频率": "毎几秒释放一次技能",
-            "启用自动穿引共鸣": "在需要跑图时时启用触发任务的自动穿引共鸣",
-            "自动选择首个密函和密函奖励": "刷武器密函时推荐同时开启下一选项",
-            "优先选择密函奖励": "在上一选项启用时生效",
         })
-        self.config_type["委托手册"] = {
-            "type": "drop_down",
-            "options": ["不使用", "100%", "200%", "800%", "2000%"],
-        }
-        self.config_type["使用技能"] = {
-            "type": "drop_down",
-            "options": ["不使用", "战技", "终结技", "魔灵支援"],
-        }
-        self.config_type["优先选择密函奖励"] = {
-            "type": "drop_down",
-            "options": ["不使用", "持有数为0", "持有数最少", "持有数最多"],
-        }
 
     def find_quit_btn(self, threshold=0, box=None):
         if box is None:
@@ -194,10 +182,10 @@ class CommissionsTask(BaseDNATask):
     def choose_drop_rate_item(self):
         if not hasattr(self, "config"):
             return
-        drop_rate = self.config.get("委托手册", "不使用")
+        drop_rate = self.commission_config.get("委托手册", "不使用")
         if drop_rate == "不使用":
             return
-        round_to_use = [int(num) for num in re.findall(r'\d+', self.config.get("委托手册指定轮次", ""))]
+        round_to_use = [int(num) for num in re.findall(r'\d+', self.commission_config.get("委托手册指定轮次", ""))]
         if len(round_to_use) != 0:
             if self.mission_status != Mission.CONTINUE:
                 if 1 not in round_to_use:
@@ -205,13 +193,13 @@ class CommissionsTask(BaseDNATask):
             elif self.current_round == 0 or (self.current_round + 1) not in round_to_use:
                 return
         if drop_rate == "100%":
-            self.click_relative_random(0.369, 0.509, 0.444, 0.581)
+            self.click_relative_random(0.373, 0.514, 0.440, 0.580)
         elif drop_rate == "200%":
-            self.click_relative_random(0.462, 0.509, 0.538, 0.607)
+            self.click_relative_random(0.466, 0.514, 0.535, 0.580)
         elif drop_rate == "800%":
-            self.click_relative_random(0.556, 0.509, 0.632, 0.608)
+            self.click_relative_random(0.560, 0.514, 0.627, 0.580)
         elif drop_rate == "2000%":
-            self.click_relative_random(0.650, 0.509, 0.726, 0.581)
+            self.click_relative_random(0.653, 0.514, 0.722, 0.580)
         self.log_info(f"使用委托手册: {drop_rate}")
         self.sleep(0.25)
 
@@ -219,18 +207,23 @@ class CommissionsTask(BaseDNATask):
         if not hasattr(self, "config"):
             return
         action_timeout = self.action_timeout if timeout == 0 else timeout
-        if self.config.get("自动选择首个密函和密函奖励", False):
+        if self.commission_config.get("自动处理密函", False):
             if (letter_btn:=self.find_letter_interface()):
-                box = self.box_of_screen_scaled(2560, 1440, 1195, 612, 2449, 817, name="letter_drag_area", hcenter=True)
+                box = self.box_of_screen_scaled(2560, 1440, 1190, 610, 2450, 820, name="letter_drag_area", hcenter=True)
                 letter_roi = self.box_of_screen_scaled(2560, 1440, 565, 651, 732, 805, name="letter_roi", hcenter=True)
                 letter_snapshot = letter_roi.crop_frame(self.frame)
                 self.sleep(0.1)
-                self.click_relative_random(0.531, 0.441, 0.577, 0.551, use_safe_move=True, safe_move_box=box, down_time=0.05)
-                self.sleep(0.3)
-                if self.find_one(template=letter_snapshot, box=letter_roi, threshold=0.7):
+
+                for _ in range(2):
+                    self.click_relative_random(0.533, 0.444, 0.575, 0.547, use_safe_move=True, safe_move_box=box, down_time=0.02)
+                    self.sleep(0.3)
+                    if not self.find_one(template=letter_snapshot, box=letter_roi, threshold=0.7):
+                        break
+                else:
                     self.log_info_notify("密函已耗尽")
                     self.soundBeep()
                     raise TaskDisabledException
+
                 self.wait_until(
                     condition=lambda: not self.find_letter_interface(),
                     post_action=lambda: (
@@ -288,7 +281,7 @@ class CommissionsTask(BaseDNATask):
                 'name': reward.name
             })
 
-        strategy = self.config.get("优先选择密函奖励")
+        strategy = self.commission_config.get("密函奖励偏好")
         target_item = None
 
         self.log_info(f"当前识别到的奖励持有数: {[item['count'] for item in parsed_items]}")
@@ -314,8 +307,8 @@ class CommissionsTask(BaseDNATask):
 
     def choose_letter_reward(self, timeout=0):
         action_timeout = self.action_timeout if timeout == 0 else timeout
-        if self.config.get("自动选择首个密函和密函奖励", False):
-            if self.config.get("优先选择密函奖励", "不使用") != "不使用":
+        if self.commission_config.get("自动处理密函", False):
+            if self.commission_config.get("密函奖励偏好", "不使用") != "不使用":
                 self.choose_target_letter_reward()
             self.wait_until(
                 condition=lambda: not self.find_letter_reward_btn(),
@@ -334,18 +327,36 @@ class CommissionsTask(BaseDNATask):
         self.sleep(0.1)
 
     def create_skill_ticker(self):
+        skills = []
+        def create_ticker(local_n):
+            def action():
+                self.log_onetime_info("全局技能设定: " + str(self.commission_skill_config), "全局技能设定")
+                skill = self.commission_skill_config.get(f"技能{local_n}", "不使用")
+                if skill == "不使用":
+                    return
+                after_sleep = self.commission_skill_config.get(f"技能{local_n}_释放后等待", 0.0)
+                if skill == "战技":
+                    self.get_current_char().send_combat_key()
+                elif skill == "终结技":
+                    self.get_current_char().send_ultimate_key()
+                elif skill == "魔灵支援":
+                    self.get_current_char().send_geniemon_key()
+                elif skill == "普攻":
+                    self.get_current_char().click()
+                if after_sleep > 10:
+                    self.log_onetime_info(f"检测到长延时：释放技能 {local_n} 后将等待 {after_sleep} 秒，可能影响脚本运行，请确认是否符合预期")
+                self.sleep(after_sleep)
 
-        def action():
-            if self.config.get("使用技能", "不使用") == "不使用":
-                return
-            if self.config.get("使用技能") == "战技":
-                self.get_current_char().send_combat_key()
-            elif self.config.get("使用技能") == "终结技":
-                self.get_current_char().send_ultimate_key()
-            elif self.config.get("使用技能") == "魔灵支援":
-                self.get_current_char().send_geniemon_key()
+            return self.create_ticker(
+                action, 
+                interval=lambda: self.commission_skill_config.get(f"技能{local_n}_释放频率", 5.0), 
+                interval_random_range=(0.8, 1.2)
+            )
+        
+        for n in range(1, 5):
+            skills.append(create_ticker(n))
 
-        return self.create_ticker(action, interval=lambda: self.config.get("技能释放频率", 5), interval_random_range=(0.8, 1.2))
+        return self.create_ticker_group(skills)
 
     def get_round_info(self):
         """获取并更新当前轮次信息。"""
@@ -492,14 +503,15 @@ class CommissionsTask(BaseDNATask):
         return box
 
 
-class QuickMoveTask:
+class QuickAssistTask:
 
     def __init__(self, owner: "CommissionsTask"):
         self._owner = owner
         self._move_task = None
+        self._aim_task = None
 
     def run(self):
-        if self._owner.config.get("启用自动穿引共鸣", False):
+        if self._owner.commission_config.get("自动穿引共鸣", False):
             if not self._move_task:
                 from src.tasks.trigger.AutoMoveTask import AutoMoveTask
 
@@ -508,11 +520,24 @@ class QuickMoveTask:
             if self._move_task:
                 self._move_task.try_connect_listener()
                 self._move_task.run()
+        
+        if self._owner.commission_config.get("自动花弓", False):
+            if not self._aim_task:
+                from src.tasks.trigger.AutoAimTask import AutoAimTask
+
+                self._aim_task = self._owner.get_task_by_class(AutoAimTask)
+
+            if self._aim_task:
+                self._aim_task.try_connect_listener()
+                self._aim_task.run()
 
     def reset(self):
         if self._move_task:
             self._move_task.reset()
             self._move_task.try_disconnect_listener()
+        if self._aim_task:
+            self._aim_task.reset()
+            self._aim_task.try_disconnect_listener()
 
 
 setting_menu_selected_color = {

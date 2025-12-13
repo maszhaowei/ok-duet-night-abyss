@@ -1,11 +1,7 @@
 from qfluentwidgets import FluentIcon
-import time
-import re
-import cv2
-from concurrent.futures import ThreadPoolExecutor
 
 from ok import Logger, TaskDisabledException
-from src.tasks.CommissionsTask import CommissionsTask, QuickMoveTask, Mission, _default_movement
+from src.tasks.CommissionsTask import CommissionsTask, QuickAssistTask, Mission, _default_movement
 from src.tasks.BaseCombatTask import BaseCombatTask
 from src.tasks.DNAOneTimeTask import DNAOneTimeTask
 from src.tasks.trigger.AutoMazeTask import AutoMazeTask
@@ -26,27 +22,17 @@ class AutoGeneral(DNAOneTimeTask, CommissionsTask, BaseCombatTask):
         self.group_name = "半自动"
         self.group_icon = FluentIcon.VIEW
 
-        self.default_config.update({
-            '轮次': 3,
-            "启动机关解锁": True,
-        })
-
         self.setup_commission_config()
-
-        keys_to_remove = ["使用技能", "技能释放频率", "超时时间"]
+        keys_to_remove = ["超时时间"]
         for key in keys_to_remove:
             self.default_config.pop(key, None)
 
-        # items = list(self.default_config.items())
-        # items[1], items[2] = items[2], items[1]
-        # self.default_config = dict(items)
-
-        # self.config_description.update({
-        #     '超时时间': '超时后将发出提示',
-        # })
+        self.default_config.update({
+            "启动机关解锁": True,
+        })
 
         self.action_timeout = DEFAULT_ACTION_TIMEOUT
-        self.quick_move_task = QuickMoveTask(self)
+        self.quick_assist_task = QuickAssistTask(self)
         self.maze_task = self.get_task_by_class(AutoMazeTask)
         self.roulette_task = self.get_task_by_class(AutoRouletteTask)
         self.external_movement = _default_movement
@@ -77,6 +63,7 @@ class AutoGeneral(DNAOneTimeTask, CommissionsTask, BaseCombatTask):
         self._external_config = config
 
     def run(self):
+        self.enable_fidget_action = False
         DNAOneTimeTask.run(self)
         self.move_mouse_to_safe_position(save_current_pos=False)
         self.set_check_monthly_card()
@@ -127,7 +114,7 @@ class AutoGeneral(DNAOneTimeTask, CommissionsTask, BaseCombatTask):
         pass
 
     def handle_in_mission(self):
-        self.quick_move_task.run()
+        self.quick_assist_task.run()
     
     def handle_mission_start(self):
         pass

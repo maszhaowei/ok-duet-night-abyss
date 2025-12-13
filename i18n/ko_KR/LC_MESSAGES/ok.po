@@ -10,94 +10,157 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 msgid "100%"
-msgstr "100%"
+msgstr ""
 
 msgid "200%"
-msgstr "200%"
+msgstr ""
 
 msgid "2000%"
-msgstr "2000%"
+msgstr ""
 
 msgid "800%"
-msgstr "800%"
+msgstr ""
 
-msgid "BAR_MIN_AREA"
-msgstr "바_최소_영역"
+msgid "Auto Pick"
+msgstr "자동 줍기"
 
-msgid "CONTROL_ZONE_RATIO"
-msgstr "제어_영역_비율"
+msgid "Auto Pick in Game World"
+msgstr "월드 내 자동 줍기"
+
+msgid "Check Monthly Card"
+msgstr "월정액 확인"
+
+msgid "Check for monthly card to avoid interruption of tasks"
+msgstr "작업 중단을 방지하기 위해 월정액 팝업을 확인합니다"
 
 msgid "Combat Key"
 msgstr "전투 키"
 
+msgid "Dodge Key"
+msgstr "회피 키"
+
 msgid "END_WAIT_SPACE"
-msgstr "종료_대기_공간"
+msgstr ""
+
+msgid "F10"
+msgstr ""
+
+msgid "F11"
+msgstr ""
+
+msgid "F12"
+msgstr ""
+
+msgid "F9"
+msgstr ""
 
 msgid "Game Hotkey Config"
 msgstr "게임 단축키 설정"
 
+msgid "Game Sensitivity Config"
+msgstr "게임 감도 설정"
+
+msgid "Game Sensitivity Description"
+msgstr "게임 감도 설명"
+
+msgid "Game Sensitivity Switch"
+msgstr "게임 감도 전환"
+
 msgid "Geniemon Key"
-msgstr "게니몬 키"
+msgstr "지니몬 키"
 
-msgid "ICON_MAX_AREA"
-msgstr "아이콘_최대_영역"
-
-msgid "ICON_MIN_AREA"
-msgstr "아이콘_최소_영역"
+msgid "HelixLeap Key"
+msgstr "헬릭스립 키"
 
 msgid "In Game Hotkey for Skills"
 msgstr "게임 내 스킬 단축키"
 
+msgid "Interact Key"
+msgstr "상호작용 키"
+
 msgid "MAX_END_SEC"
-msgstr "최대_종료_초"
+msgstr ""
 
 msgid "MAX_FIGHT_SEC"
-msgstr "최대_전투_초"
+msgstr ""
 
 msgid "MAX_ROUNDS"
-msgstr "최대_라운드"
+msgstr ""
 
 msgid "MAX_START_SEC"
-msgstr "최대_시작_초"
+msgstr ""
+
+msgid "Monthly Card Config"
+msgstr "월정액 설정"
+
+msgid "Monthly Card Time"
+msgstr "월정액 시간"
+
+msgid "Turn on to avoid interruption by monthly card when executing tasks"
+msgstr "작업 수행 중 월정액 팝업으로 인한 중단 방지 활성화"
 
 msgid "Ultimate Key"
 msgstr "궁극기 키"
 
-msgid "right"
-msgstr "오른쪽"
+msgid "X-axis sensitivity"
+msgstr "X축 감도"
 
-msgid "v2.996版本 10 30火 60 70皎皎币 70调停 花生"
-msgstr "v2.996 버전 10 30 불 60 70 조개 화폐 70 중재 땅콩"
+msgid "Y-axis sensitivity"
+msgstr "Y축 감도"
+
+msgid "Your computer's local time when the monthly card will popup, hour in (1-24)"
+msgstr "월정액 팝업이 뜨는 컴퓨터 현지 시간 (1-24시)"
+
+msgid "e"
+msgstr ""
+
+msgid "f"
+msgstr ""
+
+msgid "right"
+msgstr ""
 
 msgid "x1"
-msgstr "x1"
+msgstr ""
 
 msgid "x2"
-msgstr "x2"
+msgstr ""
 
 msgid "不使用"
 msgstr "사용 안 함"
+
+msgid "不重开时会发出声音提示"
+msgstr "작업이 다시 시작되지 않으면 소리 알림이 울립니다"
+
+msgid "不需要按开始"
+msgstr "시작을 누를 필요 없음"
 
 msgid "主画面侦测"
 msgstr "메인 화면 감지"
 
 msgid "使用外部移动逻辑自动打本"
-msgstr "외부 이동 로직을 사용하여 자동 사냥"
-
-msgid "使用技能"
-msgstr "스킬 사용"
+msgstr "외부 이동 로직을 사용하여 던전 자동 진행"
 
 msgid "使用键盘"
 msgstr "키보드 사용"
 
+msgid "全局任务设定"
+msgstr "전역 작업 설정"
+
+msgid "全局技能设定"
+msgstr "전역 스킬 설정"
+
 msgid "全自动"
 msgstr "완전 자동"
 
-msgid "刷几次"
-msgstr "반복 횟수"
-
-msgid "刷武器密函时不建议使用"
-msgstr "무기 밀함 파밍 시 사용 비권장"
+msgid ""
+"全自动80护送 (源自emt)，欢迎作者署名。\n"
+"装备：水母 + 0精春玦戟。设置：水平灵敏度和垂直灵敏度1.0，镜头距离1.3，帧率120。\n"
+"魔之楔：金色迅捷+5 / 紫色穿引共鸣 / 紫色迅捷蓄势+5 / 紫色迅捷坠击+5（面板攻速1.67）。"
+msgstr ""
+"완전 자동 80 호위 (출처 emt), 제작자 표기 환영.\n"
+"장비: 해파리 + 0재련 춘결극. 설정: 수평 및 수직 감도 1.0, 카메라 거리 1.3, 프레임 속도 120.\n"
+"마의 쐐기: 금색 신속+5 / 보라색 공명 유인 / 보라색 신속 축적+5 / 보라색 신속 추락+5 (패널 공격 속도 1.67)."
 
 msgid "副本类型"
 msgstr "던전 유형"
@@ -105,113 +168,206 @@ msgstr "던전 유형"
 msgid "半自动"
 msgstr "반자동"
 
-msgid "单次提示响几次"
-msgstr "알림당 소리 횟수"
+msgid "半自动 (只有基础操作)"
+msgstr "반자동 (기본 조작만)"
 
-msgid "发出声音提醒"
-msgstr "소리 알림"
+msgid "单次提示响几次"
+msgstr "단일 프롬프트에 대한 신호음 횟수"
 
 msgid "右键按住多久(秒)"
-msgstr "오른쪽 클릭 유지 시간(초)"
+msgstr "오른쪽 마우스 버튼을 누르고 있는 시간(초)"
 
 msgid "右键释放后等待多久(秒)"
-msgstr "오른쪽 클릭 해제 후 대기 시간(초)"
+msgstr "오른쪽 마우스 버튼을 놓은 후 대기 시간(초)"
 
 msgid "启动任务时和特定场景下会将鼠标移动到安全位置"
-msgstr "임무 시작 및 특정 상황에서 마우스를 안전한 위치로 이동"
+msgstr "작업 시작 시 및 특정 시나리오에서 마우스를 안전한 위치로 이동"
 
-msgid "启用自动穿引共鸣"
-msgstr "자동 공명 탐사 활성화"
+msgid "启动机关解锁"
+msgstr "장치를 활성화하여 잠금 해제"
+
+msgid "启用"
+msgstr "활성화"
 
 msgid "在需要时发出声音提醒"
-msgstr "필요시 소리 알림"
+msgstr "필요할 때 소리 알림 재생"
 
-msgid "在需要跑图时时启用触发任务的自动穿引共鸣"
-msgstr "맵 이동 필요 시 임무를 발동하는 자동 공명 탐사 활성화"
+msgid "在需要时启用触发任务的自动穿引共鸣"
+msgstr "필요할 때 작업을 트리거하기 위해 자동 공명 유인 활성화"
+
+msgid "在需要时启用触发任务的自动花弓"
+msgstr "필요할 때 작업을 트리거하기 위해 자동 꽃활 활성화"
+
+msgid "地图选择"
+msgstr "지도 선택"
 
 msgid "外部文件夹"
 msgstr "외부 폴더"
 
 msgid "如果不在可操控角色的画面则结束任务"
-msgstr "조작 가능한 캐릭터 화면이 아니면 임무 종료"
+msgstr "조작 가능한 캐릭터 화면이 아니면 작업 종료"
 
 msgid "如果是无尽关卡，选择打几个轮次"
-msgstr "무한 스테이지인 경우, 라운드 수 선택"
+msgstr "무한 레벨인 경우, 몇 웨이브를 싸울지 선택"
 
 msgid "委托手册"
-msgstr "의뢰 핸드북"
+msgstr "의뢰 매뉴얼"
+
+msgid "委托手册指定轮次"
+msgstr "의뢰 매뉴얼 지정 웨이브"
+
+msgid "密函奖励偏好"
+msgstr "비밀 편지 보상 환경 설정"
 
 msgid "左键按住多久"
-msgstr "왼쪽 클릭 유지 시간"
+msgstr "왼쪽 마우스 버튼을 누르고 있는 시간"
 
 msgid "左键释放后等待多久"
-msgstr "왼쪽 클릭 해제 후 대기 시간"
+msgstr "왼쪽 마우스 버튼을 놓은 후 대기 시간"
+
+msgid "建议启用"
+msgstr "활성화 권장"
+
+msgid "建议启用, 鼠标抖动时如果不在窗口范围则设置到窗口范围内"
+msgstr "활성화 권장. 마우스 흔들림 중 마우스가 창 범위를 벗어나면 창 내로 이동합니다"
 
 msgid "开始阶段超时(秒)"
 msgstr "시작 단계 시간 초과(초)"
 
+msgid "开局向前走"
+msgstr "시작 시 앞으로 이동"
+
+msgid "开局向前走几秒"
+msgstr "시작 시 몇 초 동안 앞으로 이동할지"
+
+msgid "开局重置角色位置"
+msgstr "시작 시 캐릭터 위치 재설정"
+
 msgid "弹出通知"
 msgstr "팝업 알림"
 
-msgid "总共刷多少次副本"
-msgstr "총 던전 반복 횟수"
+msgid "必须勾选才能执行任务！"
+msgstr "작업을 실행하려면 선택해야 합니다!"
+
+msgid "我已阅读注意事项并确认配置"
+msgstr "참고 사항을 읽고 구성을 확인했습니다"
 
 msgid "战技"
 msgstr "전투 스킬"
 
 msgid "打几个轮次"
-msgstr "라운드 수"
+msgstr "몇 웨이브를 싸울지"
 
 msgid "扼守无尽"
-msgstr "무한 수비"
+msgstr "무한 방어"
 
 msgid "技能"
 msgstr "스킬"
 
-msgid "技能释放频率"
-msgstr "스킬 시전 빈도"
+msgid "技能1"
+msgstr "스킬 1"
+
+msgid "技能1_释放后等待"
+msgstr "스킬 1_시전 후 대기"
+
+msgid "技能1_释放频率"
+msgstr "스킬 1_시전 빈도"
+
+msgid "技能2"
+msgstr "스킬 2"
+
+msgid "技能2_释放后等待"
+msgstr "스킬 2_시전 후 대기"
+
+msgid "技能2_释放频率"
+msgstr "스킬 2_시전 빈도"
+
+msgid "技能3"
+msgstr "스킬 3"
+
+msgid "技能3_释放后等待"
+msgstr "스킬 3_시전 후 대기"
+
+msgid "技能3_释放频率"
+msgstr "스킬 3_시전 빈도"
+
+msgid "技能4"
+msgstr "스킬 4"
+
+msgid "技能4_释放后等待"
+msgstr "스킬 4_시전 후 대기"
+
+msgid "技能4_释放频率"
+msgstr "스킬 4_시전 빈도"
+
+msgid "持有数为0"
+msgstr "수량 0"
+
+msgid "持有数最多"
+msgstr "최대 수량"
+
+msgid "持有数最少"
+msgstr "최소 수량"
+
+msgid "挂机模式"
+msgstr "AFK 모드"
 
 msgid "挂机相关设置"
-msgstr "자동 사냥 관련 설정"
+msgstr "AFK 관련 설정"
 
 msgid "挂机设置"
-msgstr "자동 사냥 설정"
+msgstr "AFK 설정"
+
+msgid "指定优先选择的奖励类型，需开启「自动处理密函」"
+msgstr "선호하는 보상 유형을 지정하려면 '비밀 편지 자동 처리'를 활성화해야 합니다"
 
 msgid "按下时间"
-msgstr "누르는 시간"
+msgstr "누름 시간"
 
 msgid "按住普攻"
-msgstr "일반 공격 길게 누르기"
+msgstr "일반 공격 누르고 있기"
+
+msgid "探险平地"
+msgstr "탐험 평지"
 
 msgid "探险无尽"
-msgstr "무한 탐험"
+msgstr "탐험 무한"
+
+msgid "探险电梯"
+msgstr "탐험 엘리베이터"
+
+msgid "探险高台"
+msgstr "탐험 고지대"
 
 msgid "提示音"
 msgstr "알림음"
 
-msgid "无悠闲全自动钓鱼 (原作者: B站无敌大蜜瓜)，如果识别不到鱼条修改配置降低面积要求"
-msgstr "느긋한 자동 낚시 (원작자: Bilibili 無敵大蜜瓜), 낚시 바가 인식되지 않으면 설정에서 면적 요구 사항을 낮추세요"
+msgid "提示音次数"
+msgstr "알림 횟수"
+
+msgid "无悠闲全自动钓鱼 (原作者: B站无敌大蜜瓜)"
+msgstr "여유 없는 완전 자동 낚시 (원작자: Bilibili의 무적대꿀참외)"
 
 msgid "是否在任务中随机移动"
-msgstr "임무 중 무작위 이동 여부"
+msgstr "작업 중 무작위로 이동"
 
 msgid "是否弹出windows通知"
-msgstr "Windows 알림 팝업 여부"
+msgstr "Windows 알림 표시"
 
 msgid "普攻"
 msgstr "일반 공격"
 
-msgid "最大轮数(0=无限制)"
-msgstr "최대 라운드 (0=무제한)"
+msgid "最大轮数，鱼塘每天上限为100次"
+msgstr "최대 웨이브, 낚시터의 일일 한도는 100회입니다"
 
-msgid "毎几秒释放一次技能"
+msgid "每几秒释放一次技能"
 msgstr "몇 초마다 스킬 시전"
 
 msgid "每轮结束等待时间(秒)"
-msgstr "라운드 종료 후 대기 시간(초)"
+msgstr "각 웨이브 종료 시 대기 시간(초)"
 
 msgid "波次超时后将发出提示"
-msgstr "웨이브 시간 초과 시 알림"
+msgstr "웨이브 시간 초과 후 알림이 발행됩니다"
 
 msgid "溜鱼阶段超时(秒)"
 msgstr "물고기 싸움 단계 시간 초과(초)"
@@ -220,7 +376,10 @@ msgid "激活键"
 msgstr "활성화 키"
 
 msgid "示例-无巧手30火突破素材(1080p) by望目"
-msgstr "예시 - 재주 없음 30 불 속성 돌파 재료(1080p) by 望目"
+msgstr "예시 - 스킬 없는 30 불 돌파 재료 (1080p) by 望目"
+
+msgid "移动延迟（秒）"
+msgstr "이동 지연(초)"
 
 msgid "终结技"
 msgstr "궁극기"
@@ -229,64 +388,100 @@ msgid "结束阶段超时(秒)"
 msgstr "종료 단계 시간 초과(초)"
 
 msgid "自动30/65级魔之楔本"
-msgstr "자동 30/65레벨 마의 쐐기 던전"
+msgstr "자동 Lv.30/65 마의 쐐기"
 
 msgid "自动70级皎皎币本"
-msgstr "자동 70레벨 조개 화폐 던전"
+msgstr "자동 Lv.70 교교 코인 던전"
 
 msgid "自动勘察"
-msgstr "자동 탐사"
+msgstr "자동 조사"
+
+msgid "自动处理密函"
+msgstr "비밀 편지 자동 처리"
+
+msgid "自动完成密函的对话交互与默认奖励领取"
+msgstr "비밀 편지 대화 상호 작용을 자동으로 완료하고 기본 보상 수령"
 
 msgid "自动战斗"
 msgstr "자동 전투"
 
 msgid "自动扼守"
-msgstr "자동 수비"
+msgstr "자동 방어"
 
 msgid "自动探险"
 msgstr "자동 탐험"
 
-msgid "自动点击肉鸽对话"
-msgstr "로그라이크 대화 자동 클릭"
+msgid "自动探险/无尽"
+msgstr "자동 탐험/무한"
 
 msgid "自动穿引共鸣"
-msgstr "자동 공명 탐사"
+msgstr "자동 공명 유인"
 
 msgid "自动肉鸽对话"
-msgstr "자동 로그라이크 대화"
+msgstr "로그라이크 대화 자동화"
 
 msgid "自动花序弓蓄力瞄准"
-msgstr "자동 꽃차례 활 차지 조준"
+msgstr "꽃활 충전 조준 자동화"
 
-msgid "自动选择首个密函和密函奖励"
-msgstr "첫 번째 밀함 및 보상 자동 선택"
+msgid "自动花弓"
+msgstr "자동 꽃활"
+
+msgid "自动解锁轮盘"
+msgstr "룰렛 자동 잠금 해제"
+
+msgid "自动解锁迷宫"
+msgstr "미로 자동 잠금 해제"
+
+msgid "自动识别并进行迷宫解锁"
+msgstr "미로를 자동으로 식별하고 잠금 해제"
+
+msgid "自动跳过肉鸽对话"
+msgstr "로그라이크 대화 자동 건너뛰기"
+
+msgid "自动避险"
+msgstr "위험 자동 회피"
 
 msgid "自动释放技能"
-msgstr "자동 스킬 시전"
+msgstr "스킬 자동 시전"
 
 msgid "自动钓鱼"
 msgstr "자동 낚시"
 
+msgid "自动飞枪80护送（无需巧手）【需要游戏处于前台】"
+msgstr "자동 비행 창 80 호위 (스킬 불필요) [게임이 전경에 있어야 함]"
+
 msgid "自动驱离"
-msgstr "자동 퇴치"
+msgstr "자동 격퇴"
+
+msgid "范例: 3,5,8"
+msgstr "예: 3,5,8"
+
+msgid "解密失败自动重开"
+msgstr "암호 해독 실패 시 자동 재시작"
 
 msgid "超时后将发出提示"
-msgstr "시간 초과 시 알림"
+msgstr "시간 초과 후 알림이 발행됩니다"
 
 msgid "超时后将重启任务"
-msgstr "시간 초과 시 임무 재시작"
+msgstr "시간 초과 후 작업이 다시 시작됩니다"
 
 msgid "超时时间"
 msgstr "시간 초과"
 
-msgid "跳过对话"
-msgstr "대화 건너뛰기"
-
 msgid "轮次"
-msgstr "라운드"
+msgstr "웨이브"
 
 msgid "选择mod目录下的外部逻辑"
-msgstr "mod 디렉토리에서 외부 로직 선택"
+msgstr "모드 디렉토리에서 외부 로직 선택"
+
+msgid "选择要自动执行的地图类型"
+msgstr "자동 실행할 지도 유형 선택"
+
+msgid "通用型半自动"
+msgstr "일반 반자동"
+
+msgid "释放后等待几秒"
+msgstr "시전 후 몇 초 대기"
 
 msgid "释放间隔"
 msgstr "시전 간격"
@@ -300,284 +495,38 @@ msgstr "간격 시간"
 msgid "防止鼠标干扰"
 msgstr "마우스 간섭 방지"
 
+msgid "随便搞的，基于2k写的其他分辨率要是有问题就不管了，有bug也不用反馈因为拿到巧手后就不维护了(狗头)"
+msgstr "그냥 대충 만든 거라 2k 기반이라 다른 해상도에서 문제 생겨도 신경 안 씁니다. 스킬 얻으면 유지보수 안 할 거니까 버그 제보도 필요 없어요 (ㅋㅋ)"
+
 msgid "随机游走"
-msgstr "무작위 배회"
+msgstr "무작위 걷기"
 
 msgid "需主动激活"
 msgstr "수동 활성화 필요"
 
 msgid "需主动激活，运行中也可使用左键打断"
-msgstr "수동 활성화 필요, 실행 중 왼쪽 클릭으로 중단 가능"
+msgstr "수동 활성화 필요, 작동 중 왼쪽 마우스 버튼으로 중단 가능"
 
 msgid "需主动激活，运行中可使用右键或左键打断"
-msgstr "수동 활성화 필요, 실행 중 오른쪽 또는 왼쪽 클릭으로 중단 가능"
+msgstr "수동 활성화 필요, 작동 중 오른쪽 또는 왼쪽 마우스 버튼으로 중단 가능"
 
-msgid "鱼条最小面积(像素)"
-msgstr "낚시 바 최소 면적(픽셀)"
-
-msgid "鱼标按空格区域占比(0-0.5)"
-msgstr "낚시 마커 스페이스바 누름 영역 비율(0-0.5)"
-
-msgid "鱼标最大面积(像素)"
-msgstr "낚시 마커 최대 면적(픽셀)"
-
-msgid "鱼标最小面积(像素)"
-msgstr "낚시 마커 최소 면적(픽셀)"
+msgid "魔灵支援"
+msgstr "제니몬 지원"
 
 msgid "默认"
 msgstr "기본값"
 
+msgid "鼠标抖动"
+msgstr "마우스 흔들림"
+
+msgid "鼠标抖动锁定在窗口范围"
+msgstr "마우스 흔들림을 창 내에 고정"
+
 msgid "鼠标键或键盘按键"
 msgstr "마우스 버튼 또는 키보드 키"
 
-msgid "Check Monthly Card"
-msgstr "월간 카드 확인"
-
-msgid "Check for monthly card to avoid interruption of tasks"
-msgstr "작업 중단 방지를 위해 월간 카드 확인"
-
-msgid "Monthly Card Config"
-msgstr "월간 카드 설정"
-
-msgid "Monthly Card Time"
-msgstr "월간 카드 시간"
-
-msgid "OK-角色经验本50-巧手(主控猪妹,ai水母280范围,超时时间可设置10秒内保证跑错重开)"
-msgstr "OK-캐릭터 경험치 던전 50-능숙 (주 제어: 돼지 소녀, AI 해파리 280 범위, 시간 초과는 10초 이내로 설정하여 경로 오류 시 재시작 보장)"
-
-msgid "OK-角色经验本60-兼容无巧手(主控成年女磐石,ai水母280范围)"
-msgstr "OK-캐릭터 경험치 던전 60-능숙 없음 호환 (주 제어: 성인 여성 바위, AI 해파리 280 범위)"
-
-msgid "Turn on to avoid interruption by monthly card when executing tasks"
-msgstr "작업 실행 시 월간 카드에 의한 중단을 피하기 위해 켜기"
-
-msgid "Your computer's local time when the monthly card will popup, hour in (1-24)"
-msgstr "월간 카드가 팝업될 컴퓨터의 현지 시간, 시간 (1-24)"
-
-msgid "ok-50MOD"
-msgstr "ok-50MOD"
-
-msgid "ok-55,70MOD(主控水母280范围)"
-msgstr "ok-55,70MOD (주 제어: 해파리 280 범위)"
-
-msgid "ok-60MOD"
-msgstr "ok-60MOD"
-
-msgid "ok-80MOD(主控水母高范围)"
-msgstr "ok-80MOD (주 제어: 해파리 고범위)"
-
-msgid "ok-武器突破材料70-巧手(水母磐石280范围)"
-msgstr "ok-무기 돌파 재료 70-능숙 (해파리 바위 280 범위)"
-
-msgid "ok-武器突破材料70-巧手稳定版(水母磐石280范围)"
-msgstr "ok-무기 돌파 재료 70-능숙 안정 버전 (해파리 바위 280 범위)"
-
-msgid "ok-武器经验本70(水母磐石280范围)"
-msgstr "ok-무기 경험치 던전 70 (해파리 바위 280 범위)"
-
-msgid "ok-武器经验本80(水母磐石280范围)"
-msgstr "ok-무기 경험치 던전 80 (해파리 바위 280 범위)"
-
-msgid "ok-火巧10-巧手(磐石)"
-msgstr "ok-불 능숙 10-능숙 (바위)"
-
-msgid "ok-火巧30,60-巧手(磐石30-14轮,60-8轮)"
-msgstr "ok-불 능숙 30,60-능숙 (바위 30-14 라운드, 60-8 라운드)"
-
-msgid "ok-火巧角色突破材料70-巧手(磐石,火10通用)"
-msgstr "ok-불 능숙 캐릭터 돌파 재료 70-능숙 (바위, 불 10 공용)"
-
-msgid "ok-皎皎币60"
-msgstr "ok-조개 화폐 60"
-
-msgid "60角色经验本"
-msgstr "60 캐릭터 경험치 던전"
-
-msgid "Auto Pick"
-msgstr "자동 줍기"
-
-msgid "Auto Pick in Game World"
-msgstr "게임 월드 자동 줍기"
-
-msgid "优先选择持有数为0的密函奖励"
-msgstr "보유 수 0인 밀함 보상 우선 선택"
-
-msgid "刷武器密函时推荐同时开启下一选项"
-msgstr "무기 밀함 파밍 시 다음 옵션도 함께 활성화하는 것을 권장합니다"
-
-msgid "在上一选项启用时生效，多个目标时选择靠左的"
-msgstr "이전 옵션 활성화 시 적용되며, 여러 대상이 있을 경우 왼쪽을 선택"
-
-msgid "完成时播放提示音"
-msgstr "완료 시 알림음 재생"
-
-msgid "开局向前走"
-msgstr "시작 시 앞으로 이동"
-
-msgid "开局向前走几秒"
-msgstr "시작 시 몇 초간 앞으로 이동"
-
-msgid "开局重置角色位置"
-msgstr "시작 시 캐릭터 위치 초기화"
-
-msgid "挂机模式"
-msgstr "AFK 모드"
-
-msgid "无悠闲全自动钓鱼 (原作者: B站无敌大蜜瓜)"
-msgstr "느긋한 자동 낚시 (원작자: Bilibili 無敵大蜜瓜)"
-
-msgid "自动避险"
-msgstr "자동 위험 회피"
-
-msgid "自动探险/无尽"
-msgstr "자동 탐험 / 무한"
-
-msgid "解密失败自动重开"
-msgstr "복호화 실패 시 자동 재시작"
-
-msgid "不重开时会发出声音提示"
-msgstr "아니오 를 선택할 때 소리로 알림이 발생합니다"
-
-msgid "Dodge Key"
-msgstr "회피 키"
-
-msgid "HelixLeap Key"
-msgstr "나선 도약 키"
-
-msgid "Interact Key"
-msgstr "상호작용 키"
-
-msgid "e"
-msgstr "e"
-
-msgid "f"
-msgstr "f"
-
-msgid "【30火&60火】-密函线索"
-msgstr "【30불&60불】-밀함 단서"
-
-msgid "【50mod】-中速-水母-主控可调"
-msgstr "【50mod】-중속-해파리-주 제어 조절 가능"
-
-msgid "【55&80mod】-磐石水母-主控可调"
-msgstr "【55&80mod】-반석 해파리-주 제어 조절 가능"
-
-msgid "【60mod&驱离-密函】-水母-主控可调（不要带黎瑟协战）-超时建议90s"
-msgstr "【60mod&퇴치-밀함】-해파리-주 제어 조절 가능 (리세 협동 전투 데려가지 마세요)-타임아웃 90초 권장"
-
-msgid "【60角色经验】-磐石水母"
-msgstr "【60 캐릭터 경험치】-반석 해파리"
-
-msgid "【65mod】-黎瑟主控（或者水母主控带个黎瑟助战）"
-msgstr "【65mod】-리세 주 제어 (또는 해파리 주 제어에 리세 지원)"
-
-msgid "【70jjb】-中低速-水母-主控可调"
-msgstr "【70jjb】-중저속-해파리-주 제어 조절 가능"
-
-msgid "【密函-拆解】-无巧手版-280范围水母"
-msgstr "【밀함-해체】-재주 없음 버전-280 범위 해파리"
-
-msgid "【密函-拆解】-需巧手-280范围水母"
-msgstr "【밀함-해체】-재주 필요-280 범위 해파리"
-
-msgid "【无飞枪80红豆（有巧手可后台）】-磐石黎瑟-使用前看文件夹内说明-超时建议5~10s"
-msgstr "【비행창 없음 80 팥 (재주 있으면 백그라운드 가능)】-반석 리세-사용 전 폴더 내 설명 참조-타임아웃 5~10초 권장"
-
-msgid "【武器材料60&70】-磐石水母-超时建议20s"
-msgstr "【무기 재료 60&70】-반석 해파리-타임아웃 20초 권장"
-
-msgid "【武器经验50】-磐石水母-超时建议20s"
-msgstr "【무기 경험치 50】-반석 해파리-타임아웃 20초 권장"
-
-msgid "【武器经验80】-磐石水母-含配置参考-超时建议20s"
-msgstr "【무기 경험치 80】-반석 해파리-설정 참고 포함-타임아웃 20초 권장"
-
-msgid ""
-"全自动80护送任务，搬运自emt，欢迎路径作者署名。\n"
-"需要使用水母主控，近战武器选择0精春玦戟。魔之楔配置为金色迅捷+5，紫色穿引共鸣，紫色迅捷蓄势+5，紫色迅捷坠击+5，不要携带其他魔之楔，面板攻速为1.67。\n"
-"设置中控制设置水平灵敏度和垂直灵敏度设置为1.0，默认镜头距离设置为1.3。确认好自身魔之楔和设置后展开下方配置点击我已阅读后运行"
-msgstr ""
-"완전 자동 80 호위 임무, emt에서 가져옴, 경로 작성자 서명 환영.\n"
-"해파리 주 제어 사용 필요, 근접 무기는 0 제련 춘결극 선택. 마의 쐐기 구성은 금색 신속+5, 보라색 공명 탐사, 보라색 신속 축적+5, 보라색 신속 낙하+5이며, 다른 마의 쐐기는 휴대하지 마십시오. 패널 공격 속도는 1.67입니다.\n"
-"설정에서 수평 및 수직 감도를 1.0으로, 기본 카메라 거리를 1.3으로 설정합니다. 자신의 마의 쐐기와 설정을 확인한 후 아래 구성을 펼치고 '읽었습니다'를 클릭하여 실행하십시오."
-
-msgid "半自动 (只有基础操作)"
-msgstr "반자동 (기본 조작만)"
-
-msgid "启动解锁机关"
-msgstr "잠금 해제 장치 활성화"
-
-msgid "启用"
-msgstr "활성화"
-
-msgid "委托手册指定轮次"
-msgstr "의뢰 핸드북 지정 라운드"
-
-msgid "完成几次护送任务后停止"
-msgstr "호위 임무를 여러 번 완료한 후 중지"
-
-msgid "必须勾选才能执行任务！"
-msgstr "임무를 실행하려면 체크해야 합니다!"
-
-msgid "我已阅读注意事项并确认配置"
-msgstr "주의 사항을 읽고 구성을 확인했습니다"
-
-msgid "移动延迟（秒）"
-msgstr "이동 지연 (초)"
-
-msgid "自动解锁轮盘"
-msgstr "자동 룰렛 잠금 해제"
-
-msgid "自动解锁迷宫"
-msgstr "자동 미로 잠금 해제"
-
-msgid "自动识别并进行迷宫解锁"
-msgstr "자동으로 미로를 인식하고 잠금 해제"
-
-msgid "自动飞枪80护送（无需巧手）【需要游戏处于前台】"
-msgstr "자동 비행창 80 호위 (재주 필요 없음) [게임이 전면에 있어야 함]"
-
-msgid "范例: 3,5,8"
-msgstr "예시: 3,5,8"
-
-msgid "通用型半自动"
-msgstr "범용 반자동"
-
-msgid "随便搞的，基于2k写的其他分辨率要是有问题就不管了，有bug也不用反馈因为拿到巧手后就不维护了(狗头)"
-msgstr "대충 만든 거라 2k 기준으로 작성해서 다른 해상도에서 문제 생겨도 책임 안 져요. 재주 얻으면 유지보수 안 할 거니까 버그 제보 안 해도 돼요 (개머리)"
-
-msgid "魔灵支援"
-msgstr "마령 지원"
-
-msgid "【50mod】-中低速-水母-主控可调"
-msgstr "【50mod】-중저속-해파리-주 제어 조절 가능"
-
-msgid "【60mod&驱离密函】-磐石水母-主控可调（不要带黎瑟协战）-超时建议90s"
-msgstr "【60mod&퇴치 밀함】-반석 해파리-주 제어 조절 가능 (리세 협동 전투 데려가지 마세요)-타임아웃 90초 권장"
-
-msgid "【无飞枪80红豆（有巧手可后台）】-磐石黎瑟-使用前看文件夹内说明"
-msgstr "【비행창 없음 80 팥 (재주 있으면 백그라운드 가능)】-반석 리세-사용 전 폴더 내 설명 참조"
-
-msgid "【武器材料60&70】-磐石水母"
-msgstr "【무기 재료 60&70】-반석 해파리"
-
-msgid "优先选择密函奖励"
-msgstr "밀함 보상 우선 선택"
-
-msgid "启动机关解锁"
-msgstr "장치 잠금 해제 활성화"
-
-msgid "在上一选项启用时生效"
-msgstr "이전 옵션 활성화 시 적용"
-
-msgid "持有数为0"
-msgstr "보유 수 0"
-
-msgid "持有数最多"
-msgstr "보유 수 가장 많음"
-
-msgid "持有数最少"
-msgstr "보유 수 가장 적음"
-
-msgid "最大轮数"
-msgstr "최대 라운드"
+msgid "使用飞枪等存在视角移动的外部逻辑时可以启用"
+msgstr "플라잉 건 등 시점 이동이 포함된 외부 로직 사용 시 활성화"
+
+msgid "关闭抖动"
+msgstr "흔들림 끄기"

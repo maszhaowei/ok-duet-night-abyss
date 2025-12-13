@@ -10,73 +10,130 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 msgid "100%"
-msgstr "100%"
+msgstr ""
 
 msgid "200%"
-msgstr "200%"
+msgstr ""
 
 msgid "2000%"
-msgstr "2000%"
+msgstr ""
 
 msgid "800%"
-msgstr "800%"
+msgstr ""
 
-msgid "BAR_MIN_AREA"
-msgstr "魚條最小面積"
+msgid "Auto Pick"
+msgstr "自動擷取"
 
-msgid "CONTROL_ZONE_RATIO"
-msgstr "魚標按空格區域佔比"
+msgid "Auto Pick in Game World"
+msgstr "大世界自動擷取"
+
+msgid "Check Monthly Card"
+msgstr "是否檢查月卡"
+
+msgid "Check for monthly card to avoid interruption of tasks"
+msgstr "設定避免小月卡彈跳窗打斷任務"
 
 msgid "Combat Key"
 msgstr "戰技"
 
+msgid "Dodge Key"
+msgstr "閃避按鍵"
+
 msgid "END_WAIT_SPACE"
-msgstr "每輪結束等待時間"
+msgstr ""
+
+msgid "F10"
+msgstr ""
+
+msgid "F11"
+msgstr ""
+
+msgid "F12"
+msgstr ""
+
+msgid "F9"
+msgstr ""
 
 msgid "Game Hotkey Config"
-msgstr "遊戲快捷鍵設置"
+msgstr "遊戲快速鍵設定"
+
+msgid "Game Sensitivity Config"
+msgstr "遊戲靈敏度設定"
+
+msgid "Game Sensitivity Description"
+msgstr "使用轉動視角類型腳本時不再需要修改遊戲內靈敏度"
+
+msgid "Game Sensitivity Switch"
+msgstr "開關"
 
 msgid "Geniemon Key"
 msgstr "魔靈支援"
 
-msgid "ICON_MAX_AREA"
-msgstr "魚標最大面積"
-
-msgid "ICON_MIN_AREA"
-msgstr "魚標最小面積"
+msgid "HelixLeap Key"
+msgstr "螺旋飛躍按鍵"
 
 msgid "In Game Hotkey for Skills"
-msgstr "遊戲內技能快捷鍵"
+msgstr "遊戲內技能快速鍵"
+
+msgid "Interact Key"
+msgstr "互動按鍵"
 
 msgid "MAX_END_SEC"
-msgstr "結束階段超時"
+msgstr ""
 
 msgid "MAX_FIGHT_SEC"
-msgstr "溜魚階段超時"
+msgstr ""
 
 msgid "MAX_ROUNDS"
-msgstr "最大輪數"
+msgstr ""
 
 msgid "MAX_START_SEC"
-msgstr "開始階段超時"
+msgstr ""
+
+msgid "Monthly Card Config"
+msgstr "小月卡設定"
+
+msgid "Monthly Card Time"
+msgstr "月卡時間"
+
+msgid "Turn on to avoid interruption by monthly card when executing tasks"
+msgstr "開啟避免掛任務的時候被月卡中斷"
 
 msgid "Ultimate Key"
 msgstr "終結技"
 
-msgid "right"
-msgstr "右鍵"
+msgid "X-axis sensitivity"
+msgstr "遊戲內水平靈敏度"
 
-msgid "v2.996版本 10 30火 60 70皎皎币 70调停 花生"
-msgstr "v2.996版本 10 30火 60 70皎皎幣 70調停 花生"
+msgid "Y-axis sensitivity"
+msgstr "遊戲內垂直靈敏度"
+
+msgid "Your computer's local time when the monthly card will popup, hour in (1-24)"
+msgstr "幾點會跳出月卡提示, 本機電腦時間(1-24)"
+
+msgid "e"
+msgstr ""
+
+msgid "f"
+msgstr ""
+
+msgid "right"
+msgstr ""
 
 msgid "x1"
-msgstr "x1"
+msgstr ""
 
 msgid "x2"
-msgstr "x2"
+msgstr ""
 
 msgid "不使用"
 msgstr "不使用"
+
+msgid "不重开时会发出声音提示"
+msgstr "不重開時會發出聲音提示"
+
+msgid "不需要按开始"
+msgstr "不需要按開始"
 
 msgid "主画面侦测"
 msgstr "主畫面偵測"
@@ -84,20 +141,26 @@ msgstr "主畫面偵測"
 msgid "使用外部移动逻辑自动打本"
 msgstr "使用外部移動邏輯自動打本"
 
-msgid "使用技能"
-msgstr "使用技能"
-
 msgid "使用键盘"
 msgstr "使用鍵盤"
+
+msgid "全局任务设定"
+msgstr "全域任務設定"
+
+msgid "全局技能设定"
+msgstr "全域技能設定"
 
 msgid "全自动"
 msgstr "全自動"
 
-msgid "刷几次"
-msgstr "刷幾次"
-
-msgid "刷武器密函时不建议使用"
-msgstr "刷武器密函時不建議使用"
+msgid ""
+"全自动80护送 (源自emt)，欢迎作者署名。\n"
+"装备：水母 + 0精春玦戟。设置：水平灵敏度和垂直灵敏度1.0，镜头距离1.3，帧率120。\n"
+"魔之楔：金色迅捷+5 / 紫色穿引共鸣 / 紫色迅捷蓄势+5 / 紫色迅捷坠击+5（面板攻速1.67）。"
+msgstr ""
+"全自動80護送 (源自emt)，歡迎作者署名。\n"
+"裝備：水母 + 0精春玦戟。設置：水平靈敏度和垂直靈敏度1.0，鏡頭距離1.3，幀率120。\n"
+"魔之楔：金色迅捷+5 / 紫色穿引共鳴 / 紫色迅捷蓄勢+5 / 紫色迅捷墜擊+5（面板攻速1.67）。"
 
 msgid "副本类型"
 msgstr "副本類型"
@@ -105,11 +168,11 @@ msgstr "副本類型"
 msgid "半自动"
 msgstr "半自動"
 
+msgid "半自动 (只有基础操作)"
+msgstr "半自動 (只有基礎操作)"
+
 msgid "单次提示响几次"
 msgstr "單次提示響幾次"
-
-msgid "发出声音提醒"
-msgstr "發出聲音提醒"
 
 msgid "右键按住多久(秒)"
 msgstr "右鍵按住多久(秒)"
@@ -120,14 +183,23 @@ msgstr "右鍵釋放後等待多久(秒)"
 msgid "启动任务时和特定场景下会将鼠标移动到安全位置"
 msgstr "啟動任務時和特定場景下會將滑鼠移動到安全位置"
 
-msgid "启用自动穿引共鸣"
-msgstr "啟用自動穿引共鳴"
+msgid "启动机关解锁"
+msgstr "啟動機關解鎖"
+
+msgid "启用"
+msgstr "啟用"
 
 msgid "在需要时发出声音提醒"
 msgstr "在需要時發出聲音提醒"
 
-msgid "在需要跑图时时启用触发任务的自动穿引共鸣"
-msgstr "在需要跑圖時啟用觸發任務的自動穿引共鳴"
+msgid "在需要时启用触发任务的自动穿引共鸣"
+msgstr "在需要時啟用觸發任務的自動穿引共鳴"
+
+msgid "在需要时启用触发任务的自动花弓"
+msgstr "在需要時啟用觸發任務的自動花弓"
+
+msgid "地图选择"
+msgstr "地圖選擇"
 
 msgid "外部文件夹"
 msgstr "外部資料夾"
@@ -141,20 +213,44 @@ msgstr "如果是無盡關卡，選擇打幾個輪次"
 msgid "委托手册"
 msgstr "委託手冊"
 
+msgid "委托手册指定轮次"
+msgstr "委託手冊指定輪次"
+
+msgid "密函奖励偏好"
+msgstr "密函獎勵偏好"
+
 msgid "左键按住多久"
 msgstr "左鍵按住多久"
 
 msgid "左键释放后等待多久"
 msgstr "左鍵釋放後等待多久"
 
+msgid "建议启用"
+msgstr "建議啟用"
+
+msgid "建议启用, 鼠标抖动时如果不在窗口范围则设置到窗口范围内"
+msgstr "建議啟用, 滑鼠抖動時如果不在視窗範圍則設置到視窗範圍內"
+
 msgid "开始阶段超时(秒)"
 msgstr "開始階段超時(秒)"
+
+msgid "开局向前走"
+msgstr "開局向前走"
+
+msgid "开局向前走几秒"
+msgstr "開局向前走幾秒"
+
+msgid "开局重置角色位置"
+msgstr "開局重置角色位置"
 
 msgid "弹出通知"
 msgstr "彈出通知"
 
-msgid "总共刷多少次副本"
-msgstr "總共刷多少次副本"
+msgid "必须勾选才能执行任务！"
+msgstr "必須勾選才能執行任務！"
+
+msgid "我已阅读注意事项并确认配置"
+msgstr "我已閱讀注意事項並確認配置"
 
 msgid "战技"
 msgstr "戰技"
@@ -168,8 +264,53 @@ msgstr "扼守無盡"
 msgid "技能"
 msgstr "技能"
 
-msgid "技能释放频率"
-msgstr "技能釋放頻率"
+msgid "技能1"
+msgstr "技能1"
+
+msgid "技能1_释放后等待"
+msgstr "技能1_釋放後等待"
+
+msgid "技能1_释放频率"
+msgstr "技能1_釋放頻率"
+
+msgid "技能2"
+msgstr "技能2"
+
+msgid "技能2_释放后等待"
+msgstr "技能2_釋放後等待"
+
+msgid "技能2_释放频率"
+msgstr "技能2_釋放頻率"
+
+msgid "技能3"
+msgstr "技能3"
+
+msgid "技能3_释放后等待"
+msgstr "技能3_釋放後等待"
+
+msgid "技能3_释放频率"
+msgstr "技能3_釋放頻率"
+
+msgid "技能4"
+msgstr "技能4"
+
+msgid "技能4_释放后等待"
+msgstr "技能4_釋放後等待"
+
+msgid "技能4_释放频率"
+msgstr "技能4_釋放頻率"
+
+msgid "持有数为0"
+msgstr "持有數為0"
+
+msgid "持有数最多"
+msgstr "持有數最多"
+
+msgid "持有数最少"
+msgstr "持有數最少"
+
+msgid "挂机模式"
+msgstr "掛機模式"
 
 msgid "挂机相关设置"
 msgstr "掛機相關設定"
@@ -177,20 +318,35 @@ msgstr "掛機相關設定"
 msgid "挂机设置"
 msgstr "掛機設定"
 
+msgid "指定优先选择的奖励类型，需开启「自动处理密函」"
+msgstr "指定優先選擇的獎勵類型，需開啟「自動處理密函」"
+
 msgid "按下时间"
 msgstr "按下時間"
 
 msgid "按住普攻"
 msgstr "按住普攻"
 
+msgid "探险平地"
+msgstr "探險平地"
+
 msgid "探险无尽"
 msgstr "探險無盡"
+
+msgid "探险电梯"
+msgstr "探險電梯"
+
+msgid "探险高台"
+msgstr "探險高台"
 
 msgid "提示音"
 msgstr "提示音"
 
-msgid "无悠闲全自动钓鱼 (原作者: B站无敌大蜜瓜)，如果识别不到鱼条修改配置降低面积要求"
-msgstr "無悠閒全自動釣魚 (原作者: B站無敵大蜜瓜)，如果識別不到魚條修改配置降低面積要求"
+msgid "提示音次数"
+msgstr "提示音次數"
+
+msgid "无悠闲全自动钓鱼 (原作者: B站无敌大蜜瓜)"
+msgstr "無悠閒全自動釣魚 (原作者: B站無敵大蜜瓜)"
 
 msgid "是否在任务中随机移动"
 msgstr "是否在任務中隨機移動"
@@ -201,10 +357,10 @@ msgstr "是否彈出windows通知"
 msgid "普攻"
 msgstr "普攻"
 
-msgid "最大轮数(0=无限制)"
-msgstr "最大輪數(0=無限制)"
+msgid "最大轮数，鱼塘每天上限为100次"
+msgstr "最大輪數，魚塘每天上限為100次"
 
-msgid "毎几秒释放一次技能"
+msgid "每几秒释放一次技能"
 msgstr "每幾秒釋放一次技能"
 
 msgid "每轮结束等待时间(秒)"
@@ -222,6 +378,9 @@ msgstr "啟用鍵"
 msgid "示例-无巧手30火突破素材(1080p) by望目"
 msgstr "範例-無巧手30火突破素材(1080p) by望目"
 
+msgid "移动延迟（秒）"
+msgstr "移動延遲（秒）"
+
 msgid "终结技"
 msgstr "終結技"
 
@@ -237,6 +396,12 @@ msgstr "自動70級皎皎幣本"
 msgid "自动勘察"
 msgstr "自動勘察"
 
+msgid "自动处理密函"
+msgstr "自動處理密函"
+
+msgid "自动完成密函的对话交互与默认奖励领取"
+msgstr "自動完成密函的對話互動與預設獎勵領取"
+
 msgid "自动战斗"
 msgstr "自動戰鬥"
 
@@ -246,8 +411,8 @@ msgstr "自動扼守"
 msgid "自动探险"
 msgstr "自動探險"
 
-msgid "自动点击肉鸽对话"
-msgstr "自動點擊肉鴿對話"
+msgid "自动探险/无尽"
+msgstr "自動探險/無盡"
 
 msgid "自动穿引共鸣"
 msgstr "自動穿引共鳴"
@@ -258,8 +423,23 @@ msgstr "自動肉鴿對話"
 msgid "自动花序弓蓄力瞄准"
 msgstr "自動花序弓蓄力瞄準"
 
-msgid "自动选择首个密函和密函奖励"
-msgstr "自動選擇首個密函和密函獎勵"
+msgid "自动花弓"
+msgstr "自動花弓"
+
+msgid "自动解锁轮盘"
+msgstr "自動解鎖輪盤"
+
+msgid "自动解锁迷宫"
+msgstr "自動解鎖迷宮"
+
+msgid "自动识别并进行迷宫解锁"
+msgstr "自動識別並進行迷宮解鎖"
+
+msgid "自动跳过肉鸽对话"
+msgstr "自動跳過肉鴿對話"
+
+msgid "自动避险"
+msgstr "自動避險"
 
 msgid "自动释放技能"
 msgstr "自動釋放技能"
@@ -267,8 +447,17 @@ msgstr "自動釋放技能"
 msgid "自动钓鱼"
 msgstr "自動釣魚"
 
+msgid "自动飞枪80护送（无需巧手）【需要游戏处于前台】"
+msgstr "自動飛槍80護送（無需巧手）【需要遊戲處於前台】"
+
 msgid "自动驱离"
 msgstr "自動驅離"
+
+msgid "范例: 3,5,8"
+msgstr "範例: 3,5,8"
+
+msgid "解密失败自动重开"
+msgstr "解密失敗自動重開"
 
 msgid "超时后将发出提示"
 msgstr "超時後將發出提示"
@@ -279,14 +468,20 @@ msgstr "超時後將重啟任務"
 msgid "超时时间"
 msgstr "超時時間"
 
-msgid "跳过对话"
-msgstr "跳過對話"
-
 msgid "轮次"
 msgstr "輪次"
 
 msgid "选择mod目录下的外部逻辑"
 msgstr "選擇mod目錄下的外部邏輯"
+
+msgid "选择要自动执行的地图类型"
+msgstr "選擇要自動執行的地圖類型"
+
+msgid "通用型半自动"
+msgstr "通用型半自動"
+
+msgid "释放后等待几秒"
+msgstr "釋放後等待幾秒"
 
 msgid "释放间隔"
 msgstr "釋放間隔"
@@ -300,6 +495,9 @@ msgstr "間隔時間"
 msgid "防止鼠标干扰"
 msgstr "防止滑鼠干擾"
 
+msgid "随便搞的，基于2k写的其他分辨率要是有问题就不管了，有bug也不用反馈因为拿到巧手后就不维护了(狗头)"
+msgstr "隨便搞的，基於2k寫的其他解析度要是有問題就不管了，有bug也不用反饋因為拿到巧手後就不維護了(狗頭)"
+
 msgid "随机游走"
 msgstr "隨機遊走"
 
@@ -312,272 +510,23 @@ msgstr "需主動啟用，運行中也可使用左鍵打斷"
 msgid "需主动激活，运行中可使用右键或左键打断"
 msgstr "需主動啟用，運行中可使用右鍵或左鍵打斷"
 
-msgid "鱼条最小面积(像素)"
-msgstr "魚條最小面積(像素)"
-
-msgid "鱼标按空格区域占比(0-0.5)"
-msgstr "魚標按空格區域佔比(0-0.5)"
-
-msgid "鱼标最大面积(像素)"
-msgstr "魚標最大面積(像素)"
-
-msgid "鱼标最小面积(像素)"
-msgstr "魚標最小面積(像素)"
+msgid "魔灵支援"
+msgstr "魔靈支援"
 
 msgid "默认"
 msgstr "預設"
 
+msgid "鼠标抖动"
+msgstr "滑鼠抖動"
+
+msgid "鼠标抖动锁定在窗口范围"
+msgstr "滑鼠抖動鎖定在視窗範圍"
+
 msgid "鼠标键或键盘按键"
 msgstr "滑鼠鍵或鍵盤按鍵"
 
-msgid "Check Monthly Card"
-msgstr "是否檢查月卡"
-
-msgid "Check for monthly card to avoid interruption of tasks"
-msgstr "設定避免小月卡彈跳窗打斷任務"
-
-msgid "Monthly Card Config"
-msgstr "小月卡設定"
-
-msgid "Monthly Card Time"
-msgstr "月卡時間"
-
-msgid "OK-角色经验本50-巧手(主控猪妹,ai水母280范围,超时时间可设置10秒内保证跑错重开)"
-msgstr "OK-角色經驗本50-巧手(主控豬妹,ai水母280範圍,超時時間可設置10秒內保證跑錯重開)"
-
-msgid "OK-角色经验本60-兼容无巧手(主控成年女磐石,ai水母280范围)"
-msgstr "OK-角色經驗本60-兼容無巧手(主控成年女磐石,ai水母280範圍)"
-
-msgid "Turn on to avoid interruption by monthly card when executing tasks"
-msgstr "開啟避免掛任務的時候被月卡中斷"
-
-msgid "Your computer's local time when the monthly card will popup, hour in (1-24)"
-msgstr "幾點會彈出月卡提示, 本地計算機時間(1-24)"
-
-msgid "ok-50MOD"
-msgstr "ok-50MOD"
-
-msgid "ok-55,70MOD(主控水母280范围)"
-msgstr "ok-55,70MOD(主控水母280範圍)"
-
-msgid "ok-60MOD"
-msgstr "ok-60MOD"
-
-msgid "ok-80MOD(主控水母高范围)"
-msgstr "ok-80MOD(主控水母高範圍)"
-
-msgid "ok-武器突破材料70-巧手(水母磐石280范围)"
-msgstr "ok-武器突破材料70-巧手(水母磐石280範圍)"
-
-msgid "ok-武器突破材料70-巧手稳定版(水母磐石280范围)"
-msgstr "ok-武器突破材料70-巧手穩定版(水母磐石280範圍)"
-
-msgid "ok-武器经验本70(水母磐石280范围)"
-msgstr "ok-武器經驗本70(水母磐石280範圍)"
-
-msgid "ok-武器经验本80(水母磐石280范围)"
-msgstr "ok-武器經驗本80(水母磐石280範圍)"
-
-msgid "ok-火巧10-巧手(磐石)"
-msgstr "ok-火巧10-巧手(磐石)"
-
-msgid "ok-火巧30,60-巧手(磐石30-14轮,60-8轮)"
-msgstr "ok-火巧30,60-巧手(磐石30-14輪,60-8輪)"
-
-msgid "ok-火巧角色突破材料70-巧手(磐石,火10通用)"
-msgstr "ok-火巧角色突破材料70-巧手(磐石,火10通用)"
-
-msgid "ok-皎皎币60"
-msgstr "ok-皎皎幣60"
-
-msgid "60角色经验本"
-msgstr "60角色經驗本"
-
-msgid "Auto Pick"
-msgstr "自動拾取"
-
-msgid "Auto Pick in Game World"
-msgstr "大世界自動拾取"
-
-msgid "优先选择持有数为0的密函奖励"
-msgstr "優先選擇持有數為0的密函獎勵"
-
-msgid "刷武器密函时推荐同时开启下一选项"
-msgstr "刷武器密函時推薦同時開啟下一選項"
-
-msgid "在上一选项启用时生效，多个目标时选择靠左的"
-msgstr "在上一選項啟用時生效，多個目標時選擇靠左的"
-
-msgid "完成时播放提示音"
-msgstr "完成時播放提示音"
-
-msgid "开局向前走"
-msgstr "開局向前走"
-
-msgid "开局向前走几秒"
-msgstr "開局向前走幾秒"
-
-msgid "开局重置角色位置"
-msgstr "開局重置角色位置"
-
-msgid "挂机模式"
-msgstr "掛機模式"
-
-msgid "无悠闲全自动钓鱼 (原作者: B站无敌大蜜瓜)"
-msgstr "無悠閒全自動釣魚 (原作者: B站無敵大蜜瓜)"
-
-msgid "自动避险"
-msgstr "自動避險"
-
-msgid "Interact Key"
-msgstr "互动按鍵"
-
-msgid "Dodge Key"
-msgstr "閃避按鍵"
-
-msgid "HelixLeap Key"
-msgstr "螺旋飛躍按鍵"
-
-msgid "自动探险/无尽"
-msgstr "自動探險 / 無盡"
-
-msgid "解密失败自动重开"
-msgstr "解密失敗時自動重啟"
-
-msgid "不重开时会发出声音提示"
-msgstr "選否時會發出聲音提示"
-
-msgid "e"
-msgstr "e"
-
-msgid "f"
-msgstr "f"
-
-msgid "【30火&60火】-密函线索"
-msgstr "【30火&60火】-密函線索"
-
-msgid "【50mod】-中速-水母-主控可调"
-msgstr "【50mod】-中速-水母-主控可調"
-
-msgid "【55&80mod】-磐石水母-主控可调"
-msgstr "【55&80mod】-磐石水母-主控可調"
-
-msgid "【60mod&驱离-密函】-水母-主控可调（不要带黎瑟协战）-超时建议90s"
-msgstr "【60mod&驅離-密函】-水母-主控可調（不要帶黎瑟協戰）-超時建議90s"
-
-msgid "【60角色经验】-磐石水母"
-msgstr "【60角色經驗】-磐石水母"
-
-msgid "【65mod】-黎瑟主控（或者水母主控带个黎瑟助战）"
-msgstr "【65mod】-黎瑟主控（或者水母主控帶個黎瑟助戰）"
-
-msgid "【70jjb】-中低速-水母-主控可调"
-msgstr "【70jjb】-中低速-水母-主控可調"
-
-msgid "【密函-拆解】-无巧手版-280范围水母"
-msgstr "【密函-拆解】-無巧手版-280範圍水母"
-
-msgid "【密函-拆解】-需巧手-280范围水母"
-msgstr "【密函-拆解】-需巧手-280範圍水母"
-
-msgid "【无飞枪80红豆（有巧手可后台）】-磐石黎瑟-使用前看文件夹内说明-超时建议5~10s"
-msgstr "【無飛槍80紅豆（有巧手可後台）】-磐石黎瑟-使用前看文件夾內說明-超時建議5~10s"
-
-msgid "【武器材料60&70】-磐石水母-超时建议20s"
-msgstr "【武器材料60&70】-磐石水母-超時建議20s"
-
-msgid "【武器经验50】-磐石水母-超时建议20s"
-msgstr "【武器經驗50】-磐石水母-超時建議20s"
-
-msgid "【武器经验80】-磐石水母-含配置参考-超时建议20s"
-msgstr "【武器經驗80】-磐石水母-含配置參考-超時建議20s"
-
-msgid ""
-"全自动80护送任务，搬运自emt，欢迎路径作者署名。\n"
-"需要使用水母主控，近战武器选择0精春玦戟。魔之楔配置为金色迅捷+5，紫色穿引共鸣，紫色迅捷蓄势+5，紫色迅捷坠击+5，不要携带其他魔之楔，面板攻速为1.67。\n"
-"设置中控制设置水平灵敏度和垂直灵敏度设置为1.0，默认镜头距离设置为1.3。确认好自身魔之楔和设置后展开下方配置点击我已阅读后运行"
-msgstr ""
-"全自動80護送任務，搬運自emt，歡迎路徑作者署名。\n"
-"需要使用水母主控，近戰武器選擇0精春玦戟。魔之楔配置為金色迅捷+5，紫色穿引共鳴，紫色迅捷蓄勢+5，紫色迅捷墜擊+5，不要攜帶其他魔之楔，面板攻速為1.67。\n"
-"設置中控制設置水平靈敏度和垂直靈敏度設置為1.0，預設鏡頭距離設置為1.3。確認好自身魔之楔和設置後展開下方配置點擊我已閱讀後運行"
-
-msgid "半自动 (只有基础操作)"
-msgstr "半自動 (只有基礎操作)"
-
-msgid "启动解锁机关"
-msgstr "啟動解鎖機關"
-
-msgid "启用"
-msgstr "啟用"
-
-msgid "委托手册指定轮次"
-msgstr "委託手冊指定輪次"
-
-msgid "完成几次护送任务后停止"
-msgstr "完成幾次護送任務後停止"
-
-msgid "必须勾选才能执行任务！"
-msgstr "必須勾選才能執行任務！"
-
-msgid "我已阅读注意事项并确认配置"
-msgstr "我已閱讀注意事項並確認配置"
-
-msgid "移动延迟（秒）"
-msgstr "移動延遲（秒）"
-
-msgid "自动解锁轮盘"
-msgstr "自動解鎖輪盤"
-
-msgid "自动解锁迷宫"
-msgstr "自動解鎖迷宮"
-
-msgid "自动识别并进行迷宫解锁"
-msgstr "自動識別並進行迷宮解鎖"
-
-msgid "自动飞枪80护送（无需巧手）【需要游戏处于前台】"
-msgstr "自動飛槍80護送（無需巧手）【需要遊戲處於前台】"
-
-msgid "范例: 3,5,8"
-msgstr "範例: 3,5,8"
-
-msgid "通用型半自动"
-msgstr "通用型半自動"
-
-msgid "随便搞的，基于2k写的其他分辨率要是有问题就不管了，有bug也不用反馈因为拿到巧手后就不维护了(狗头)"
-msgstr "隨便搞的，基於2k寫的其他分辨率要是有問題就不管了，有bug也不用反饋因為拿到巧手後就不維護了(狗頭)"
-
-msgid "魔灵支援"
-msgstr "魔靈支援"
-
-msgid "【50mod】-中低速-水母-主控可调"
-msgstr "【50mod】-中低速-水母-主控可調"
-
-msgid "【60mod&驱离密函】-磐石水母-主控可调（不要带黎瑟协战）-超时建议90s"
-msgstr "【60mod&驅離密函】-磐石水母-主控可調（不要帶黎瑟協戰）-超時建議90s"
-
-msgid "【无飞枪80红豆（有巧手可后台）】-磐石黎瑟-使用前看文件夹内说明"
-msgstr "【無飛槍80紅豆（有巧手可後台）】-磐石黎瑟-使用前看文件夾內說明"
-
-msgid "【武器材料60&70】-磐石水母"
-msgstr "【武器材料60&70】-磐石水母"
-
-msgid "优先选择密函奖励"
-msgstr "優先選擇密函獎勵"
-
-msgid "启动机关解锁"
-msgstr "啟動機關解鎖"
-
-msgid "在上一选项启用时生效"
-msgstr "在上一選項啟用時生效"
-
-msgid "持有数为0"
-msgstr "持有數為0"
-
-msgid "持有数最多"
-msgstr "持有數最多"
-
-msgid "持有数最少"
-msgstr "持有數最少"
-
-msgid "最大轮数"
-msgstr "最大輪數"
+msgid "使用飞枪等存在视角移动的外部逻辑时可以启用"
+msgstr "使用飛槍等存在視角移動的外部邏輯時可以啟用"
+
+msgid "关闭抖动"
+msgstr "關閉抖動"

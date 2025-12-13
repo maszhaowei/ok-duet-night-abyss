@@ -20,18 +20,16 @@ class AutoExpulsion(DNAOneTimeTask, CommissionsTask, BaseCombatTask):
         self.group_name = "全自动"
         self.group_icon = FluentIcon.CAFE
 
-        self.default_config.update({
-            "随机游走": False,
-            "刷几次": 999,
-            "挂机模式": "开局重置角色位置",
-            "开局向前走": 0.0
-        })
-
         self.setup_commission_config()
-        keys_to_remove = ["启用自动穿引共鸣"]
+        keys_to_remove = ["轮次"]
         for key in keys_to_remove:
             self.default_config.pop(key, None)
 
+        self.default_config.update({
+            "随机游走": False,
+            "挂机模式": "开局重置角色位置",
+            "开局向前走": 0.0
+        })
         self.config_description.update({
             "随机游走": "是否在任务中随机移动",
             "开局向前走": "开局向前走几秒"
@@ -41,7 +39,6 @@ class AutoExpulsion(DNAOneTimeTask, CommissionsTask, BaseCombatTask):
             "options": ["开局重置角色位置", "开局向前走"],
         }
 
-        self.default_config.pop("启用自动穿引共鸣", None)
         self.action_timeout = 10
         
         self.skill_tick = self.create_skill_ticker()
@@ -70,7 +67,6 @@ class AutoExpulsion(DNAOneTimeTask, CommissionsTask, BaseCombatTask):
             _status = self.handle_mission_interface(stop_func=self.stop_func)
             if _status == Mission.START:
                 self.wait_until(self.in_team, time_out=30)
-                self.sleep(2)
                 self.init_all()
                 self.handle_mission_start()
             elif _status == Mission.STOP:
@@ -107,12 +103,7 @@ class AutoExpulsion(DNAOneTimeTask, CommissionsTask, BaseCombatTask):
         self.skill_tick()
 
     def handle_mission_start(self):
-        if self.count >= self.config.get("刷几次", 999):
-            self.sleep(1)
-            self.open_in_mission_menu()
-            self.log_info_notify("任务终止")
-            self.soundBeep()
-            return
+        self.sleep(2)
         self.log_info("任务开始")
     
     def stop_func(self):

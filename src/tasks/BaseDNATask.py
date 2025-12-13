@@ -6,6 +6,7 @@ import winsound
 import win32api
 import win32con
 import random
+from collections import deque
 
 from datetime import datetime, timedelta
 from concurrent.futures import ThreadPoolExecutor
@@ -76,7 +77,11 @@ class BaseDNATask(BaseTask):
         self.old_mouse_pos = None
         self.next_monthly_card_start = 0
         self._logged_in = False
+        self.enable_fidget_action = True
+        self.hold_lalt = False
         self.sensitivity_config = self.get_global_config('Game Sensitivity Config')  # 游戏灵敏度配置
+        self.onetime_seen = set()
+        self.onetime_queue = deque()
 
     @property
     def f_search_box(self) -> Box:
@@ -92,6 +97,14 @@ class BaseDNATask(BaseTask):
     def thread_pool_executor(self) -> ThreadPoolExecutor:
         return og.my_app.get_thread_pool_executor()
     
+    @property
+    def shared_frame(self) -> np.ndarray:
+        return og.my_app.shared_frame
+    
+    @shared_frame.setter
+    def shared_frame(self, value):
+        og.my_app.shared_frame = value
+
     @cached_property
     def genshin_interaction(self):
         """
@@ -109,14 +122,29 @@ class BaseDNATask(BaseTask):
         """
         # 确保引用的是正确的类
         return PyDirectInteraction(self.executor.interaction.capture, self.hwnd)
+    
+    def enable(self):
+        self.onetime_seen = set()
+        super().enable()
 
-    def in_team(self) -> bool:
-        frame = self.frame
+    def log_onetime_info(self, msg: str, key=None|str):
+        if key is None:
+            key = msg
+        if key in self.onetime_seen:
+            return
+        self.onetime_seen.add(key)
+        self.log_info(msg)
+        if len(self.onetime_queue) > 100:
+            oldest_msg = self.onetime_queue.popleft()
+            self.onetime_seen.discard(oldest_msg)
+
+    def in_team(self, frame=None) -> bool:
+        _frame = self.frame if frame is None else frame
         if self.find_one('lv_text', frame=frame, threshold=0.8):
             return True
         # start_time = time.perf_counter()
         mat = self.get_feature_by_name("ultimate_key_icon").mat
-        mat2 = self.get_box_by_name("ultimate_key_icon").crop_frame(frame)
+        mat2 = self.get_box_by_name("ultimate_key_icon").crop_frame(_frame)
         max_area1 = invert_max_area_only(mat)[2]
         max_area2 = invert_max_area_only(mat2)[2]
         result = False
@@ -200,13 +228,12 @@ class BaseDNATask(BaseTask):
         if self.afk_config["防止鼠标干扰"]:
             self.old_mouse_pos = win32api.GetCursorPos() if save_current_pos else None
             if self.rel_move_if_in_win(0.95, 0.6, box=box):
-                self.sleep(0.01)
+                pass
             else:
                 self.old_mouse_pos = None
 
     def move_back_from_safe_position(self):
         if self.afk_config["防止鼠标干扰"] and self.old_mouse_pos is not None:
-            self.sleep(0.01)
             win32api.SetCursorPos(self.old_mouse_pos)
             self.old_mouse_pos = None
 
@@ -315,26 +342,25 @@ class BaseDNATask(BaseTask):
         x = int(x_abs)
         y = int(y_abs)
 
-        down_time = random.uniform(0.05, 0.12) + down_time
-        after_sleep = random.uniform(0.08, 0.15) + after_sleep
-        post_sleep = 0.15 if post_sleep < 0.15 else post_sleep
+        _post_sleep = 0.0 if post_sleep <= 0 else post_sleep + random.uniform(0.05, 0.15)
+        _down_time = random.uniform(0.06, 0.13) if down_time <= 0 else max(0.05, down_time + random.uniform(0.0, 0.13))
+        _after_sleep = random.uniform(0.01, 0.04) if after_sleep <= 0 else after_sleep + random.uniform(0.02, 0.08)
+        
+        self.sleep(_post_sleep)
 
         if not self.hwnd.is_foreground():
-            interval = random.uniform(0.08, 0.15)
-            self.sleep(random.uniform(0.08, post_sleep))
             if use_safe_move:
+                _down_time = 0.01 if down_time == 0.0 else down_time
                 self.move_mouse_to_safe_position(box=safe_move_box)
-                down_time = 0.02
-            self.click(x, y, down_time=down_time, interval=interval)
+            self.click(x, y, down_time=_down_time)
             if use_safe_move:
                 self.move_back_from_safe_position()
         else:
-            self.sleep(random.uniform(0.08, post_sleep))
             self.pydirect_interaction.move(x, y)
             self.sleep(random.uniform(0.08, 0.12))
-            self.pydirect_interaction.click(down_time=down_time)
+            self.pydirect_interaction.click(down_time=_down_time)
 
-        self.sleep(after_sleep)
+        self.sleep(_after_sleep)
     
     def click_box_random(self, box: Box, down_time=0.0, post_sleep=0.0, after_sleep=0.0, use_safe_move=False, safe_move_box=None, left_extend=0.0, right_extend=0.0, up_extend=0.0, down_extend=0.0):
         le_px = left_extend * self.width
@@ -347,11 +373,14 @@ class BaseDNATask(BaseTask):
 
         self._perform_random_click(
             random_x, random_y, 
-            use_safe_move, safe_move_box, 
-            down_time, post_sleep, after_sleep
+            use_safe_move=use_safe_move,
+            safe_move_box=safe_move_box, 
+            down_time=down_time,
+            post_sleep=post_sleep,
+            after_sleep=after_sleep
         )
 
-    def click_relative_random(self, x1, y1, x2, y2, down_time=0.02, post_sleep=0.0, after_sleep=0.0, use_safe_move=False, safe_move_box=None):
+    def click_relative_random(self, x1, y1, x2, y2, down_time=0.0, post_sleep=0.0, after_sleep=0.0, use_safe_move=False, safe_move_box=None):
         r_x = random.uniform(x1, x2)
         r_y = random.uniform(y1, y2)
 
@@ -360,8 +389,11 @@ class BaseDNATask(BaseTask):
 
         self._perform_random_click(
             abs_x, abs_y, 
-            use_safe_move, safe_move_box, 
-            down_time, post_sleep, after_sleep
+            use_safe_move=use_safe_move,
+            safe_move_box=safe_move_box, 
+            down_time=down_time,
+            post_sleep=post_sleep,
+            after_sleep=after_sleep
         )
 
     def sleep_random(self, timeout, random_range: tuple = (1.0, 1.0)):
@@ -448,6 +480,33 @@ class BaseDNATask(BaseTask):
         tick.touch = touch
         tick.start_next_tick = start_next_tick
         return tick
+    
+    def create_ticker_group(self, tickers: list):
+    
+        def tick_all():
+            for ticker in tickers:
+                ticker()
+                
+        def reset_all():
+            for ticker in tickers:
+                if hasattr(ticker, "reset"):
+                    ticker.reset()
+
+        def touch_all():
+            for ticker in tickers:
+                if hasattr(ticker, "touch"):
+                    ticker.touch()
+
+        def start_next_tick_all():
+            for ticker in tickers:
+                if hasattr(ticker, "start_next_tick"):
+                    ticker.start_next_tick()
+
+        tick_all.reset = reset_all
+        tick_all.touch = touch_all
+        tick_all.start_next_tick = start_next_tick_all
+        
+        return tick_all
 
     def get_interact_key(self):
         """获取交互的按键。
@@ -484,16 +543,16 @@ class BaseDNATask(BaseTask):
         # 判断设置中灵敏度开关是否打开
         if self.sensitivity_config['Game Sensitivity Switch']:
             # 获取设置中的游戏灵敏度
-            game_Xsensitivity = round(self.sensitivity_config['X-axis sensitivity'], 1)
-            game_Ysensitivity = round(self.sensitivity_config['Y-axis sensitivity'], 1)
+            game_Xsensitivity = self.sensitivity_config['X-axis sensitivity']
+            game_Ysensitivity = self.sensitivity_config['Y-axis sensitivity']
 
             # 判断和计算
             if original_Xsensitivity == game_Xsensitivity and original_Ysensitivity == game_Ysensitivity:
                 calculate_dx = dx
                 calculate_dy = dy
             else:
-                calculate_dx = dx / round(game_Xsensitivity / original_Xsensitivity, 10)
-                calculate_dy = dy / round(game_Ysensitivity / original_Ysensitivity, 10)
+                calculate_dx = round(dx / (game_Xsensitivity / original_Xsensitivity))
+                calculate_dy = round(dy / (game_Ysensitivity / original_Ysensitivity))
         else:
             calculate_dx = dx
             calculate_dy = dy
@@ -522,58 +581,160 @@ class BaseDNATask(BaseTask):
                 self.hwnd.bring_to_front()
             self.sleep(0.5)
         
-    def setup_jitter(self):
-        def _jitter_loop_task():
+    def setup_fidget_action(self):
+        if not self.enable_fidget_action:
+            return
+
+        lalt_pressed = False
+        needs_resync = False
+        _in_team = None
+
+        def send_key_raw(key, is_down):
+            interaction = self.executor.interaction
+            vk_code = interaction.get_key_by_str(key)
+            event = win32con.WM_KEYDOWN if is_down else win32con.WM_KEYUP
+            interaction.post(event, vk_code, interaction.lparam)
+
+        def get_magic_sleep_time():
+            """
+            核心防检测逻辑：
+            生成针对 Lua 0.3s 量化刻度的随机时间。
+            目标刻度: 0.0s, 0.3s, 0.6s, 0.9s
+            """
+            return random.choice([
+                random.uniform(0.005, 0.02),
+                random.uniform(0.20, 0.28),
+                random.uniform(0.50, 0.58),
+                random.uniform(0.80, 0.88)
+            ])
+
+        def in_team():
+            nonlocal _in_team
+            local_frame = self.shared_frame 
+            if _in_team is None and local_frame is not None:
+                _in_team = self.in_team(local_frame)
+            elif local_frame is None:
+                _in_team = True
+            return _in_team
+
+        def check_alt_logic():
+            nonlocal lalt_pressed, needs_resync, _in_team
+            
+            if not self.afk_config.get("鼠标抖动", True):
+                return
+
+            if self.hold_lalt:
+                if not lalt_pressed:
+                    self.log_info("[LAlt保持] 激活: 按下 LAlt")
+                    send_key_raw("lalt", True)
+                    time.sleep(0.1)
+                    lalt_pressed = True
+                elif not needs_resync and lalt_pressed and not in_team():
+                    wait_time = get_magic_sleep_time()
+                    time.sleep(wait_time)
+                    self.log_info("[LAlt保持] 暂停: 检测到不在队伍，暂时释放 LAlt")
+                    needs_resync = True
+                    send_key_raw("lalt", False)
+                elif needs_resync and in_team():
+                    self.log_info("[LAlt保持] 恢复: 检测到重回队伍，重新按下 LAlt")
+                    needs_resync = False
+                    send_key_raw("lalt", True)
+                _in_team = None
+            else:
+                if lalt_pressed:
+                    self.log_info("[LAlt保持] 停止: 功能关闭，彻底释放 LAlt")
+                    send_key_raw("lalt", False)
+                    lalt_pressed = False
+                    needs_resync = False
+
+        def perform_mouse_jitter(current_drift):
+            """执行鼠标微小抖动，返回更新后的漂移量"""
+            if not self.afk_config.get("鼠标抖动", True):
+                return current_drift
+
+            if self.afk_config.get("鼠标抖动锁定在窗口范围", True):
+                self.set_mouse_in_window()
+
+            dist_sq = current_drift[0]**2 + current_drift[1]**2
+
+            if dist_sq < 4:
+                target_x = random.choice([-3, -2, 2, 3])
+                target_y = random.choice([-3, -2, 2, 3])
+            else:
+                target_x = random.randint(-1, 1)
+                target_y = random.randint(-1, 1)
+
+            move_x = target_x - current_drift[0]
+            move_y = target_y - current_drift[1]
+
+            if move_x == 0 and move_y == 0:
+                move_x = 1 if random.random() > 0.5 else -1
+
+            self.genshin_interaction.do_move_mouse_relative(move_x, move_y)
+            
+            current_drift[0] += move_x
+            current_drift[1] += move_y
+            
+            return current_drift
+
+        def perform_random_key_press(key_list):
+            """执行随机按键，包含核心的防检测时间逻辑"""
+
+            key = random.choice(key_list)
+            
+            human_down_time = random.uniform(0.02, 0.09)
+            
+            magic_after_sleep = get_magic_sleep_time()
+
+            send_key_raw(key, True)
+            time.sleep(human_down_time)
+            send_key_raw(key, False)
+            
+            time.sleep(magic_after_sleep)
+
+        def smart_sleep(duration):
+            deadline = time.time() + duration
+            while time.time() < deadline:
+                if self.executor.current_task is None or self.executor.exit_event.is_set():
+                    return False
+
+                check_alt_logic()
+                time.sleep(0.1)
+            return True
+
+        def _fidget_worker():
             current_drift = [0, 0]
+
+            spiral_key = self.get_spiral_dive_key()
+            numeric_keys = [str(i) for i in range(1, 6) if str(i) != spiral_key][:4]
+            random_key_list = [self.key_config['Geniemon Key']] + numeric_keys
+
             if self.executor.current_task:
-                self.log_info("jitter loop task start")
+                self.log_info("fidget action started")
+
             while self.executor.current_task is not None and not self.executor.exit_event.is_set():
                 if self.executor.paused:
                     time.sleep(0.1)
                     continue
-                # if not self.scene.in_team(self.in_team_and_world):
-                #     time.sleep(1)
-                #     continue
 
-                key = random.choice([self.key_config['Geniemon Key'], "1", "2", "3"])
-                down_time = random.uniform(0.02, 0.12)
-                after_sleep = random.uniform(0.08, 0.15)
-                interaction = self.executor.interaction
-                vk_code = interaction.get_key_by_str(key)
-                interaction.post(win32con.WM_KEYDOWN, vk_code, interaction.lparam)
-                time.sleep(down_time)
-                interaction.post(win32con.WM_KEYUP, vk_code, interaction.lparam)
-                time.sleep(after_sleep)
+                check_alt_logic()
 
-                if self.afk_config.get("鼠标抖动", True):
-                    if self.afk_config.get("鼠标抖动锁定在窗口范围", True):
-                        self.set_mouse_in_window()
+                current_drift = perform_mouse_jitter(current_drift)
 
-                    dist_sq = current_drift[0]**2 + current_drift[1]**2
+                perform_random_key_press(random_key_list)
+
+                long_sleep = random.choice([
+                    random.uniform(3.05, 3.20), # ~ 3.0 / 3.3
+                    random.uniform(4.25, 4.40), # ~ 4.2 / 4.5
+                    random.uniform(5.45, 5.60)  # ~ 5.4 / 5.7
+                ])
+                
+                if not smart_sleep(long_sleep):
+                    break
                     
-                    if dist_sq < 4:
-                        target_x = random.choice([-3, -2, 2, 3])
-                        target_y = random.choice([-3, -2, 2, 3])
-                    else:
-                        target_x = random.randint(-1, 1)
-                        target_y = random.randint(-1, 1)
+            self.log_info("fidget action stopped")
 
-                    move_x = target_x - current_drift[0]
-                    move_y = target_y - current_drift[1]
-
-                    if move_x != 0 or move_y != 0:
-                        self.genshin_interaction.do_move_mouse_relative(move_x, move_y)
-                        current_drift[0] += move_x
-                        current_drift[1] += move_y
-
-                deadline = time.time() + random.uniform(3.0, 6.0)
-                while time.time() < deadline:
-                    if self.executor.current_task is None or self.executor.exit_event.is_set():
-                        self.log_info("jitter loop task stopped")
-                        return
-                    time.sleep(0.1)
-
-        self.thread_pool_executor.submit(_jitter_loop_task)
+        self.thread_pool_executor.submit(_fidget_worker)
 
 track_point_color = {
     "r": (121, 255),  # Red range
