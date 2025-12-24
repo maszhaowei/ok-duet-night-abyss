@@ -190,7 +190,8 @@ class ImportTask(DNAOneTimeTask, CommissionsTask, BaseCombatTask):
         png_files = {}
 
         if not os.path.exists(folder_path):
-            raise FileNotFoundError(f"文件夹不存在: {folder_path}")
+            self.log_info(f"文件夹 '{folder_path}' 不存在，将执行无图匹配逻辑。")
+            return png_files
 
         for filename in os.listdir(folder_path):
             if filename.lower().endswith('.png'):
@@ -294,11 +295,32 @@ class ImportTask(DNAOneTimeTask, CommissionsTask, BaseCombatTask):
             else:
                 self.log_info("超时未匹配到任何地图，假定到达目的地或路径丢失")
                 return True
-
+            
+    def no_img_match_map(self, index):
+        sorted_keys = sorted(self.script.keys())
+        count = -1
+        if index is None:
+            if len(sorted_keys):
+                next_key = sorted_keys[0]
+            else:
+                next_key = None 
+                count = 0
+        else:
+            current_pos = sorted_keys.index(index)
+            if current_pos + 1 < len(sorted_keys):
+                next_key = sorted_keys[current_pos + 1]
+            else:
+                next_key = None 
+                count = 0
+        return next_key, count
+    
     def match_map(self, index, max_conf=0.0, pattern=None):  # 建议给 max_conf 一个合理的默认阈值，如 0.6
         """
         在当前屏幕中寻找匹配度最高的地图模板。
         """
+        if not self.img:
+            return self.no_img_match_map(index)
+
         # 1. 提取图像处理逻辑到循环外 (极大的性能提升)
         # 假设 box 定义不变，可以提取出来
         box = self.box_of_screen_scaled(2560, 1440, 1, 1, 2559, 1439, name="full_screen", hcenter=True)
