@@ -56,6 +56,38 @@ class BaseChar:
         self._combat_available = False
         self.task.send_key(self.get_combat_key(), interval=interval, down_time=down_time, after_sleep=after_sleep)
 
+
+    def send_combat_key_with_ctrl(self, after_sleep=0):        
+        """发送 Ctrl + 战技组合键 (Ctrl+E)。
+
+        Args:
+            after_sleep (float, optional): 发送后的休眠时间。默认为 0。
+            interval (float, optional): 不适用没保留参数
+            down_time (float, optional): 不适用没保留参数
+        """
+
+        self._combat_available = False
+        
+        # 1. 按下 Ctrl (只按不放) - 使用 ok 框架支持的 "CONTROL" 键名
+        self.task.send_key_down("CONTROL")
+        
+        # 2. 稍微等待，确保系统/游戏识别到 Ctrl 已按住 (防止判定为单独按 E)
+        time.sleep(0.05) 
+        
+        # 3. 发送战技 (按 E)
+        # 直接调用现有的 send_combat_key 方法
+        self.send_combat_key()
+        
+        # 4. 稍微等待，防止释放过快
+        time.sleep(0.05)
+        
+        # 5. 释放 Ctrl - 使用 ok 框架支持的 "CONTROL" 键名
+        self.task.send_key_up("CONTROL")
+
+        # 6. 模拟ok-script，处理后续休眠 
+        if after_sleep > 0:
+            self.sleep(after_sleep)
+
     def send_ultimate_key(self, after_sleep=0, interval=-1, down_time=0.01):
         """发送终结技按键。
 
