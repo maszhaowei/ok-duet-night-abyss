@@ -22,7 +22,7 @@ for n in range(1, 5):
     config_type.update({
         f"技能{n}": {
             "type": "drop_down",
-            "options": ["不使用", "战技", "Ctrl+战技", "终结技", "魔灵支援", "普攻"],
+            "options": ["不使用", "战技", "Ctrl+战技（赛琪专属）", "终结技", "魔灵支援", "普攻"],
         },
     })
 

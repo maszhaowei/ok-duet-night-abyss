@@ -338,7 +338,7 @@ class CommissionsTask(BaseDNATask):
                 after_sleep = self.commission_skill_config.get(f"技能{local_n}_释放后等待", 0.0)
                 if skill == "战技":
                     self.get_current_char().send_combat_key()
-                elif skill == "Ctrl+战技":
+                elif skill == "Ctrl+战技（赛琪专属）":
                     self.get_current_char().send_combat_key_with_ctrl()
                 elif skill == "终结技":
                     self.get_current_char().send_ultimate_key()
