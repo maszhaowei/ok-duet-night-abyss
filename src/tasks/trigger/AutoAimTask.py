@@ -1,4 +1,5 @@
 from contextlib import contextmanager
+import time
 
 from ok import TriggerTask, Logger, og
 from src.scene.DNAScene import DNAScene
@@ -69,7 +70,7 @@ class AutoAimTask(BaseListenerTask, BaseCombatTask, TriggerTask):
 
         if self.manual_activate and not self.running:
             self.running = True
-            self.handler.post(self.do_aim)
+            self.submit_periodic_task(0.01, self.do_aim)
 
         return
     
@@ -89,24 +90,27 @@ class AutoAimTask(BaseListenerTask, BaseCombatTask, TriggerTask):
         except CharDeadException:
             self.log_error("Characters dead", notify=True)
             self.running = False
-            return
+            return False
         except TriggerDeactivateException as e:
             logger.info(f"auto_aim_task_deactivate {e}")
             self.running = False
-            return
-        self.handler.post(self.do_aim)
+            return False
 
     def sleep_check(self, sec, check_signal_flag=True):
-        remaining = sec
-        step = 0.2
-        while remaining > 0:
+        if sec <= 0:
+            return
+        end_time = time.perf_counter() + sec
+        step = 0.01
+        while True:
+            remaining = end_time - time.perf_counter()
+            if remaining <= 0:
+                break
             s = step if remaining > step else remaining
-            self.sleep(s)
-            remaining -= s
+            time.sleep(s)
+            if not self.manual_activate or not self._enabled or self.paused:
+                raise TriggerDeactivateException
             if self._should_interrupt(check_signal_flag):
                 self.switch_state()
-            if not self.manual_activate:
-                raise TriggerDeactivateException
 
     def _should_interrupt(self, check_signal_flag: bool) -> bool:
         """检查是否应该中断当前操作"""

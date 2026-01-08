@@ -95,7 +95,14 @@ class BaseDNATask(BaseTask):
 
     @property
     def thread_pool_executor(self) -> ThreadPoolExecutor:
+        if og.my_app is None:
+            return None
         return og.my_app.get_thread_pool_executor()
+
+    def submit_periodic_task(self, delay, task, *args, **kwargs):
+        if og.my_app is None:
+            return None
+        return og.my_app.submit_periodic_task(delay, task, *args, **kwargs)
     
     @property
     def shared_frame(self) -> np.ndarray:
