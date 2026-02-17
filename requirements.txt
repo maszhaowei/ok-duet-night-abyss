@@ -21,7 +21,7 @@ numpy==2.3.5
     #   opencv-python
     #   openvino
     #   shapely
-ok-script==1.0.39
+ok-script==1.0.51
     # via -r requirements.in
 playwright==1.57.0
 onnxocr-ppocrv4==0.0.5
