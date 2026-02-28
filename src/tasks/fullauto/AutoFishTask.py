@@ -238,10 +238,7 @@ class AutoFishTask(DNAOneTimeTask, BaseDNATask):
         # ensure foreground handled by framework interaction activation
         start_deadline = time.monotonic() + cfg.get("MAX_START_SEC", 20.0)
 
-        has_cast_icon, _ = self.find_fish_cast()
-        self.stats["last_cast_icon_found"] = has_cast_icon
-
-        # 检测是否有授渔以鱼机会
+        # 检测是否有授渔以鱼机会 (优先执行且短路，减少不必要的对比开销)
         has_chance_icon, _ = self.find_fish_chance()
         if has_chance_icon:
             logger.info("检测到fish_chance（授渔以鱼）-> 按下E键使用授渔以鱼抛竿")
@@ -253,13 +250,16 @@ class AutoFishTask(DNAOneTimeTask, BaseDNATask):
                 self.info_set("完成轮数", self.stats["rounds_completed"])
                 logger.info(f"上一轮的鱼作为鱼饵，轮数调整为: {self.stats['rounds_completed']}")
             self.send_key("e", down_time=0.06)
-        elif not has_cast_icon:
-            logger.info("开始阶段未找到fish_cast，尝试按空格抛竿并等待fish_bite出现")
-            # press space to cast
-            self.send_key("space", down_time=0.06)
         else:
-            logger.info("找到fish_cast -> 按下空格抛竿")
-            self.send_key("space", down_time=0.06)
+            has_cast_icon, _ = self.find_fish_cast()
+            self.stats["last_cast_icon_found"] = has_cast_icon
+            if not has_cast_icon:
+                logger.info("开始阶段未找到fish_cast，尝试按空格抛竿并等待fish_bite出现")
+                # press space to cast
+                self.send_key("space", down_time=0.06)
+            else:
+                logger.info("找到fish_cast -> 按下空格抛竿")
+                self.send_key("space", down_time=0.06)
 
         logger.info("等待fish_bite出现...")
         ret = self.wait_until(lambda: self.find_fish_bite()[0], time_out=start_deadline, raise_if_not_found=False)
@@ -447,25 +447,28 @@ class AutoFishTask(DNAOneTimeTask, BaseDNATask):
         logger.info(f"等待 {cfg.get('END_WAIT_SPACE', 7.0)}s 结束鱼信息展示...")
         self.sleep(cfg.get("END_WAIT_SPACE", 7.0))
 
-        logger.info("点击屏幕以结束鱼信息展示")
-        self.click_relative_random(0.3, 0.3, 0.7, 0.7)
-
         # wait and verify
         confirm_deadline = time.monotonic() + cfg.get("MAX_END_SEC", 20.0)
         while time.monotonic() < confirm_deadline:
-            has_cast_icon, _ = self.find_fish_cast()
-            has_bite_icon, _ = self.find_fish_bite()
             has_chance_icon, _ = self.find_fish_chance()
-            self.stats["last_cast_icon_found"] = has_cast_icon
-            self.stats["last_bite_icon_found"] = has_bite_icon
-            if has_cast_icon or has_bite_icon or has_chance_icon:
-                if has_chance_icon:
-                    logger.info("确认已回到挥杆界面（检测到授渔以鱼）")
-                else:
-                    logger.info("确认已回到挥杆界面")
+            if has_chance_icon:
+                logger.info("确认已回到挥杆界面（检测到授渔以鱼）")
                 return True
-            self.click_relative_random(0.3, 0.3, 0.7, 0.7)
-            self.sleep(1.0)
+                
+            has_cast_icon, _ = self.find_fish_cast()
+            self.stats["last_cast_icon_found"] = has_cast_icon
+            if has_cast_icon:
+                logger.info("确认已回到挥杆界面")
+                return True
+                
+            has_bite_icon, _ = self.find_fish_bite()
+            self.stats["last_bite_icon_found"] = has_bite_icon
+            if has_bite_icon:
+                logger.info("确认已回到挥杆界面")
+                return True
+                
+            self.click_relative_random(0.6, 0.3, 0.95, 0.7)
+            self.sleep(0.5)
         logger.info("结束阶段确认失败")
         return False
 
