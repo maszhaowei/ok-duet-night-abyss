@@ -449,26 +449,40 @@ class AutoFishTask(DNAOneTimeTask, BaseDNATask):
 
         # wait and verify
         confirm_deadline = time.monotonic() + cfg.get("MAX_END_SEC", 20.0)
+        
+        # 抛竿图标连续稳定确认机制
+        stable_confirm_time = 0.5
+        cast_appeared_time = None
+
         while time.monotonic() < confirm_deadline:
-            has_chance_icon, _ = self.find_fish_chance()
-            if has_chance_icon:
+            has_chance = self.find_fish_chance()[0]
+            if has_chance:
                 logger.info("确认已回到挥杆界面（检测到授渔以鱼）")
                 return True
-                
-            has_cast_icon, _ = self.find_fish_cast()
-            self.stats["last_cast_icon_found"] = has_cast_icon
-            if has_cast_icon:
-                logger.info("确认已回到挥杆界面")
+
+            has_bite = self.find_fish_bite()[0]
+            if has_bite:
+                logger.info("确认已回到挥杆界面（检测到鱼咬钩被遗留）")
                 return True
-                
-            has_bite_icon, _ = self.find_fish_bite()
-            self.stats["last_bite_icon_found"] = has_bite_icon
-            if has_bite_icon:
-                logger.info("确认已回到挥杆界面")
-                return True
-                
-            self.click_relative_random(0.6, 0.3, 0.95, 0.7)
+
+            has_cast = self.find_fish_cast()[0]
+            self.stats["last_cast_icon_found"] = has_cast
+            if has_cast:
+                if cast_appeared_time is None:
+                    # 记录第一次看见抛竿图标的时间
+                    cast_appeared_time = time.monotonic()
+                elif time.monotonic() - cast_appeared_time >= stable_confirm_time:
+                    # 第二次确认：抛竿图标连续显示，非画面闪现
+                    logger.info("界面稳定，确认已回到抛竿界面")
+                    return True
+            else:
+                # 抛竿图标消失，重置判定计时
+                cast_appeared_time = None
+
+            # 继续保持点击屏幕左侧用来关闭那些可能无法单纯靠时间等待关闭的层叠UI
+            self.click_relative_random(0.05, 0.3, 0.4, 0.7)
             self.sleep(0.5)
+            
         logger.info("结束阶段确认失败")
         return False
 
@@ -556,9 +570,6 @@ class AutoFishTask(DNAOneTimeTask, BaseDNATask):
                 logger.info(f"  剩余轮数: {remaining}")
                 logger.info("=" * 50)
 
-                # 继续下一轮
-                self.sleep(1.0)
-                self.sleep(1.0)
             except TaskDisabledException:
                 raise
             except Exception as e:
