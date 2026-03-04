@@ -137,6 +137,11 @@ class AutoDefence(DNAOneTimeTask, CommissionsTask, BaseCombatTask):
         if self.external_movement is not _default_movement:
             self.log_info("任务开始，执行外部移动逻辑")
             self.external_movement(delay=2)
+            # 复位失败时 walk_to_aim 会调用 give_up_mission() 退出副本后直接 return，
+            # 此时已不在队伍中，应立即返回让主循环重新识别界面并重开任务
+            if not self.in_team():
+                self.log_info("外部移动后未在队伍中（可能复位失败已退出副本），等待重开任务")
+                return
             time_out = self.action_timeout + 10
             self.log_info(f"外部移动执行完毕，等待战斗开始，{time_out}秒后超时")
             if not self.wait_until(lambda: self.current_wave != -1 or self.find_esc_menu(), post_action=self.get_wave_info,
